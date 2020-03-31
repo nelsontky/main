@@ -93,7 +93,7 @@ public class TabsPanel extends UiPart<Region> {
             break;
 
         case HELP:
-            selectionModel.select(savedTab);
+            selectionModel.select(helpTab);
             break;
 
         default:
