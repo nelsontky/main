@@ -1,4 +1,4 @@
-= Coupon Stash - Developer Guide v1.0
+= Coupon Stash v1.4 - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:

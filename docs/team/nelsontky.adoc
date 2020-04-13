@@ -137,6 +137,4 @@ Highlights include frequent use of Unified Modelling Language
 (UML) diagrams to illustrate associations between program components._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
 include::../DeveloperGuide.adoc[tag=updownarrowcommandhistory]
-include::../DeveloperGuide.adoc[tag=couponsorting]
