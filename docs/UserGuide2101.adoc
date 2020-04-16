@@ -860,6 +860,7 @@ not be copied.
 
 Examples:
 
+[[prevExample]]
 * `copy 2` +
 Copies the second coupon in the current list to an <<Adding a coupon: `add`, `add`>> command and copies it to
 your clipboard.
@@ -869,18 +870,18 @@ your clipboard.
 . Key in `copy 2` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard.
 +
 .Example of keying the `copy 2` command into the Command Input Box
-image::UG_Copy_1.png[width=60%]
+image::UG_copy_1.png[width=60%]
 
 . You will see a message in the <<UserInterface, Command Result Box>> indicating that the coupon is copied to your
 clipboard.
 +
 .Example of result message of the <<Copying a coupon: `copy` (Denise) , `copy`>> command in the Command Result Box
-image::UG_Copy_2.png[width="40%"]
+image::UG_copy_2.png[width="40%"]
 
 . Simply kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) and send it to someone!
 +
 .Example of sharing the copied coupon through a messaging application
-image::UG_Copy_3.png[width=50%]
+image::UG_copy_3.png[width=50%]
 
 
 * `find food` +
@@ -896,20 +897,20 @@ send it to someone:
 their names.
 +
 .Example of keying the `find food` command into the Command Input Box
-image::UG_Copy_4.png[width="50%"]
+image::UG_copy_4.png[width="50%"]
 
 . You will see a message in the <<UserInterface, Command Result Box>> indicating the number of coupons that has
 names with the keyword "food".
 +
 .Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box
-image::UG_Copy_5.png[width=40%]
+image::UG_copy_5.png[width=40%]
 
 . Key in `copy 3` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard. +
 +
 .Example of keying the `copy 3` command into the Command Input Box
-image::UG_Copy_6.png[width=70%]
+image::UG_copy_6.png[width=70%]
 
-. Repeat the last 2 steps from the previous example!
+. Repeat the last 2 steps from the <<prevExample, previous example>>!
 // end::copy[]
 
 // tag::share[]
