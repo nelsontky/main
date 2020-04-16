@@ -1018,7 +1018,7 @@ be visible immediately.
 // end::setcurrency[]
 
 // tag::help[]
-=== Viewing help: `help` (Alden)
+=== Viewing help: `help`
 Open a browser window that accesses an offline copy of this user guide.
 
 [WARNING]
@@ -1029,7 +1029,7 @@ Format: `help`
 // end::help[]
 
 // tag::clear[]
-=== Clearing all entries: `clear`
+=== Clearing all entries: `clear` (Alden)
 
 Deletes every single coupon in Coupon Stash. This
 includes archived and non-archived coupons! +
