@@ -1,3 +1,6 @@
+// command to generate:
+// asciidoctor-pdf -a pdf-theme=default-with-fallback-font UserGuide2101.adoc
+
 = Coupon Stash v1.4 - User Guide
 :site-section: UserGuide
 :toc:
@@ -27,70 +30,6 @@ along the way.
 
 *as of April 2020
 
-[cols=",",options="header",]
-|=========================================
-|*Contents* |*Section Number*
-a|
-*Introduction*
-|1
-
-a|
-*About This Document*
-|2
-
-a|
-*Quick Start*
-|3
-
-a|
-*User Interface*
-|4
-
-a|
-*Features*
-
-. Adding a coupon: add
-. Editing a coupon: edit
-. Deleting a coupon: delete
-. Listing coupons: list
-. Using a coupon: used
-. Viewing savings: saved
-. Archiving a coupon: archive
-. Unarchiving a coupon: unarchive
-. Finding coupons by name: find
-. Listing all expiring coupons: expiring
-. Sorting coupons: sort
-. Copying a coupon: copy
-. Sharing a coupon: share
-. Undoing the previous command: undo
-. Redoing the undone command: redo
-. Displaying a month-year on the calendar: goto
-. Expanding a coupon: expand
-. Setting currency symbol: setcurrency
-. Viewing help: help
-. Clearing all entries: clear
-. Exiting the program: exit
-. Reminding of coupon expiry
-. Saving the data
- |5
-
-a|
-*Keyboard Shortcuts*
-
-   . Restore previously entered command texts: kbd:[↑] and kbd:[↓]
-   . Close expanded coupon window: kbd:[Ctrl]+kbd:[q]
-   . Cycle through tabs: kbd:[Ctrl]+kbd:[Tab]
-|6
-
-a|
-*FAQ*|7
-
-a|
-*Command Summary* |8
-
-a|
-*Appendix*|9
-|=========================================
 .Picture of Stasher (Coupon Stash's Mascot)
 image::ug_stasher.png[]
 Hi! I'm Stasher, the mascot of Coupon Stash. Together,
@@ -928,17 +867,23 @@ Format: `share INDEX`
 Examples:
 
 * `share 1` +
-Shares the specified coupon. +
-Step 1. <<Finding coupons by name: `find`, `find`>> the coupon that you would
-like to share. E.g. `find grab` +
-Step 2. Specify the index of the coupon to share - `share 1` +
-Step 3. Type the name of the file and select the folder you want to save to. +
+Shares the first coupon.
 
+Here are instructions for viewing your savings with the `share` command:
+
+. First, find the coupon that you want to share. This
+can be done with the <<Finding coupons by name: `find`, `find` command>>.
+
+. Specify the index of the coupon to share!
+
+. Type the name of the file and select the folder you want to save to.
++
 .Screen of downloading shared coupon image
 image::ShareDownload.png[]
 
-Step 4. Click save, and the imaged will be saved into the specified folder. +
-Step 5. Share this image with your friends and family!
+. Click save, and the imaged will be saved into the specified folder.
+
+. Share this image with your friends and family!
 
 .Example of a shared coupon
 image::GrabFoodCoupon.png[]
@@ -951,8 +896,8 @@ Below is a sample of how a shared coupon image looks like:
 
 // tag::undo[]
 === Undoing the previous command: `undo` (Nelson)
-Undo the most recent operation on the Coupon Stash. Only operations that change
-the coupons in the Coupon Stash can be undone.
+Undo the most recent operation on the Coupon Stash. Only operations that
+change the coupons in the Coupon Stash can be undone.
 
 Format: `undo`
 ====
@@ -973,7 +918,7 @@ Changes to user preferences, such as the
 <<setcurrency, setting of the currency symbol>>, cannot be undone.
 
 [WARNING]
-You can only undo commands which you have input since
+You can only undo commands which you have entered since
 you opened Coupon Stash. This means that after you close
 the application, your undo history will be lost!
 
@@ -991,8 +936,9 @@ Revert the <<Deleting a coupon: `delete`, `delete`>> that was performed. Deleted
 // end::undo[]
 
 // tag::redo[]
-=== Redoing the undone command: `redo` (Nelson)
-Redo the previously undone operation. This is akin to undoing an
+=== Reversing an undo: `redo` (Nelson)
+Reverse your last <<Undoing the previous command: `undo` (Nelson), `undo`>>.
+This is akin to undoing an
 <<Undoing the previous command: `undo`, `undo`>>.
 
 Format: `redo`
@@ -1183,10 +1129,34 @@ allows you to restore the text of the previous executed command. Pressing
 the kbd:[↓] keyboard button allows you to revert to a more recently entered
 command.
 
-Demonstration:
+Here are instructions for restoring previously entered command texts with the
+kbd:[↑] and kbd:[↓] keys:
 
-.Animation of kbd:[↑]/kbd:[↓] button presses.
-image::gifs/Up down arrow.gif[]
+. Suppose you ran these 3 commands in order in Coupon Stash:
+* `edit 1 n/ Adidas 31 Percent`
++
+.Before running the `edit` command.
+image::keyboard_shortcuts/updownedit.png[]
++
+* `archive 2`
++
+.Before running the `archive` command.
+image::keyboard_shortcuts/updownarchive.png[]
+* `add n/McDonald's McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/50% sd/1-4-2020 l/2 t/Value t/Savoury`
++
+.Before running the `add` command.
+image::keyboard_shortcuts/updownadd.png[]
+
+. We realise that in the first command we ran (the `edit` command), we
+renamed the first coupon wrongly.
++
+.Name was edited erroneously, should be "Adidas 30 Percent" instead of "Adidas 31 Percent".
+image::keyboard_shortcuts/updownwrongname.png[]
+
+. To save ourselves the hassle of retyping the entire `edit` command again,
+we can access the previously entered command via the kbd:[↑] keyboard button.
+. Press kbd:[↑] thrice to retrieve the `edit` command.
+* We press kbd:[↑] thrice as the `edit` command was run three commands ago.
 
 === Close expanded coupon or reminder windows: kbd:[Ctrl]+kbd:[q]
 After <<expand, expanding>> a coupon, you can close
@@ -1196,9 +1166,13 @@ shortcut also works for closing <<_reminding_of_coupon_expiry, reminder>>
 windows.
 
 Demonstration:
-during the process of adding
-.Animation of closing window with kbd:[Ctrl]+kbd:[q].
-image::gifs/ctrl q.gif[]
+
+(Disclaimer: In the original non-PDF web version of this UG, the
+animation below plays automatically without the need for any further action.
+Click on the image to play the animation in this PDF file.)
+
+.Animation of closing window with kbd:[Ctrl]+kbd:[q]
+image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/copy%20command.gif]
 
 === Cycle through tabs: kbd:[Ctrl]+kbd:[Tab]
 You can press the keyboard buttons kbd:[Ctrl] and kbd:[Tab] simultaneously to
@@ -1207,8 +1181,12 @@ key presses would work.
 
 Demonstration:
 
+(Disclaimer: In the original non-PDF web version of this UG, the
+animation below plays automatically without the need for any further action.
+Click on the image to play the animation in this PDF file.)
+
 .Animation of switching tabs with kbd:[Ctrl]+kbd:[Tab].
-image::gifs/ctrl tab.gif[]
+image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/ctrl%20tab.gif]
 
 // end::KeyboardShortcuts[]
 
