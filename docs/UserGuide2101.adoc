@@ -337,7 +337,7 @@ The calendar changes accordingly to the changes in the list of coupons in the <<
 the following commands that alters the list of coupons may also alter the calendar: +
 
 * <<Adding a coupon: `add`, `add`>>
-* <<Archiving a coupon: `archive`, `archive`>>
+* <<Archiving a coupon: `archive` (Chester), `archive`>>
 * <<Clearing all entries: `clear`, `clear`>>
 * <<Deleting a coupon: `delete`, `delete`>>
 * <<Editing a coupon: `edit`, `edit`>>
@@ -345,9 +345,9 @@ the following commands that alters the list of coupons may also alter the calend
 * <<Finding coupons by name: `find`, `find`>>
 * <<Listing coupons: `list`, `list`>>
 * <<Redoing the undone command: `redo`, `redo`>>
-* <<Unarchiving a coupon: `unarchive`, `unarchive`>>
+* <<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>>
 * <<Undoing the previous command: `undo`, `undo`>>
-* <<Using a coupon: `used`, `used`>>
+* <<Using a coupon: `used` (Chester), `used`>>
 ====
 
 
@@ -556,13 +556,13 @@ Format: `list [PREFIX]` +
 ****
 * `PREFIX` can be either `a/` or `u/`.
 * Using `a/` lists all coupons that are archived, while `u/` lists all used coupons (including
-<<Archiving a coupon: `archive`, archived>> coupons at the
+<<Archiving a coupon: `archive` (Chester), archived>> coupons at the
 end of the list).
 ****
 
 [NOTE]
 `PREFIX` can be left blank to list all active coupons (coupons that are not fully used/ not archived (except for
-coupon(s) that are <<Unarchiving a coupon: `unarchive`, unarchived>> on purpose)).
+coupon(s) that are <<Unarchiving a coupon: `unarchive` (Chester), unarchived>> on purpose)).
 
 Examples:
 
@@ -605,7 +605,7 @@ command <<Viewing savings: `saved`, `saved`>>.
 A coupon cannot be used if it has not reached its start date, or it is archived.
 If there is an intention to use the coupon, you can
 <<Editing a coupon: `edit`, `edit`>> the start date or
-<<Unarchiving a coupon: `unarchive`, `unarchive`>> the coupon.
+<<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>> the coupon.
 // end::used[]
 
 
@@ -697,7 +697,7 @@ Unarchive a coupon, thus bringing it back to your active coupons list.
 [NOTE]
 To unarchive a coupon, you have to make sure that the archived coupon is
 visible in the Coupon Stash first. Read the section on the
-<<Archiving a coupon: `archive`, `archive`>> command to find out the ways that
+<<Archiving a coupon: `archive` (Chester), `archive`>> command to find out the ways that
 you can display archived coupons.
 
 Format: `unarchive INDEX`
@@ -740,9 +740,9 @@ For example, coupons with the keyword **ken** would be returned: +
 
 [NOTE]
 The <<Finding coupons by name: `find`, `find`>> command searches the
-<<Archiving a coupon: `archive`, `archive`>> for matches too. Coupons that are
+<<Archiving a coupon: `archive` (Chester), `archive`>> for matches too. Coupons that are
 found
-in the <<Archiving a coupon: `archive`, `archive`>> are displayed **below** the
+in the <<Archiving a coupon: `archive` (Chester), `archive`>> are displayed **below** the
 non-archived matches.
 
 // end::find[]
@@ -913,10 +913,10 @@ coupons in the Coupon Stash) +
 * <<Adding a coupon: `add`, `add`>>
 * <<Editing a coupon: `edit`, `edit`>>
 * <<Deleting a coupon: `delete`, `delete`>>
-* <<Archiving a coupon: `archive`, `archive`>>
-* <<Unarchiving a coupon: `unarchive`, `unarchive`>>
+* <<Archiving a coupon: `archive` (Chester), `archive`>>
+* <<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>>
 * <<Clearing all entries: `clear`, `clear`>>
-* <<Using a coupon: `used`, `used`>>
+* <<Using a coupon: `used` (Chester), `used`>>
 ====
 
 [NOTE]
