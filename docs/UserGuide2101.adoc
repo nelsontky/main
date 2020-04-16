@@ -653,6 +653,22 @@ Command Result Box>>.
 * `saved sd/1-5-2019 e/20-3-2020` +
 A message with your total savings and saveables saved between 1 May 2019 and 20 March 2020 will be displayed in the
 <<CommandResultBox, Command Result Box>>.
+
+Here are instructions for viewing your savings with the `saved` command:
+
+. First, ensure that your coupons have been added to Coupon Stash. This
+can be done with the <<Adding a coupon: `add`, `add` command>>.
+
+. Use your coupons to make a purchase!
+
+. Register your usage of the coupon with the
+<<Using a coupon: `used` (Chester), `used` command>>
+
+. Use the `saved` command to view your savings!
+
+. Navigate to the <<Summary tab, summary tab>> to view
+a graph of your savings per week.
+
 // end::saved[]
 
 // tag::archive[]
