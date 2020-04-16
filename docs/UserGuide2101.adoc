@@ -380,8 +380,9 @@ A coupon can have any number of tags (including 0)
 
 [NOTE]
 If unspecified, the default remind date of a coupon will be set to
-3 days before the expiry date. Go to <<Reminding of coupon expiry>>  to
-learn more about remind dates.
+3 days before the expiry date. Go to
+<<Reminding of coupon expiry (Kevin), Section 5.22, “Reminding of coupon expiry”>>
+to learn more about remind dates.
 
 ****
 * Coupons must have at least one "savings" value, whether it is
@@ -442,7 +443,8 @@ Savings cannot be cleared in the same way as clearing tags,
 as a coupon must have at least 1 saving.
 
 [NOTE]
-Remind date cannot be removed or cleared. Go to <<Reminding of coupon expiry>>
+Remind date cannot be removed or cleared. Go to
+<<Reminding of coupon expiry (Kevin), Section 5.22, “Reminding of coupon expiry”>>
 to learn more about remind dates.
 
 Examples:
@@ -1150,7 +1152,7 @@ image::keyboard_shortcuts/updownedit.png[]
 +
 .Before running the `archive` command.
 image::keyboard_shortcuts/updownarchive.png[]
-* `add n/McDonalds McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/50% sd/1-4-2020 l/2 t/Value t/Savoury`
+* `add n/McDonald's McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/50% sd/1-4-2020 l/2 t/Value t/Savoury`
 +
 .Before running the `add` command.
 image::keyboard_shortcuts/updownadd.png[]
