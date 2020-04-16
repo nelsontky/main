@@ -582,6 +582,7 @@ saved.
 * This value changes depending on which coupons were marked as used during the
 time period specified.
 ****
+
 Examples:
 
 * `saved d/1-3-2020` +
@@ -603,10 +604,17 @@ can be done with the <<Adding a coupon: `add`, `add` command>>.
 . Register your usage of the coupon with the
 <<Using a coupon: `used` (Chester), `used` command>>
 
-. Use the `saved` command to view your savings!
+. Use the `saved` command to view your savings! The savings
+will be displayed in the result box, as shown below:
++
+.Savings amount displayed in the command result box.
+image::ug-savings-in-box.png[]
 
 . Navigate to the <<Summary tab, summary tab>> to view
 a graph of your savings per week.
++
+.Savings graph displayed in summary tab.
+image::ug-savings-in-graph.png[]
 
 // end::saved[]
 
