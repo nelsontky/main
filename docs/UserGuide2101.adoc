@@ -537,9 +537,8 @@ Deletes the first coupon in the resulting coupon list of the find command.
 // end::delete[]
 
 // tag::list[]
-=== Listing coupons: `list` (Denise)
-
-Shows a list of coupons in the Coupon Stash. +
+=== Listing coupons: `list`
+The `list` command shows you a list of a type of coupon in your Coupon Stash. +
 
 There are 3 types of lists: +
 
@@ -554,15 +553,16 @@ date).
 Format: `list [PREFIX]` +
 
 ****
-* `PREFIX` can be either `a/` or `u/`.
-* Using `a/` lists all coupons that are archived, while `u/` lists all used coupons (including
-<<Archiving a coupon: `archive`, archived>> coupons at the
-end of the list).
+* `PREFIX` can be `a/`, `u/` or left empty.
+* The `PREFIX` `a/` lists all of your archived coupons and `u/` lists all of your used coupons. If left empty, it lists
+all of your active coupons (coupons that are not fully used/ not archived (except for coupon(s) that are
+<<Unarchiving a coupon: `unarchive`, unarchived>> on purpose))
+
 ****
 
 [NOTE]
-`PREFIX` can be left blank to list all active coupons (coupons that are not fully used/ not archived (except for
-coupon(s) that are <<Unarchiving a coupon: `unarchive`, unarchived>> on purpose)).
+`PREFIX` `u/` lists all used coupons (including <<Archiving a coupon: `archive`, archived>> coupons that have been used
+at the end of the list).
 
 Examples:
 
@@ -748,13 +748,13 @@ non-archived matches.
 // end::find[]
 
 // tag::expiring[]
-=== Listing all expiring coupons: `expiring` (Denise)
+=== Listing all expiring coupons: `expiring`
 
-Shows a list of all your coupons expiring on a date or during a
+The `expiring` command shows a list of all your coupons expiring on a specified date or during a
 <<coupon-stash-monthyear-format, month year>>.
 
 [NOTE]
-This command will change the month year on display in the <<calendar, calendar>> to the month year of specified
+This command will change the month year on display in the <<calendar, calendar>> to the month year of the specified
 <<coupon-stash-date-format, expiry date>> or <<coupon-stash-monthyear-format, month year>>. +
 For example, `expiring e/30-9-2020` & `expiring my/9-2020` both changes the month year on display in the
 <<calendar, calendar>> to September 2020.
@@ -762,8 +762,6 @@ For example, `expiring e/30-9-2020` & `expiring my/9-2020` both changes the mont
 Format: `expiring e/EXPIRY_DATE` or `expiring my/MONTH_YEAR`
 
 ****
-* Lists all coupons that are expiring on the specified expiry date or during
-the specified month year.
 * The <<coupon-stash-date-format, expiry date>> or <<coupon-stash-monthyear-format, month year>> must follow the
 <<coupon-stash-date-format, Coupon Stash date format>>
 or the <<coupon-stash-monthyear-format, Coupon Stash MonthYear format>>
@@ -822,14 +820,14 @@ Sorts the Coupon Stash by reminder date from earliest to latest.
 // end::sort[]
 
 // tag::copy[]
-=== Copying a coupon: `copy` (Denise)
-Copies a coupon as an <<Adding a coupon: `add`, `add`>> command to your
-clipboard so that you can easily share it with your friends/family!
+=== Copying a coupon: `copy`
+The `copy` command copies a coupon as an <<Adding a coupon: `add`, `add`>> command to your
+clipboard so that you can easily share it with your friends/family who are also using Coupon Stash!
 
 Format: `copy INDEX`
 
 ****
-* Copies the coupon at the specified <<index, INDEX>>.
+* Copies the coupon at the specified <<index, INDEX>> of the current displayed list.
 * The <<Adding a coupon: `add`, `add`>> command of the coupon will be copied to
 your clipboard. Simply kbd:[Ctrl] + kbd:[V] to paste it!
 (kbd:[Cmd] + kbd:[V] for macOS)
@@ -844,24 +842,56 @@ not be copied.
 ** Condition (if any)
 ****
 
-Below is a short demonstration of the `copy` command:
-
-.Animation of `copy` command operation.
-image::gifs/copy command.gif[]
-
 Examples:
 
-* `list` +
-`copy 2` +
-Copies the second coupon in the resulting coupon list of the
-<<_listing_coupons_list, `list`>> command to an
-<<Adding a coupon: `add`, `add`>> command and copies it to
-your clipboard.
-* `find chicken` +
-`copy 1` +
-Copies the first coupon in the resulting coupon list of the
-<<Finding coupons by name: `find`, `find`>> command to an <<Adding a coupon: `add`, `add`>> command
-and copies it to your clipboard.
+* To copy the second coupon in the current list of coupons to send it to someone.
+
+Step 1. Key in `copy 2` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard.
+
+image::UG_Copy_1.png[]
+
+
+Step 2. You will see a message in the <<UserInterface, Command Result Box>> indicating that the coupon is copied to your clipboard.
+
+image::UG_Copy_2.png[width="80%"]
+
+
+Step 3. Simply kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) and send it to someone!
+
+image::UG_Copy_3.png[]
+
+
+* To copy the third coupon in the resulting list of coupons after <<Finding coupons by name: `find`, `find`>> command to
+send it to someone.
+
+Step 1. Key in `find food` in the <<UserInterface, Command Input Box>> to find all coupons with the keyword "food" in
+their names.
+
+image::UG_Copy_4.png[width="70%"]
+
+
+Step 2. You will see a message in the <<UserInterface, Command Result Box>> indicating the number of coupons that has
+names with the keyword "food".
+
+image::UG_Copy_5.png[width=60%]
+
+
+Step 3. Key in `copy 3` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard.
+
+image::UG_Copy_6.png[]
+
+
+Step 4. You will see a message in the <<UserInterface, Command Result Box>> indicating that the coupon is copied to your
+clipboard.
+
+image::UG_Copy_7.png[width="80%"]
+
+
+Step 5. Simply kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) and send it to someone!
+
+image::UG_Copy_8.png[]
+
+
 // end::copy[]
 
 // tag::share[]
@@ -968,15 +998,15 @@ was in the resulting coupon list is deleted.
 // end::redo[]
 
 // tag::goto[]
-=== Going to a month-year on the calendar: `goto` (Denise)
-Goes to the specified month and year on the <<calendar, calendar>> by changing the month year on display. +
+=== Going to a month-year on the calendar: `goto`
+The `goto` command changes the month year displayed on the <<calendar, calendar>> to the specified month and year. +
 
 Format: `goto my/MONTH_YEAR`  +
 
 Example:
 
 * `goto my/12-2020` +
-Goes to December 2020 on the <<calendar, calendar>> by changing the month year on display to December 2020.
+Changes the month year display on the <<calendar, calendar>> to December 2020.
 // end::goto[]
 
 // tag::expand[]
