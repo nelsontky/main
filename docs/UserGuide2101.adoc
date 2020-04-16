@@ -8,11 +8,8 @@
 :stylesDir: stylesheets
 :xrefstyle: full
 :experimental:
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:warning-caption: :warning:
-endif::[]
+:icons: font
+
 :repoURL: https://github.com/AY1920S2-CS2103T-F09-1/main
 
 [[section]]
@@ -377,7 +374,7 @@ Some date cells are highlighted. The following are the meanings of the various h
 * Red highlight: Indicates expiring coupon(s) on that date
 
 .Elements in the Calendar
-image::Calendar_Elements.png[]
+image::Calendar_Elements.png[width="50%"]
 
 [[CommandInputBox]]
 === Command Input Box
@@ -540,7 +537,7 @@ Deletes the first coupon in the resulting coupon list of the find command.
 // end::delete[]
 
 // tag::list[]
-=== Listing coupons: `list`
+=== Listing coupons: `list` (Denise)
 
 Shows a list of coupons in the Coupon Stash. +
 
@@ -580,7 +577,7 @@ Shows a list of all *used* coupons in Coupon Stash.
 // end::list[]
 
 // tag::used[]
-=== Using a coupon: `used`
+=== Using a coupon: `used` (Chester)
 Use a coupon if its usage has yet to reach its limit.
 Requires an original amount of purchase if the coupon has savings in a
 percentage value. +
@@ -614,7 +611,7 @@ If there is an intention to use the coupon, you can
 
 // tag::saved[]
 [[saved]]
-=== Viewing savings: `saved`
+=== Viewing savings: `saved` (Alden)
 
 Shows you how much you have saved by using coupons in Coupon Stash.
 There are three ways to use this command:
@@ -660,7 +657,7 @@ A message with your total savings and saveables saved between 1 May 2019 and 20 
 
 // tag::archive[]
 [[archive]]
-=== Archiving a coupon: `archive`
+=== Archiving a coupon: `archive` (Chester)
 Archives a coupon when you want to keep a record of it, without cluttering your
 current stash of coupons.
 
@@ -694,7 +691,7 @@ your coupons once their usage limit has been reached, or when they have expired.
 // end::archive[]
 
 // tag::unarchive[]
-=== Unarchiving a coupon: `unarchive`
+=== Unarchiving a coupon: `unarchive` (Chester)
 Unarchive a coupon, thus bringing it back to your active coupons list.
 
 [NOTE]
@@ -751,7 +748,7 @@ non-archived matches.
 // end::find[]
 
 // tag::expiring[]
-=== Listing all expiring coupons: `expiring`
+=== Listing all expiring coupons: `expiring` (Denise)
 
 Shows a list of all your coupons expiring on a date or during a
 <<coupon-stash-monthyear-format, month year>>.
@@ -788,7 +785,7 @@ displayed **below** the non-archived matches.
 // end::expiring[]
 
 // tag::sort[]
-=== Sorting coupons: `sort`
+=== Sorting coupons: `sort` (Nelson)
 
 Sorts the coupons in Coupon Stash in **ascending** order. It is possible to sort
 by coupon name, expiry date, or remind date.
@@ -825,7 +822,7 @@ Sorts the Coupon Stash by reminder date from earliest to latest.
 // end::sort[]
 
 // tag::copy[]
-=== Copying a coupon: `copy`
+=== Copying a coupon: `copy` (Denise)
 Copies a coupon as an <<Adding a coupon: `add`, `add`>> command to your
 clipboard so that you can easily share it with your friends/family!
 
@@ -868,7 +865,7 @@ and copies it to your clipboard.
 // end::copy[]
 
 // tag::share[]
-=== Sharing a coupon: `share`
+=== Sharing a coupon: `share` (Chester)
 Shares a coupon as a `.png` image file (portable network graphic).
 Now you can post your coupons on your social media platforms like Instagram!
 
@@ -906,7 +903,7 @@ file.
 // end::share[]
 
 // tag::undo[]
-=== Undoing the previous command: `undo`
+=== Undoing the previous command: `undo` (Nelson)
 Undo the most recent operation on the Coupon Stash. Only operations that change
 the coupons in the Coupon Stash can be undone.
 
@@ -947,7 +944,7 @@ Revert the <<Deleting a coupon: `delete`, `delete`>> that was performed. Deleted
 // end::undo[]
 
 // tag::redo[]
-=== Redoing the undone command: `redo`
+=== Redoing the undone command: `redo` (Nelson)
 Redo the previously undone operation. This is akin to undoing an
 <<Undoing the previous command: `undo`, `undo`>>.
 
@@ -971,7 +968,7 @@ was in the resulting coupon list is deleted.
 // end::redo[]
 
 // tag::goto[]
-=== Going to a month-year on the calendar: `goto`
+=== Going to a month-year on the calendar: `goto` (Denise)
 Goes to the specified month and year on the <<calendar, calendar>> by changing the month year on display. +
 
 Format: `goto my/MONTH_YEAR`  +
@@ -983,7 +980,7 @@ Goes to December 2020 on the <<calendar, calendar>> by changing the month year o
 // end::goto[]
 
 // tag::expand[]
-=== Expanding a coupon: `expand`
+=== Expanding a coupon: `expand` (Alden)
 Displays a coupon in its own window, giving you a
 complete expanded view of it.
 
@@ -1004,7 +1001,7 @@ image::expand_example.png[]
 
 // tag::setcurrency[]
 [[setcurrency]]
-=== Setting currency symbol: `setcurrency`
+=== Setting currency symbol: `setcurrency` (Alden)
 Sets the currency symbol used in Coupon Stash.
 This will force Coupon Stash to reload all coupons
 to use the new symbol instead.
@@ -1027,7 +1024,7 @@ be visible immediately.
 // end::setcurrency[]
 
 // tag::help[]
-=== Viewing help: `help`
+=== Viewing help: `help` (Alden)
 Open a browser window that accesses an offline copy of this user guide.
 
 [WARNING]
@@ -1066,7 +1063,7 @@ of this cross button differs depending on operating system).
 // end::exit[]
 
 // tag::reminding[]
-=== Reminding of coupon expiry
+=== Reminding of coupon expiry (Kevin)
 
 By default, all added coupons have a remind date that is 3 days before its
 stated expiry date. This default value can be changed during the process of
@@ -1126,7 +1123,7 @@ There is no need to save manually.
 
 // tag::KeyboardShortcuts[]
 [[KeyboardShortcuts]]
-== Keyboard Shortcuts
+== Keyboard Shortcuts (Nelson)
 With Coupon Stash being optimized for efficient command line usage, how can we
 not include some nifty keyboard shortcuts to further streamline
 your workflow! This section introduces some of the keyboard shortcuts available
