@@ -82,15 +82,15 @@ the kbd:[Ctrl] key, which is used for most shortcuts.
 
 == Quick Start
 
-Getting started! Look no further! The simple steps below will get you up to
+Getting started? Look no further! The simple steps below will get you up to
 speed on this program faster than a beetle!
 
 .  Ensure you have Java (version 11 or above) installed in your
 Computer. Java is an application development platform
 and version 11 can be downloaded
 link:https://www.oracle.com/java/technologies/javase-jdk11-downloads.html[here].
-.  Download the latest link:{repoURL}/releases[`CouponStash.jar`].
-.  Copy the file to the folder you want to use as the home folder for your
+.  Download the latest `CouponStash.jar` from link:{repoURL}/releases[here].
+.  Copy the `.jar` file to the folder you want to use as the home folder for your
 Coupon Stash.
 .  Double-click the file to start the app. The Graphical User
 Interface (GUI) should appear in a few
@@ -114,7 +114,7 @@ command.
 [NOTE]
 There is some default sample data in Coupon Stash on your first startup of Coupon Stash. They are for you to experiment
 with Coupon Stash's <<Features, features>>! +
-Once you are ready, use the <<Clearing all entries: `clear`, `clear`>> command to clear them and start your couponing
+Once you are ready, use the <<Clearing all entries: `clear` (Alden), `clear`>> command to clear them and start your couponing
 journey with Coupon Stash!
 
 [[UserInterface]]
@@ -123,7 +123,7 @@ journey with Coupon Stash!
 In this section, we look at the key features of Coupon Stash's
 graphical user interface. The interface can be broadly split
 into 4 different parts: the different tabs present in the
-program (Coupons, Summary and Help), the calendar,
+program (Coupons, Summary, and Help), the calendar,
 the command input box and the command result box.
 
 .Coupon Stash main screen.
@@ -164,7 +164,7 @@ application.
 ===== Coupon card
 
 The coupon card displays information about each coupon, and
-it is styled to look like a coupon itself!
+it is styled to look like a coupon.
 
 .Sample coupon card.
 image::ShopeeCoupon.png[]
@@ -277,7 +277,7 @@ the following commands that alters the list of coupons may also alter the calend
 
 * <<Adding a coupon: `add`, `add`>>
 * <<Archiving a coupon: `archive` (Chester), `archive`>>
-* <<Clearing all entries: `clear`, `clear`>>
+* <<Clearing all entries: `clear` (Alden), `clear`>>
 * <<Deleting a coupon: `delete`, `delete`>>
 * <<Editing a coupon: `edit`, `edit`>>
 * <<Listing all expiring coupons: `expiring` (Denise), `expiring`>>
@@ -919,7 +919,7 @@ coupons in the Coupon Stash) +
 * <<Deleting a coupon: `delete`, `delete`>>
 * <<Archiving a coupon: `archive` (Chester), `archive`>>
 * <<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>>
-* <<Clearing all entries: `clear`, `clear`>>
+* <<Clearing all entries: `clear` (Alden), `clear`>>
 * <<Using a coupon: `used` (Chester), `used`>>
 ====
 
