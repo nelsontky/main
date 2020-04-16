@@ -52,7 +52,7 @@ a|
 . Adding a coupon: add
 . Editing a coupon: edit
 . Deleting a coupon: delete
-. Listing all coupons: list
+. Listing coupons: list
 . Using a coupon: used
 . Viewing savings: saved
 . Archiving a coupon: archive
@@ -337,17 +337,17 @@ The calendar changes accordingly to the changes in the list of coupons in the <<
 the following commands that alters the list of coupons may also alter the calendar: +
 
 * <<Adding a coupon: `add`, `add`>>
-* <<Archiving a coupon: `archive`, `archive`>>
+* <<Archiving a coupon: `archive` (Chester), `archive`>>
 * <<Clearing all entries: `clear`, `clear`>>
 * <<Deleting a coupon: `delete`, `delete`>>
 * <<Editing a coupon: `edit`, `edit`>>
-* <<Listing all expiring coupons: `expiring`, `expiring`>>
+* <<Listing all expiring coupons: `expiring` (Denise), `expiring`>>
 * <<Finding coupons by name: `find`, `find`>>
-* <<Listing coupons: `list`, `list`>>
+* <<Listing coupons: `list` (Denise), `list`>>
 * <<Redoing the undone command: `redo`, `redo`>>
-* <<Unarchiving a coupon: `unarchive`, `unarchive`>>
+* <<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>>
 * <<Undoing the previous command: `undo`, `undo`>>
-* <<Using a coupon: `used`, `used`>>
+* <<Using a coupon: `used` (Chester), `used`>>
 ====
 
 
@@ -361,7 +361,7 @@ The left and right arrows enable you to change the month year on display on the 
 A click on the left and right arrows displays the previous month and the next month respectively.
 
 [TIP]
-You may also change the month year on display using the <<Going to a month-year on the calendar: `goto`, `goto`>>
+You may also change the month year on display using the <<Going to a month-year on the calendar: `goto` (Denise), `goto`>>
 command!
 
 [[calendar-date]]
@@ -537,7 +537,7 @@ Deletes the first coupon in the resulting coupon list of the find command.
 // end::delete[]
 
 // tag::list[]
-=== Listing coupons: `list`
+=== Listing coupons: `list` (Denise)
 The `list` command shows you a list of a type of coupon in your Coupon Stash. +
 
 There are 3 types of lists: +
@@ -561,7 +561,7 @@ all of your active coupons (coupons that are not fully used/ not archived (excep
 ****
 
 [NOTE]
-`PREFIX` `u/` lists all used coupons (including <<Archiving a coupon: `archive`, archived>> coupons that have been used
+`PREFIX` `u/` lists all used coupons (including <<Archiving a coupon: `archive` (Chester), archived>> coupons that have been used
 at the end of the list).
 
 Examples:
@@ -599,13 +599,13 @@ Uses the first coupon in the coupon list.
 * `used 1 $10.0` +
 Uses the first coupon in the coupon list, which also has a percentage savings.
 The total savings of the coupon will be calculated, and can be seen with the
-command <<Viewing savings: `saved`, `saved`>>.
+command <<saved, `saved`>>.
 
 [WARNING]
 A coupon cannot be used if it has not reached its start date, or it is archived.
 If there is an intention to use the coupon, you can
 <<Editing a coupon: `edit`, `edit`>> the start date or
-<<Unarchiving a coupon: `unarchive`, `unarchive`>> the coupon.
+<<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>> the coupon.
 // end::used[]
 
 
@@ -653,6 +653,22 @@ Command Result Box>>.
 * `saved sd/1-5-2019 e/20-3-2020` +
 A message with your total savings and saveables saved between 1 May 2019 and 20 March 2020 will be displayed in the
 <<CommandResultBox, Command Result Box>>.
+
+Here are instructions for viewing your savings with the `saved` command:
+
+. First, ensure that your coupons have been added to Coupon Stash. This
+can be done with the <<Adding a coupon: `add`, `add` command>>.
+
+. Use your coupons to make a purchase!
+
+. Register your usage of the coupon with the
+<<Using a coupon: `used` (Chester), `used` command>>
+
+. Use the `saved` command to view your savings!
+
+. Navigate to the <<Summary tab, summary tab>> to view
+a graph of your savings per week.
+
 // end::saved[]
 
 // tag::archive[]
@@ -663,15 +679,15 @@ current stash of coupons.
 
 [NOTE]
 To view archived coupons, the user can run the
-<<Listing coupons: `list`, `list a/`>> command to list all
+<<Listing coupons: `list` (Denise), `list a/`>> command to list all
 archived coupons. Alternatively, the <<Finding coupons by name: `find`,
 `find`>> command explained below will
 search all archived coupons, thus displaying archives that match the supplied
 keywords below unarchived coupons. Finally, the
-<<Listing all expiring coupons: `expiring`, `expiring`>> command will also
+<<Listing all expiring coupons: `expiring` (Denise), `expiring`>> command will also
 include all archived coupons that are expiring in its results.
 Read the section on <<Finding coupons by name: `find`, `find`>> and
-<<Listing all expiring coupons: `expiring`, `expiring`>>
+<<Listing all expiring coupons: `expiring` (Denise), `expiring`>>
 respectively to find out more.
 
 Format: `archive INDEX`
@@ -697,7 +713,7 @@ Unarchive a coupon, thus bringing it back to your active coupons list.
 [NOTE]
 To unarchive a coupon, you have to make sure that the archived coupon is
 visible in the Coupon Stash first. Read the section on the
-<<Archiving a coupon: `archive`, `archive`>> command to find out the ways that
+<<Archiving a coupon: `archive` (Chester), `archive`>> command to find out the ways that
 you can display archived coupons.
 
 Format: `unarchive INDEX`
@@ -740,15 +756,15 @@ For example, coupons with the keyword **ken** would be returned: +
 
 [NOTE]
 The <<Finding coupons by name: `find`, `find`>> command searches the
-<<Archiving a coupon: `archive`, `archive`>> for matches too. Coupons that are
+<<Archiving a coupon: `archive` (Chester), `archive`>> for matches too. Coupons that are
 found
-in the <<Archiving a coupon: `archive`, `archive`>> are displayed **below** the
+in the <<Archiving a coupon: `archive` (Chester), `archive`>> are displayed **below** the
 non-archived matches.
 
 // end::find[]
 
 // tag::expiring[]
-=== Listing all expiring coupons: `expiring`
+=== Listing all expiring coupons: `expiring` (Denise)
 
 The `expiring` command shows a list of all your coupons expiring on a specified date or during a
 <<coupon-stash-monthyear-format, month year>>.
@@ -820,7 +836,7 @@ Sorts the Coupon Stash by reminder date from earliest to latest.
 // end::sort[]
 
 // tag::copy[]
-=== Copying a coupon: `copy`
+=== Copying a coupon: `copy` (Denise)
 The `copy` command copies a coupon as an <<Adding a coupon: `add`, `add`>> command to your
 clipboard so that you can easily share it with your friends/family who are also using Coupon Stash!
 
@@ -906,30 +922,28 @@ Format: `share INDEX`
 * A message with the file path to the `.png` file will be displayed in the <<CommandResultBox, Command Result Box>>.
 ****
 
+Examples:
+
+* `share 1` +
+Shares the specified coupon. +
+Step 1. <<Finding coupons by name: `find`, `find`>> the coupon that you would
+like to share. E.g. `find grab` +
+Step 2. Specify the index of the coupon to share - `share 1` +
+Step 3. Type the name of the file and select the folder you want to save to. +
+
+.Screen of downloading shared coupon image
+image::ShareDownload.png[]
+
+Step 4. Click save, and the imaged will be saved into the specified folder. +
+Step 5. Share this image with your friends and family!
+
+.Example of a shared coupon
+image::GrabFoodCoupon.png[]
+
 [WARNING]
 Image generated will have an index of 1 regardless of
 its true index!
 Below is a sample of how a shared coupon image looks like:
-
-.Example of a shared coupon
-image::example_shared_coupon.png[]
-
-[WARNING]
-Do not try entering this command with `MAX_INT` value as <<index, INDEX>>.
-This may lead to a bug.
-
-Examples:
-
-* `list` +
-`share 2` +
-Shares the second coupon in the resulting coupon list of the
-<<_listing_coupons_list, `list`>> command and save
-it as a `.png` file.
-* `find chicken` +
-`share 1` +
-Shares the first coupon in the resulting coupon list of the
-<<Finding coupons by name: `find`, `find`>> command and save it as a `.png`
-file.
 // end::share[]
 
 // tag::undo[]
@@ -945,10 +959,10 @@ coupons in the Coupon Stash) +
 * <<Adding a coupon: `add`, `add`>>
 * <<Editing a coupon: `edit`, `edit`>>
 * <<Deleting a coupon: `delete`, `delete`>>
-* <<Archiving a coupon: `archive`, `archive`>>
-* <<Unarchiving a coupon: `unarchive`, `unarchive`>>
+* <<Archiving a coupon: `archive` (Chester), `archive`>>
+* <<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>>
 * <<Clearing all entries: `clear`, `clear`>>
-* <<Using a coupon: `used`, `used`>>
+* <<Using a coupon: `used` (Chester), `used`>>
 ====
 
 [NOTE]
@@ -998,7 +1012,7 @@ was in the resulting coupon list is deleted.
 // end::redo[]
 
 // tag::goto[]
-=== Going to a month-year on the calendar: `goto`
+=== Going to a month-year on the calendar: `goto` (Denise)
 The `goto` command changes the month year displayed on the <<calendar, calendar>> to the specified month and year. +
 
 Format: `goto my/MONTH_YEAR`  +
@@ -1010,6 +1024,7 @@ Changes the month year display on the <<calendar, calendar>> to December 2020.
 // end::goto[]
 
 // tag::expand[]
+[[expand]]
 === Expanding a coupon: `expand` (Alden)
 Displays a coupon in its own window, giving you a
 complete expanded view of it.
@@ -1171,7 +1186,7 @@ Demonstration:
 image::gifs/Up down arrow.gif[]
 
 === Close expanded coupon or reminder windows: kbd:[Ctrl]+kbd:[q]
-After <<Expanding a coupon: `expand`, `expanding`>> a coupon, you can close
+After <<expand, expanding>> a coupon, you can close
 the expanded coupon window by keeping the focus on the coupon window and
 pressing the keyboard buttons kbd:[Ctrl] and kbd:[q] simultaneously. This
 shortcut also works for closing <<_reminding_of_coupon_expiry, reminder>>
