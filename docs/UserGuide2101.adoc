@@ -497,7 +497,7 @@ Format: `list [PREFIX]` +
 * `PREFIX` can be `a/`, `u/` or left empty.
 * The `PREFIX` `a/` lists all of your archived coupons and `u/` lists all of your used coupons. If left empty, it lists
 all of your active coupons (coupons that are not fully used/ not archived (except for coupon(s) that are
-<<Unarchiving a coupon: `unarchive`, unarchived>> on purpose))
+<<Unarchiving a coupon: `unarchive` (Chester), unarchived>> on purpose))
 
 ****
 
@@ -508,13 +508,16 @@ at the end of the list).
 Examples:
 
 * `list` +
-Shows a list of all *active* coupons in Coupon Stash.
+Shows a list of all active coupons in Coupon Stash. The <<CommandResultBox, Command Result Box>> will show a message
+indicating that all active coupons are listed.
 
 * `list a/` +
-Shows a list of all *archived* coupons in Coupon Stash.
+Shows a list of all archived coupons in Coupon Stash. The <<CommandResultBox, Command Result Box>> will show a message
+indicating that all archived coupons are listed.
 
 * `list u/` +
-Shows a list of all *used* coupons in Coupon Stash.
+Shows a list of all used coupons in Coupon Stash. The <<CommandResultBox, Command Result Box>> will show a message
+indicating that all used coupons are listed.
 // end::list[]
 
 // tag::used[]
@@ -816,24 +819,24 @@ and copies it to your clipboard.
 Here are the instructions for copying the third coupon in the resulting list of coupons after a
 <<Finding coupons by name: `find`, `find`>> command to send it to someone:
 
-. Key in `find food` in the <<UserInterface, Command Input Box>> to find all coupons with the keyword "food" in
+. Key in `find food` in the <<CommandInputBox, Command Input Box>> to find all coupons with the keyword "food" in
 their names.
 +
 .Example of keying the `find food` command into the Command Input Box.
 image::UG_copy_4.png[width="60%"]
 
-. You will see a message in the <<UserInterface, Command Result Box>> indicating the number of coupons that has
+. You will see a message in the <<CommandResultBox, Command Result Box>> indicating the number of coupons that has
 names with the keyword "food".
 +
 .Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box.
 image::UG_copy_5.png[width=40%]
 
-. Key in `copy 3` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard. +
+. Key in `copy 3` in the <<CommandInputBox, Command Input Box>> to copy the second coupon to your clipboard.
 +
 .Example of keying the `copy 3` command into the Command Input Box.
 image::UG_copy_6.png[width=100%]
 
-. You will see a message in the <<UserInterface, Command Result Box>> indicating that the third coupon has been copied
+. You will see a message in the <<CommandResultBox, Command Result Box>> indicating that the third coupon has been copied
 to your clipboard.
 +
 .Example of result message of the `copy` command.
@@ -1055,8 +1058,7 @@ of this cross button differs depending on operating system).
 
 By default, all added coupons have a remind date that is 3 days before its
 stated expiry date. This default value can be changed during the process of
-<<_adding_a_coupon_add, adding>> a new coupon or by
-<<_editing_a_coupon_edit, editing>> an existing coupon. The remind dates for all
+adding a new coupon or by editing an existing coupon. The remind dates for all
 coupons are checked on program launch. All coupons that have a remind date which
 falls on the date of program launch will be listed in a popup window on launch.
 The popup window can be closed by pressing kbd:[Ctrl] + kbd:[q].
