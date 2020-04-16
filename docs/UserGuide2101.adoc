@@ -1,3 +1,6 @@
+// command to generate:
+// asciidoctor-pdf -a pdf-theme=default-with-fallback-font UserGuide2101.adoc
+
 = Coupon Stash v1.4 - User Guide
 :site-section: UserGuide
 :toc:
