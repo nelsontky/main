@@ -942,7 +942,7 @@ image::ShareDownload.png[]
 . Click save, and the imaged will be saved into the specified folder.
 
 . Share this image with your friends and family!
-
++
 .Example of a shared coupon
 image::GrabFoodCoupon.png[]
 
