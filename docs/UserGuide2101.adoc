@@ -17,10 +17,6 @@
 
 <<<
 [[section]]
-image:Stash.png[image,width=322,height=322]
-
-
-By: Team F09-1
 
 Welcome to the Coupon Stash User Guide! Thank you so much for choosing
 Coupon Stash, the world's most popular command-line coupon management desktop
@@ -132,6 +128,7 @@ the command input box and the command result box.
 .Coupon Stash main screen.
 image::ug_user_interface.png[]
 
+<<<
 === Tabs
 
 Tab selection determines the content shown in the main
@@ -144,7 +141,7 @@ selected tab will be highlighted with a bolder text, and a
 darker blue.
 
 .Coupon Stash summary tab.
-image::ug_currently_selected_tab.png[]
+image::ug_currently_selected_tab.png[width=50%]
 
 [NOTE]
 The tabs bar is visible on every single tab! It serves
@@ -199,6 +196,7 @@ accordingly with some commands of Coupon Stash.
 Duplicate coupons cannot exist in the active coupon list! Coupons are duplicates
 when they have the same name, promo code, expiry date, and savings.
 
+<<<
 ==== Summary tab
 
 The summary tab provides an overview of how much
@@ -213,7 +211,7 @@ quantified displayed in a lime-green box at the side,
 preceded by the text "And these saveables too!".
 
 .Coupon Stash summary tab.
-image::ug_summary_tab.png[]
+image::ug_summary_tab.png[width=75%]
 
 A graph that shows the monetary amount saved
 every week is also displayed in the summary tab.
@@ -247,7 +245,7 @@ However, they can still be calculated using the
 <<saved, saved command>>.
 
 .Coupon Stash savings graph.
-image::ug_savings_graph.png[]
+image::ug_savings_graph.png[width=75%]
 
 ==== Help tab
 
@@ -258,6 +256,7 @@ to use all the commands in Coupon Stash.
 As compared to the User Guide's descriptions, the
 descriptions provided in the help tab are less detailed!
 
+<<<
 [[calendar]]
 === Calendar
 
@@ -358,7 +357,7 @@ times)
 ****
 ====
 
-
+<<<
 // tag::add[]
 === Adding a coupon: `add`
 
@@ -399,6 +398,8 @@ Adds a new Coupon:
 .Newly added McDonald's coupon.
 image::ug_mcdonalds_mcgriddles.png[]
 
+<<<
+
 * `add n/Grabfood s/40% e/30-4-2020 p/GRAB40 t/delivery`
 +
 Adds a new Coupon:
@@ -411,6 +412,7 @@ If your coupon allows for unlimited usage, set the limit of the coupon to a
 number less than 1! E.g. `l/0`
 // end::add[]
 
+<<<
 // tag::edit[]
 === Editing a coupon: `edit`
 
