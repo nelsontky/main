@@ -16,8 +16,8 @@
 :repoURL: https://github.com/AY1920S2-CS2103T-F09-1/main
 
 <<<
-[[section]]
 
+== Introduction
 Welcome to the Coupon Stash User Guide! Thank you so much for choosing
 Coupon Stash, the world's most popular command-line coupon management desktop
 application*!
@@ -27,14 +27,8 @@ along the way.
 
 *as of April 2020
 
-.Picture of Stasher (Coupon Stash's Mascot).
-image::ug_stasher.png[width=70%]
-Hi! I'm Stasher, the mascot of Coupon Stash. Together,
-we are going to save so much money! Let me guide you
-to use this wonderful application.
-
-<<<
-== Introduction
+.Hi! I'm Stasher, the mascot of Coupon Stash.
+image::ug_stasher.png[width=30%]
 
 Coupon Stash is meant for School of Computing (SoC) students and staff who enjoy
 managing their coupons with a desktop command-line interface. It is optimised
@@ -90,8 +84,7 @@ link:https://www.oracle.com/java/technologies/javase-jdk11-downloads.html[here].
 .  Download the latest `CouponStash.jar` from link:{repoURL}/releases[here].
 .  Copy the `.jar` file to the folder you want to use as the home folder for your
 Coupon Stash.
-.  Double-click the file to start the app. The Graphical User
-Interface (GUI) should appear in a few
+.  Double-click the file to start the app. The GUI should appear in a few
 seconds. If nothing occurs, use the command
 `java -jar CouponStash.jar` on your computer's Command Line Interface (CLI) to
 open the file up.
@@ -99,13 +92,16 @@ open the file up.
 .  Some example commands you can try:
 * *add:* `add n/Domino's Pizza Extra Large s/40% p/ILOVEDOMINOS e/30-4-2020 l/5
           t/pizza t/delivery`
-*** adds a coupon named Domino's Pizza Extra Large to the Coupon Stash, with an
+*** Adds a coupon named Domino's Pizza Extra Large to the Coupon Stash, with an
 expiry date of 30th April 2020, 40% savings with promo code ILOVEDOMINOS, and a
 limit of 5 usages.
-* *used*: `used 3` : marks the third coupon shown in the current list
-as used, and automatically archives it if the limit is reached
-* *saved*: `saved` : displays how much you have saved from all coupons
-* *exit* : exits the app (your data will be saved automatically)
+* *used*: `used 3`
+ ** Marks the third coupon shown in the current list
+as used, and automatically archives it if the limit is reached.
+* *saved*: `saved`
+** Displays how much you have saved from all coupons.
+* *exit* : `exit`
+** Exits the app. (Your data will be saved automatically)
 .  Refer to the <<Features, Features>> section below for the details of each
 command.
 
@@ -324,8 +320,7 @@ whether your command was successful or not.
 [[Features]]
 == Features
 This section introduces the features of Coupon Stash. There are some examples
-for you to try out too! +
-Also, take note of the general format of all the commands below!
+for you to try out too! Also, take note of the general format of all the commands below!
 
 ====
 ****
@@ -398,15 +393,6 @@ Adds a new Coupon:
 .Newly added McDonald's coupon.
 image::ug_mcdonalds_mcgriddles.png[]
 
-<<<
-
-* `add n/Grabfood s/40% e/30-4-2020 p/GRAB40 t/delivery`
-+
-Adds a new Coupon:
-+
-.Newly added Grabfood coupon.
-image::ug_grabfood.png[]
-
 [TIP]
 If your coupon allows for unlimited usage, set the limit of the coupon to a
 number less than 1! E.g. `l/0`
@@ -467,10 +453,6 @@ Examples:
 * `delete 2` +
 Deletes the second coupon in the coupon list.
 
-* `delete 1` +
-Deletes the first coupon in the resulting coupon list of the find command.
-// end::delete[]
-
 // tag::list[]
 === Listing coupons: `list` (Denise)
 Shows you a list of a type of coupon in your Coupon Stash. +
@@ -515,38 +497,7 @@ Command Result Box>> will show a message
 indicating that all <<_using_a_coupon_used_chester, used>> coupons are listed.
 // end::list[]
 
-// tag::used[]
-=== Using a coupon: `used` (Chester)
-Use a coupon if its usage has yet to reach its limit.
-Requires an original amount of purchase if the coupon has savings in a
-percentage value. +
-
-Format: `used INDEX` or `used INDEX MONETARY_AMOUNT`
-where `MONETARY_AMOUNT` is a number prefixed by a user-defined currency
-symbol e.g. ($4.50, where the currency symbol is "$").
-
-****
-* Uses the coupon at the specified <<index, INDEX>>.
-****
-
-Examples:
-
-* `used 1` +
-Use the first coupon in the coupon list.
-
-
-* `used 1 $10.0` +
-Use the first coupon in the coupon list, which also has a percentage savings.
-The total savings of the coupon will be calculated, and can be seen with the
-command <<saved, `saved`>>.
-
-[WARNING]
-A coupon cannot be used if it has not reached its start date, or it is archived.
-If there is an intention to use the coupon, you can
-<<Editing a coupon: `edit`, `edit`>> the start date or
-<<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>> the coupon.
-// end::used[]
-
+<<<
 
 // tag::saved[]
 [[saved]]
@@ -602,7 +553,10 @@ can be done with the <<Adding a coupon: `add`, `add`>> command.
 
 . Register your usage of the coupon with the
 <<Using a coupon: `used` (Chester), `used`>> command.
-
++
+{empty} +
+{empty} +
+{empty} +
 . Use the `saved` command to view your savings! The savings
 will be displayed in the result box, as shown below:
 +
@@ -616,6 +570,40 @@ a graph of your savings per week.
 image::ug-savings-in-graph.png[]
 
 // end::saved[]
+
+<<<
+
+// tag::used[]
+=== Using a coupon: `used` (Chester)
+Use a coupon if its usage has yet to reach its limit.
+Requires an original amount of purchase if the coupon has savings in a
+percentage value. +
+
+Format: `used INDEX` or `used INDEX MONETARY_AMOUNT`
+where `MONETARY_AMOUNT` is a number prefixed by a user-defined currency
+symbol e.g. ($4.50, where the currency symbol is "$").
+
+****
+* Uses the coupon at the specified <<index, INDEX>>.
+****
+
+Examples:
+
+* `used 1` +
+Use the first coupon in the coupon list.
+
+
+* `used 1 $10.0` +
+Use the first coupon in the coupon list, which also has a percentage savings.
+The total savings of the coupon will be calculated, and can be seen with the
+command <<saved, `saved`>>.
+
+[WARNING]
+A coupon cannot be used if it has not reached its start date, or it is archived.
+If there is an intention to use the coupon, you can
+<<Editing a coupon: `edit`, `edit`>> the start date or
+<<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>> the coupon.
+// end::used[]
 
 // tag::archive[]
 [[archive]]
@@ -645,7 +633,7 @@ Format: `archive INDEX`
 Examples:
 
 * `archive 1` +
-Archives the first coupon in the Coupon Stash.
+Archives the first coupon in Coupon Stash.
 
 [TIP]
 To keep your coupons more organized, Coupon Stash will automatically archive
@@ -671,7 +659,7 @@ Format: `unarchive INDEX`
 Examples:
 
 * `unarchive 1` +
-Unarchive the first coupon in the Coupon Stash.
+Unarchive the first coupon in Coupon Stash.
 // end::unarchive[]
 
 // tag::find[]
@@ -771,6 +759,8 @@ Format: `sort PREFIX`
 expiry date, and `r/` would mean sorting by reminder date.
 ****
 
+<<<
+
 Examples:
 
 * `sort n/` +
@@ -805,6 +795,8 @@ not be copied.
 ** Condition (if any)
 ****
 
+<<<
+
 Examples:
 
 * `copy 3` +
@@ -825,25 +817,28 @@ names with the keyword "food".
 +
 .Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box.
 image::UG_copy_5.png[width=40%]
-
++
+{empty} +
+{empty} +
+{empty} +
 . Key in `copy 3` in the <<CommandInputBox, Command Input Box>> to copy the
 third coupon to your clipboard.
 +
 .Example of keying the `copy 3` command into the Command Input Box.
-image::UG_copy_6.png[width=100%]
+image::UG_copy_6.png[width=75%]
 
 . You will see a message in the <<CommandResultBox, Command Result Box>> indicating that the third coupon has been copied
 to your clipboard.
 +
 .Example of result message of the `copy` command.
-image::UG_copy_7.png[width=50%]
+image::UG_copy_7.png[width=40%]
 
 . You can now kbd:[Ctrl] + kbd:[v] to paste it (kbd:[Cmd] + kbd:[v] for
 macOS) into any messaging platform/application
 to share it.
 +
 .Example of sharing the copied coupon on a messaging application.
-image::UG_copy_8.png[width=70%]
+image::UG_copy_8.png[width=60%]
 // end::copy[]
 
 // tag::share[]
@@ -873,14 +868,14 @@ can be done with the <<Finding coupons by name: `find`, `find` command>>.
 . Type the name of the file and select the folder you want to save to.
 +
 .Screen of downloading shared coupon image.
-image::ShareDownload.png[]
+image::ShareDownload.png[width="50%"]
 
-. Click save, and the imaged will be saved into the specified folder.
+. Click save, and the image will be saved into the specified folder.
 
 . Share this image with your friends and family!
 +
 .Example of a shared coupon.
-image::GrabFoodCoupon.png[]
+image::GrabFoodCoupon.png[width="75%"]
 
 [WARNING]
 Image generated will have an index of 1 regardless of
@@ -929,6 +924,8 @@ Reverts the <<Deleting a coupon: `delete`, `delete`>> that was performed.
 Deleted coupon is restored.
 // end::undo[]
 
+<<<
+
 // tag::redo[]
 === Reversing an undo: `redo` (Nelson)
 Reverse your last <<Undoing the previous command: `undo` (Nelson), `undo`>>.
@@ -949,7 +946,6 @@ list is edited.
 * `delete 1` +
 `undo` +
 `redo` +
-
 Un-undo the <<Deleting a coupon: `delete`, `delete`>> command. First coupon that
 was in the resulting coupon list is deleted.
 // end::redo[]
@@ -965,6 +961,8 @@ Example:
 * `goto my/12-2020` +
 Changes the month year display on the <<calendar, calendar>> to December 2020.
 // end::goto[]
+
+<<<
 
 // tag::expand[]
 [[expand]]
@@ -984,7 +982,7 @@ Examples:
 Opens the first coupon in the coupon list in a new window.
 +
 .Example of an expanded coupon window.
-image::expand_example.png[]
+image::expand_example.png[width="80%"]
 // end::expand[]
 
 // tag::setcurrency[]
@@ -1077,13 +1075,15 @@ made available in version 2.0.
 in the D-M-YYYY format. (<<coupon-stash-date-format, Coupon Stash date format>>)
 ====
 
+<<<
+
 Examples:
 
 * `add n/McDonald's McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/$2
    sd/1-4-2020 l/2 t/value t/savoury`
 +
 Add a new Coupon without specifying a remind date. Note that the default
-remind date is 3 days before the state expiry date:
+remind date is 3 days before the stated expiry date:
 +
 .New coupon with a default remind date.
 image::ug_mcdonalds_mcgriddles.png[]
@@ -1126,26 +1126,46 @@ command.
 Here is a scenario where restoring previously entered command texts with the
 kbd:[↑] and kbd:[↓] keys will be useful:
 
-. Suppose you ran these 3 commands in order in Coupon Stash:
+. Suppose you ran these 3 commands in order:
 * `edit 1 n/ Adidas 31 Percent`
 +
 .Before running the `edit` command.
-image::keyboard_shortcuts/updownedit.png[]
+image::keyboard_shortcuts/updownedit.png[width="75%"]
 +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
 * `archive 2`
 +
 .Before running the `archive` command.
-image::keyboard_shortcuts/updownarchive.png[]
+image::keyboard_shortcuts/updownarchive.png[width="75%"]
 * `add n/McDonald's McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/50% sd/1-4-2020 l/2 t/Value t/Savoury`
 +
 .Before running the `add` command.
-image::keyboard_shortcuts/updownadd.png[]
-
+image::keyboard_shortcuts/updownadd.png[width="75%"]
++
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
 . We realise that in the first command we ran (the `edit` command), we
 renamed the first coupon wrongly.
 +
 .Name was edited erroneously, should be "Adidas 30 Percent" instead of "Adidas 31 Percent".
-image::keyboard_shortcuts/updownwrongname.png[]
+image::keyboard_shortcuts/updownwrongname.png[width="75%"]
 
 . To save ourselves the hassle of retyping the entire `edit` command again,
 we can access the previously entered command via the kbd:[↑] keyboard button.
@@ -1154,27 +1174,34 @@ we can access the previously entered command via the kbd:[↑] keyboard button.
 
 +
 .`edit` command restored after pressing kbd:[↑] thrice.
-image::keyboard_shortcuts/updownretrivee.png[]
+image::keyboard_shortcuts/updownretrivee.png[width="75%"]
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty}
 
 . Next, we can change ``edit``'s name parameter from "Adidas 31 Percent" to
 "Adidas 30 Percent", before executing the command again.
 
 +
 .Amended name parameter.
-image::keyboard_shortcuts/updownchangedname.png[]
+image::keyboard_shortcuts/updownchangedname.png[width="75%"]
 +
 .Adidas coupon amended successfully.
-image::keyboard_shortcuts/updownfinal.png[]
+image::keyboard_shortcuts/updownfinal.png[width="75%"]
 
 [NOTE]
 Just as kbd:[↑] can be used to navigate the command history, kbd:[↓] can be
 used to navigate towards the more recent entries in the command history.
 
+<<<
+
 === Close expanded coupon or reminder windows: kbd:[Ctrl]+kbd:[q] (Nelson)
 After <<expand, expanding>> a coupon, you can close
 the expanded coupon window by keeping the focus on the coupon window and
 pressing the keyboard buttons kbd:[Ctrl] and kbd:[q] simultaneously. This
-shortcut also works for closing <<_reminding_of_coupon_expiry, reminder>>
+shortcut also works for closing <<Reminding of coupon expiry (Kevin), reminder>>
 windows.
 
 Demonstration:
@@ -1185,6 +1212,8 @@ Click on the image to play the animation in this PDF file.)
 
 .Animation of closing window with kbd:[Ctrl]+kbd:[q].
 image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/ctrl%20q.gif]
+
+<<<
 
 === Cycle through tabs: kbd:[Ctrl]+kbd:[Tab] (Nelson)
 You can press the keyboard buttons kbd:[Ctrl] and kbd:[Tab] simultaneously to
@@ -1260,7 +1289,7 @@ t/value`
 [sd/START_DATE] [r/REMIND_DATE] [c/CONDITION] [s/SAVINGS]... [t/TAG]...` +
 e.g. `edit 2 n/Chicken Up s/50%`
 |*Delete*
-|`delete INDEX` +
+|`delete INDEX`
 e.g. `delete 3`
 |*List*
 |`list [PREFIX]`
@@ -1269,7 +1298,7 @@ e.g. `list`
 |`find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find western chick`
 |*Sort*
-|`sort PREFIX` +
+|`sort PREFIX`
 e.g. `sort n/`
 |*Expiring*
 |`expiring e/EXPIRY_DATE` or `expiring my/MONTH_YEAR` +
@@ -1278,33 +1307,33 @@ e.g. `expiring e/30-9-2020` or `expiring my/9-2020`
 |`used INDEX` or `used INDEX MONETARY_SYMBOL + ORIGINAL_AMOUNT` +
 e.g. `used 1` or `used 1 $10`
 |*Saved*
-|saved d/DATE_TO_TRACK_FROM +
+|`saved d/DATE_TO_TRACK_FROM`
 e.g. `saved d/ 1-5-2020`
 |*Archive*
-|`archive INDEX` +
+|`archive INDEX`
 e.g. `archive 1`
 |*Unarchive*
-|`unarchive INDEX` +
+|`unarchive INDEX`
 e.g. `unarchive 1`
 |*Copy*
-|`copy INDEX` +
+|`copy INDEX`
 e.g. `copy 1`
 |*Share*
-|`share INDEX` +
+|`share INDEX`
 e.g. `share 1`
 |*Undo*
 |`undo`
 |*Redo*
 |`redo`
 |*Goto*
-|`goto my/MONTH_YEAR` +
+|`goto my/MONTH_YEAR`
 e.g.`goto 9-2020`
 |*Expand*
-|`expand INDEX` +
+|`expand INDEX`
 e.g. `expand 1`
 |*SetCurrency*
-|`setcurrency [ms/NEW_MONEY_SYMBOL]` +
-e.g. setcurrency ms/€
+|`setcurrency [ms/NEW_MONEY_SYMBOL]`
+e.g. `setcurrency ms/€`
 |*Help*
 |`help`
 |*Clear*
