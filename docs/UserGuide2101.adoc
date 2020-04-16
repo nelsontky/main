@@ -283,9 +283,9 @@ the following commands that alters the list of coupons may also alter the calend
 * <<Listing all expiring coupons: `expiring` (Denise), `expiring`>>
 * <<Finding coupons by name: `find`, `find`>>
 * <<Listing coupons: `list` (Denise), `list`>>
-* <<Redoing the undone command: `redo`, `redo`>>
+* <<Reversing an undo: `redo` (Nelson), `redo`>>
 * <<Unarchiving a coupon: `unarchive` (Chester), `unarchive`>>
-* <<Undoing the previous command: `undo`, `undo`>>
+* <<Undoing the previous command: `undo` (Nelson), `undo`>>
 * <<Using a coupon: `used` (Chester), `used`>>
 ====
 
@@ -477,7 +477,7 @@ Deletes the first coupon in the resulting coupon list of the find command.
 
 // tag::list[]
 === Listing coupons: `list` (Denise)
-The `list` command shows you a list of a type of coupon in your Coupon Stash. +
+Shows you a list of a type of coupon in your Coupon Stash. +
 
 There are 3 types of lists: +
 
@@ -713,7 +713,7 @@ non-archived matches.
 // tag::expiring[]
 === Listing all expiring coupons: `expiring` (Denise)
 
-The `expiring` command shows a list of all your coupons expiring on a specified date or during a
+Shows a list of all your coupons expiring on a specified date or during a
 <<coupon-stash-monthyear-format, month year>>.
 
 [NOTE]
@@ -748,7 +748,7 @@ displayed **below** the non-archived matches.
 // tag::sort[]
 === Sorting coupons: `sort` (Nelson)
 
-Sorts the coupons in Coupon Stash in **ascending** order. It is possible to sort
+Sorts the coupons in Coupon StashSorting coupons: `sort` in **ascending** order. It is possible to sort
 by coupon name, expiry date, or remind date.
 
 [WARNING]
@@ -784,7 +784,7 @@ Sorts the Coupon Stash by reminder date from earliest to latest.
 
 // tag::copy[]
 === Copying a coupon: `copy` (Denise)
-The `copy` command copies a coupon as an <<Adding a coupon: `add`, `add`>> command to your
+Copies a coupon as an <<Adding a coupon: `add`, `add`>> command to your
 clipboard so that you can easily share it with your friends/family who are also using Coupon Stash!
 
 Format: `copy INDEX`
@@ -947,7 +947,7 @@ Revert the <<Deleting a coupon: `delete`, `delete`>> that was performed. Deleted
 === Reversing an undo: `redo` (Nelson)
 Reverse your last <<Undoing the previous command: `undo` (Nelson), `undo`>>.
 This is akin to undoing an
-<<Undoing the previous command: `undo`, `undo`>>.
+<<Undoing the previous command: `undo` (Nelson), `undo`>>.
 
 Format: `redo`
 
@@ -970,7 +970,7 @@ was in the resulting coupon list is deleted.
 
 // tag::goto[]
 === Going to a month-year on the calendar: `goto` (Denise)
-The `goto` command changes the month year displayed on the <<calendar, calendar>> to the specified month and year. +
+Changes the month year displayed on the <<calendar, calendar>> to the specified month and year. +
 
 Format: `goto my/MONTH_YEAR`  +
 
@@ -1045,7 +1045,7 @@ Format: `clear`
 
 [TIP]
 If you clear your Coupon Stash on accident, you can
-use <<Undoing the previous command: `undo`, `undo`>> to restore
+use <<Undoing the previous command: `undo` (Nelson), `undo`>> to restore
 your Coupons! Just make sure you don't close the application
 immediately after you cleared your Coupons.
 // end::clear[]
@@ -1125,20 +1125,20 @@ There is no need to save manually.
 
 // tag::KeyboardShortcuts[]
 [[KeyboardShortcuts]]
-== Keyboard Shortcuts (Nelson)
+== Keyboard Shortcuts
 With Coupon Stash being optimized for efficient command line usage, how can we
 not include some nifty keyboard shortcuts to further streamline
 your workflow! This section introduces some of the keyboard shortcuts available
 for use in this program.
 
-=== Restore previously entered command texts: kbd:[↑] and kbd:[↓]
+=== Restore previously entered command texts: kbd:[↑] and kbd:[↓] (Nelson)
 Pressing the kbd:[↑] keyboard button while the focus is on the command box
 allows you to restore the text of the previous executed command. Pressing
 the kbd:[↓] keyboard button allows you to revert to a more recently entered
 command.
 
-Here are instructions for restoring previously entered command texts with the
-kbd:[↑] and kbd:[↓] keys:
+Here is a scenario where restoring previously entered command texts with the
+kbd:[↑] and kbd:[↓] keys will be useful:
 
 . Suppose you ran these 3 commands in order in Coupon Stash:
 * `edit 1 n/ Adidas 31 Percent`
@@ -1150,7 +1150,7 @@ image::keyboard_shortcuts/updownedit.png[]
 +
 .Before running the `archive` command.
 image::keyboard_shortcuts/updownarchive.png[]
-* `add n/McDonald's McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/50% sd/1-4-2020 l/2 t/Value t/Savoury`
+* `add n/McDonalds McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/50% sd/1-4-2020 l/2 t/Value t/Savoury`
 +
 .Before running the `add` command.
 image::keyboard_shortcuts/updownadd.png[]
@@ -1166,7 +1166,25 @@ we can access the previously entered command via the kbd:[↑] keyboard button.
 . Press kbd:[↑] thrice to retrieve the `edit` command.
 * We press kbd:[↑] thrice as the `edit` command was run three commands ago.
 
-=== Close expanded coupon or reminder windows: kbd:[Ctrl]+kbd:[q]
++
+.`edit` command restored after pressing kbd:[↑] thrice.
+image::keyboard_shortcuts/updownretrivee.png[]
+
+. Next, we can change ``edit``'s name parameter from "Adidas 31 Percent" to
+"Adidas 30 Percent", before executing the command again.
+
++
+.Amended name parameter.
+image::keyboard_shortcuts/updownchangedname.png[]
++
+.Adidas coupon amended successfully.
+image::keyboard_shortcuts/updownfinal.png[]
+
+[NOTE]
+Just as kbd:[↑] can be used to navigate the command history, kbd:[↓] can be
+used to navigate towards the more recent entries in the command history.
+
+=== Close expanded coupon or reminder windows: kbd:[Ctrl]+kbd:[q] (Nelson)
 After <<expand, expanding>> a coupon, you can close
 the expanded coupon window by keeping the focus on the coupon window and
 pressing the keyboard buttons kbd:[Ctrl] and kbd:[q] simultaneously. This
@@ -1180,9 +1198,9 @@ animation below plays automatically without the need for any further action.
 Click on the image to play the animation in this PDF file.)
 
 .Animation of closing window with kbd:[Ctrl]+kbd:[q]
-image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/copy%20command.gif]
+image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/ctrl%20q.gif]
 
-=== Cycle through tabs: kbd:[Ctrl]+kbd:[Tab]
+=== Cycle through tabs: kbd:[Ctrl]+kbd:[Tab] (Nelson)
 You can press the keyboard buttons kbd:[Ctrl] and kbd:[Tab] simultaneously to
 switch tabs. Do note that the focus has to be on the main panel before the
 key presses would work.
@@ -1199,45 +1217,39 @@ image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2
 // end::KeyboardShortcuts[]
 
 == FAQ
-
-*Q*: How do I transfer my data to another computer?
-
-*A*: Simply install Stash in the other computer and overwrite the empty data
+[qanda]
+How do I transfer my data to another computer?::
+Simply install Stash in the other computer and overwrite the empty data
 file with your intended data file. +
 {empty} +
 
-*Q*: Can I add multiple coupons using a command line?
-
-*A:*  Sorry, not at the moment. We may consider adding this feature in version
+Can I add multiple coupons using a command line?::
+Sorry, not at the moment. We may consider adding this feature in version
 2.0.0. +
 {empty} +
 
-*Q* : Why do I need to tag my coupons?
-
-*A* : Tagging is not compulsory. However, it allows you to group similar
+Why do I need to tag my coupons?::
+Tagging is not compulsory. However, it allows you to group similar
 coupons together for easier identification. For example, you can easily
 identify all the coupons that are tagged "cheap", as these tags are
 displayed in bright orange at the top of each coupon.
 Do refer to <<couponcard, section 4.1.1>> for more details about the coupon card. +
 {empty} +
 
-*Q* : How do I store coupons with no expiry date?
-
-*A* : Sorry, at the moment, coupon entries with no expiry date cannot be
+How do I store coupons with no expiry date?::
+Sorry, at the moment, coupon entries with no expiry date cannot be
 stored. You would need to enter a much further date like 1-1-2030. To
 be added in version 2.0.0 +
 {empty} +
 
-*Q* : How do you calculate the savings value?
-
-*A* :  Whenever a coupon is marked as used, Coupon Stash will automatically
+How do you calculate the savings value?::
+Whenever a coupon is marked as used, Coupon Stash will automatically
 calculate the values saved based on the details of the coupon. You
-can use the <<saved, saved command>> to view the amount saved.
+can use the <<saved, saved command>> to view the amount saved. +
 {empty} +
 
-*Q* : What animal is Stasher?
-
-*A* :  Stasher is a beetle that loves discounts and hot deals!
+What animal is Stasher?::
+Stasher is a beetle that loves discounts and hot deals!
 Beetles are resourceful insects that know how to scavenge for
 the best coupons, as well as remember these coupons safely
 inside their tough exoskeleton and elytra.
