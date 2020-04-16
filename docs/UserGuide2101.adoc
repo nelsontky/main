@@ -427,7 +427,7 @@ adding of tags is not cumulative)
 * You can remove all of a  coupon’s tags by typing `t/` without specifying any
 parameters after it.
 * When editing savings, just like tags, existing savings of the coupon will also
-be removed.
+be replaced.
 * Usage cannot be edited.
 ****
 
@@ -502,12 +502,15 @@ Shows a list of all active coupons in Coupon Stash. The <<CommandResultBox, Comm
 indicating that all active coupons are listed.
 
 * `list a/` +
-Shows a list of all archived coupons in Coupon Stash. The <<CommandResultBox, Command Result Box>> will show a message
-indicating that all archived coupons are listed.
+Shows a list of all <<archive, archived>> coupons in Coupon Stash. The
+<<CommandResultBox, Command Result Box>> will show a message
+indicating that all <<archive, archived>> coupons are listed.
 
 * `list u/` +
-Shows a list of all used coupons in Coupon Stash. The <<CommandResultBox, Command Result Box>> will show a message
-indicating that all used coupons are listed.
+Shows a list of all <<_using_a_coupon_used_chester, used>> coupons in Coupon
+Stash. The <<CommandResultBox,
+Command Result Box>> will show a message
+indicating that all <<_using_a_coupon_used_chester, used>> coupons are listed.
 // end::list[]
 
 // tag::used[]
@@ -527,11 +530,11 @@ symbol e.g. ($4.50, where the currency symbol is "$").
 Examples:
 
 * `used 1` +
-Uses the first coupon in the coupon list.
+Use the first coupon in the coupon list.
 
 
 * `used 1 $10.0` +
-Uses the first coupon in the coupon list, which also has a percentage savings.
+Use the first coupon in the coupon list, which also has a percentage savings.
 The total savings of the coupon will be calculated, and can be seen with the
 command <<saved, `saved`>>.
 
@@ -560,11 +563,10 @@ earned only on that day.
 +
 Format: `saved d/DATE_TO_SHOW`
 
-- If a start date and end date are given, Coupon Stash will show you
+- If *both* start and end dates are given, Coupon Stash will show you
 the total savings accumulated over all the dates between that start date
 and end date, inclusive of those dates as well.
 +
-
 Format: `saved sd/START_DATE e/END_DATE`
 
 ****
@@ -592,12 +594,12 @@ A message with your total savings and saveables saved between 1 May 2019 and 20 
 Here are instructions for viewing your savings with the `saved` command:
 
 . First, ensure that your coupons have been added to Coupon Stash. This
-can be done with the <<Adding a coupon: `add`, `add` command>>.
+can be done with the <<Adding a coupon: `add`, `add`>> command.
 
 . Use your coupons to make a purchase!
 
 . Register your usage of the coupon with the
-<<Using a coupon: `used` (Chester), `used` command>>
+<<Using a coupon: `used` (Chester), `used`>> command.
 
 . Use the `saved` command to view your savings! The savings
 will be displayed in the result box, as shown below:
@@ -641,7 +643,7 @@ Format: `archive INDEX`
 Examples:
 
 * `archive 1` +
-Archives the first coupon in the coupon list.
+Archives the first coupon in the Coupon Stash.
 
 [TIP]
 To keep your coupons more organized, Coupon Stash will automatically archive
@@ -667,7 +669,7 @@ Format: `unarchive INDEX`
 Examples:
 
 * `unarchive 1` +
-Unarchive the first coupon in the coupon list.
+Unarchive the first coupon in the Coupon Stash.
 // end::unarchive[]
 
 // tag::find[]
@@ -683,7 +685,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 Chicken Rice.
 * Only full words will be matched e.g. Chicken will not match Chickens.
 * Coupons matching at least one keyword will be returned.
-e.g. Chicken Rice will return Duck Rice, Chicken Chop.
+e.g. `find Chicken Rice` will return both Duck Rice and Chicken Chop.
 ****
 
 [TIP]
@@ -714,7 +716,8 @@ Shows a list of all your coupons expiring on a specified date or during a
 [NOTE]
 This command will change the month year on display in the <<calendar, calendar>> to the month year of the specified
 <<coupon-stash-date-format, expiry date>> or <<coupon-stash-monthyear-format, month year>>. +
-For example, `expiring e/30-9-2020` & `expiring my/9-2020` both changes the month year on display in the
+For example, `expiring e/30-9-2020` and `expiring my/9-2020` both changes the
+month year on display in the
 <<calendar, calendar>> to September 2020.
 
 Format: `expiring e/EXPIRY_DATE` or `expiring my/MONTH_YEAR`
@@ -743,8 +746,8 @@ displayed **below** the non-archived matches.
 // tag::sort[]
 === Sorting coupons: `sort` (Nelson)
 
-Sorts the coupons in Coupon StashSorting coupons: `sort` in **ascending** order. It is possible to sort
-by coupon name, expiry date, or remind date.
+Sorts the coupons in Coupon Stash in **ascending** order. It is possible to sort
+by coupon name, expiry date or remind date.
 
 [WARNING]
 When you <<Editing a coupon: `edit`, `edit`>> or
@@ -787,8 +790,8 @@ Format: `copy INDEX`
 ****
 * Copies the coupon at the specified <<index, INDEX>> of the current displayed list.
 * The <<Adding a coupon: `add`, `add`>> command of the coupon will be copied to
-your clipboard. Simply kbd:[Ctrl] + kbd:[V] to paste it!
-(kbd:[Cmd] + kbd:[V] for macOS)
+your clipboard. Simply kbd:[Ctrl] + kbd:[v] to paste it!
+(kbd:[Cmd] + kbd:[v] for macOS)
 * Statistics like number of times used or amount of savings accumulated will
 not be copied.
 * The copied <<Adding a coupon: `add`, `add`>> command will only contain the following fields: +
@@ -821,7 +824,8 @@ names with the keyword "food".
 .Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box.
 image::UG_copy_5.png[width=40%]
 
-. Key in `copy 3` in the <<CommandInputBox, Command Input Box>> to copy the second coupon to your clipboard.
+. Key in `copy 3` in the <<CommandInputBox, Command Input Box>> to copy the
+third coupon to your clipboard.
 +
 .Example of keying the `copy 3` command into the Command Input Box.
 image::UG_copy_6.png[width=100%]
@@ -832,7 +836,8 @@ to your clipboard.
 .Example of result message of the `copy` command.
 image::UG_copy_7.png[width=50%]
 
-. You can now kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) into any messaging platform/ application
+. You can now kbd:[Ctrl] + kbd:[v] to paste it (kbd:[Cmd] + kbd:[v] for
+macOS) into any messaging platform/application
 to share it.
 +
 .Example of sharing the copied coupon on a messaging application.
@@ -918,7 +923,8 @@ previous value.
 
 * `delete 1` +
 `undo` +
-Revert the <<Deleting a coupon: `delete`, `delete`>> that was performed. Deleted coupon is restored.
+Reverts the <<Deleting a coupon: `delete`, `delete`>> that was performed.
+Deleted coupon is restored.
 // end::undo[]
 
 // tag::redo[]
@@ -1005,7 +1011,7 @@ be visible immediately.
 
 // tag::help[]
 === Viewing help: `help`
-Open a browser window that accesses an offline copy of this user guide.
+Opens a browser window that accesses an offline copy of this user guide.
 
 [WARNING]
 First run of this command may take some time as the
@@ -1024,8 +1030,8 @@ Format: `clear`
 [TIP]
 If you clear your Coupon Stash on accident, you can
 use <<Undoing the previous command: `undo` (Nelson), `undo`>> to restore
-your Coupons! Just make sure you don't close the application
-immediately after you cleared your Coupons.
+your coupons! Just make sure you don't close the application
+immediately after you cleared your coupons.
 // end::clear[]
 
 // tag::exit[]
