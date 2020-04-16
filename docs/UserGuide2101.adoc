@@ -1245,7 +1245,7 @@ inside their tough exoskeleton and elytra.
 <<<
 == Command Summary
 This section provides you with a summary of all the commands.
-[cols="1,9", options="header"]
+[cols="15,85", options="header"]
 |===
 | *Action* | *Format*
 |*Add*
