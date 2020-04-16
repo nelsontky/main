@@ -799,6 +799,7 @@ not be copied.
 
 Examples:
 
+[[prevExample]]
 * `copy 2` +
 Copies the second coupon in the current list to an <<Adding a coupon: `add`, `add`>> command and copies it to
 your clipboard.
@@ -808,18 +809,18 @@ your clipboard.
 . Key in `copy 2` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard.
 +
 .Example of keying the `copy 2` command into the Command Input Box
-image::UG_Copy_1.png[width=60%]
+image::UG_copy_1.png[width=60%]
 
 . You will see a message in the <<UserInterface, Command Result Box>> indicating that the coupon is copied to your
 clipboard.
 +
 .Example of result message of the <<Copying a coupon: `copy` (Denise) , `copy`>> command in the Command Result Box
-image::UG_Copy_2.png[width="40%"]
+image::UG_copy_2.png[width="40%"]
 
 . Simply kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) and send it to someone!
 +
 .Example of sharing the copied coupon through a messaging application
-image::UG_Copy_3.png[width=50%]
+image::UG_copy_3.png[width=50%]
 
 
 * `find food` +
@@ -835,20 +836,20 @@ send it to someone:
 their names.
 +
 .Example of keying the `find food` command into the Command Input Box
-image::UG_Copy_4.png[width="50%"]
+image::UG_copy_4.png[width="50%"]
 
 . You will see a message in the <<UserInterface, Command Result Box>> indicating the number of coupons that has
 names with the keyword "food".
 +
 .Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box
-image::UG_Copy_5.png[width=40%]
+image::UG_copy_5.png[width=40%]
 
 . Key in `copy 3` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard. +
 +
 .Example of keying the `copy 3` command into the Command Input Box
-image::UG_Copy_6.png[width=70%]
+image::UG_copy_6.png[width=70%]
 
-. Repeat the last 2 steps from the previous example!
+. Repeat the last 2 steps from the <<prevExample, previous example>>!
 // end::copy[]
 
 // tag::share[]
@@ -866,17 +867,23 @@ Format: `share INDEX`
 Examples:
 
 * `share 1` +
-Shares the specified coupon. +
-Step 1. <<Finding coupons by name: `find`, `find`>> the coupon that you would
-like to share. E.g. `find grab` +
-Step 2. Specify the index of the coupon to share - `share 1` +
-Step 3. Type the name of the file and select the folder you want to save to. +
+Shares the first coupon.
 
+Here are instructions for viewing your savings with the `share` command:
+
+. First, find the coupon that you want to share. This
+can be done with the <<Finding coupons by name: `find`, `find` command>>.
+
+. Specify the index of the coupon to share!
+
+. Type the name of the file and select the folder you want to save to.
++
 .Screen of downloading shared coupon image
 image::ShareDownload.png[]
 
-Step 4. Click save, and the imaged will be saved into the specified folder. +
-Step 5. Share this image with your friends and family!
+. Click save, and the imaged will be saved into the specified folder.
+
+. Share this image with your friends and family!
 
 .Example of a shared coupon
 image::GrabFoodCoupon.png[]
@@ -1011,7 +1018,7 @@ be visible immediately.
 // end::setcurrency[]
 
 // tag::help[]
-=== Viewing help: `help` (Alden)
+=== Viewing help: `help`
 Open a browser window that accesses an offline copy of this user guide.
 
 [WARNING]
@@ -1022,7 +1029,7 @@ Format: `help`
 // end::help[]
 
 // tag::clear[]
-=== Clearing all entries: `clear`
+=== Clearing all entries: `clear` (Alden)
 
 Deletes every single coupon in Coupon Stash. This
 includes archived and non-archived coupons! +
