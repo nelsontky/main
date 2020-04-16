@@ -30,7 +30,7 @@ along the way.
 
 *as of April 2020
 
-.Picture of Stasher (Coupon Stash's Mascot)
+.Picture of Stasher (Coupon Stash's Mascot).
 image::ug_stasher.png[]
 Hi! I'm Stasher, the mascot of Coupon Stash. Together,
 we are going to save so much money! Let me guide you
@@ -312,7 +312,7 @@ Some date cells are highlighted. The following are the meanings of the various h
 * Blue highlight: Indicates the system's date (usually today's date)
 * Red highlight: Indicates expiring coupon(s) on that date
 
-.Elements in the Calendar
+.Elements in the Calendar.
 image::Calendar_Elements.png[width="50%"]
 
 [[CommandInputBox]]
@@ -402,14 +402,14 @@ Examples:
    sd/1-4-2020 l/2 t/value t/savoury`
 +
 Adds a new Coupon:
-
++
 .Newly added McDonald's coupon.
 image::ug_mcdonalds_mcgriddles.png[]
 
 * `add n/Grabfood s/40% e/30-4-2020 p/GRAB40 t/delivery`
 +
 Adds a new Coupon:
-
++
 .Newly added Grabfood coupon.
 image::ug_grabfood.png[]
 
@@ -863,7 +863,7 @@ Examples:
 * `share 1` +
 Shares the first coupon.
 
-Here are instructions for viewing your savings with the `share` command:
+Here are instructions for generating a coupon image with the `share` command:
 
 . First, find the coupon that you want to share. This
 can be done with the <<Finding coupons by name: `find`, `find` command>>.
@@ -872,14 +872,14 @@ can be done with the <<Finding coupons by name: `find`, `find` command>>.
 
 . Type the name of the file and select the folder you want to save to.
 +
-.Screen of downloading shared coupon image
+.Screen of downloading shared coupon image.
 image::ShareDownload.png[]
 
 . Click save, and the imaged will be saved into the specified folder.
 
 . Share this image with your friends and family!
-
-.Example of a shared coupon
++
+.Example of a shared coupon.
 image::GrabFoodCoupon.png[]
 
 [WARNING]
@@ -982,7 +982,7 @@ Examples:
 
 * `expand 1` +
 Opens the first coupon in the coupon list in a new window.
-
++
 .Example of an expanded coupon window.
 image::expand_example.png[]
 // end::expand[]
@@ -1085,14 +1085,14 @@ Examples:
 +
 Add a new Coupon without specifying a remind date. Note that the default
 remind date is 3 days before the state expiry date:
-
++
 .New coupon with a default remind date.
 image::ug_mcdonalds_mcgriddles.png[]
 
 * `add n/Grabfood s/40% e/30-4-2020 p/GRAB40 t/delivery r/10-4-2020`
 +
 Add a new Coupon while specifying a remind date of `10-04-2020`:
-
++
 .New coupon with remind date set to `10-04-2020`.
 image::ug_Grabfood_reminder.png[]
 
@@ -1183,7 +1183,7 @@ Demonstration:
 animation below plays automatically without the need for any further action.
 Click on the image to play the animation in this PDF file.)
 
-.Animation of closing window with kbd:[Ctrl]+kbd:[q]
+.Animation of closing window with kbd:[Ctrl]+kbd:[q].
 image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/ctrl%20q.gif]
 
 === Cycle through tabs: kbd:[Ctrl]+kbd:[Tab] (Nelson)
