@@ -866,17 +866,23 @@ Format: `share INDEX`
 Examples:
 
 * `share 1` +
-Shares the specified coupon. +
-Step 1. <<Finding coupons by name: `find`, `find`>> the coupon that you would
-like to share. E.g. `find grab` +
-Step 2. Specify the index of the coupon to share - `share 1` +
-Step 3. Type the name of the file and select the folder you want to save to. +
+Shares the first coupon.
 
+Here are instructions for viewing your savings with the `share` command:
+
+. First, find the coupon that you want to share. This
+can be done with the <<Finding coupons by name: `find`, `find` command>>.
+
+. Specify the index of the coupon to share!
+
+. Type the name of the file and select the folder you want to save to.
++
 .Screen of downloading shared coupon image
 image::ShareDownload.png[]
 
-Step 4. Click save, and the imaged will be saved into the specified folder. +
-Step 5. Share this image with your friends and family!
+. Click save, and the imaged will be saved into the specified folder.
+
+. Share this image with your friends and family!
 
 .Example of a shared coupon
 image::GrabFoodCoupon.png[]
