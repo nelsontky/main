@@ -602,7 +602,7 @@ Uses the first coupon in the coupon list.
 * `used 1 $10.0` +
 Uses the first coupon in the coupon list, which also has a percentage savings.
 The total savings of the coupon will be calculated, and can be seen with the
-command <<Viewing savings: `saved`, `saved`>>.
+command <<saved, `saved`>>.
 
 [WARNING]
 A coupon cannot be used if it has not reached its start date, or it is archived.
@@ -656,6 +656,22 @@ Command Result Box>>.
 * `saved sd/1-5-2019 e/20-3-2020` +
 A message with your total savings and saveables saved between 1 May 2019 and 20 March 2020 will be displayed in the
 <<CommandResultBox, Command Result Box>>.
+
+Here are instructions for viewing your savings with the `saved` command:
+
+. First, ensure that your coupons have been added to Coupon Stash. This
+can be done with the <<Adding a coupon: `add`, `add` command>>.
+
+. Use your coupons to make a purchase!
+
+. Register your usage of the coupon with the
+<<Using a coupon: `used` (Chester), `used` command>>
+
+. Use the `saved` command to view your savings!
+
+. Navigate to the <<Summary tab, summary tab>> to view
+a graph of your savings per week.
+
 // end::saved[]
 
 // tag::archive[]
@@ -983,6 +999,7 @@ Goes to December 2020 on the <<calendar, calendar>> by changing the month year o
 // end::goto[]
 
 // tag::expand[]
+[[expand]]
 === Expanding a coupon: `expand` (Alden)
 Displays a coupon in its own window, giving you a
 complete expanded view of it.
@@ -1144,7 +1161,7 @@ Demonstration:
 image::gifs/Up down arrow.gif[]
 
 === Close expanded coupon or reminder windows: kbd:[Ctrl]+kbd:[q]
-After <<Expanding a coupon: `expand`, `expanding`>> a coupon, you can close
+After <<expand, expanding>> a coupon, you can close
 the expanded coupon window by keeping the focus on the coupon window and
 pressing the keyboard buttons kbd:[Ctrl] and kbd:[q] simultaneously. This
 shortcut also works for closing <<_reminding_of_coupon_expiry, reminder>>
