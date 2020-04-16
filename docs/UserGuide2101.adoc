@@ -30,7 +30,7 @@ along the way.
 
 *as of April 2020
 
-.Picture of Stasher (Coupon Stash's Mascot)
+.Picture of Stasher (Coupon Stash's Mascot).
 image::ug_stasher.png[]
 Hi! I'm Stasher, the mascot of Coupon Stash. Together,
 we are going to save so much money! Let me guide you
@@ -312,7 +312,7 @@ Some date cells are highlighted. The following are the meanings of the various h
 * Blue highlight: Indicates the system's date (usually today's date)
 * Red highlight: Indicates expiring coupon(s) on that date
 
-.Elements in the Calendar
+.Elements in the Calendar.
 image::Calendar_Elements.png[width="50%"]
 
 [[CommandInputBox]]
@@ -402,14 +402,14 @@ Examples:
    sd/1-4-2020 l/2 t/value t/savoury`
 +
 Adds a new Coupon:
-
++
 .Newly added McDonald's coupon.
 image::ug_mcdonalds_mcgriddles.png[]
 
 * `add n/Grabfood s/40% e/30-4-2020 p/GRAB40 t/delivery`
 +
 Adds a new Coupon:
-
++
 .Newly added Grabfood coupon.
 image::ug_grabfood.png[]
 
@@ -809,57 +809,41 @@ not be copied.
 
 Examples:
 
-[[prevExample]]
-* `copy 2` +
-Copies the second coupon in the current list to an <<Adding a coupon: `add`, `add`>> command and copies it to
-your clipboard.
-
-** Here are instructions for copying the second coupon in the current list of coupons to send it to someone:
-
-. Key in `copy 2` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard.
-+
-.Example of keying the `copy 2` command into the Command Input Box
-image::UG_copy_1.png[width=60%]
-
-. You will see a message in the <<UserInterface, Command Result Box>> indicating that the coupon is copied to your
-clipboard.
-+
-.Example of result message of the <<Copying a coupon: `copy` (Denise) , `copy`>> command in the Command Result Box
-image::UG_copy_2.png[width="40%"]
-
-. Simply kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) and send it to someone!
-+
-.Example of sharing the copied coupon through a messaging application
-image::UG_copy_3.png[width=50%]
-
-
-* `find food` +
-`copy 3` +
-Copies the third coupon in the resulting coupon list of the
-<<Finding coupons by name: `find`, `find`>> command to an <<Adding a coupon: `add`, `add`>> command
+* `copy 3` +
+Copies the third coupon in the current coupon list as an <<Adding a coupon: `add`, `add`>> command
 and copies it to your clipboard.
 
-** Here are the instructions for copying the third coupon in the resulting list of coupons after <<Finding coupons by name: `find`, `find`>> command to
-send it to someone:
+Here are the instructions for copying the third coupon in the resulting list of coupons after a
+<<Finding coupons by name: `find`, `find`>> command to send it to someone:
 
 . Key in `find food` in the <<UserInterface, Command Input Box>> to find all coupons with the keyword "food" in
 their names.
 +
-.Example of keying the `find food` command into the Command Input Box
-image::UG_copy_4.png[width="50%"]
+.Example of keying the `find food` command into the Command Input Box.
+image::UG_copy_4.png[width="60%"]
 
 . You will see a message in the <<UserInterface, Command Result Box>> indicating the number of coupons that has
 names with the keyword "food".
 +
-.Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box
+.Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box.
 image::UG_copy_5.png[width=40%]
 
 . Key in `copy 3` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard. +
 +
-.Example of keying the `copy 3` command into the Command Input Box
-image::UG_copy_6.png[width=70%]
+.Example of keying the `copy 3` command into the Command Input Box.
+image::UG_copy_6.png[width=100%]
 
-. Repeat the last 2 steps from the <<prevExample, previous example>>!
+. You will see a message in the <<UserInterface, Command Result Box>> indicating that the third coupon has been copied
+to your clipboard.
++
+.Example of result message of the `copy` command.
+image::UG_copy_7.png[width=50%]
+
+. You can now kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) into any messaging platform/ application
+to share it.
++
+.Example of sharing the copied coupon on a messaging application.
+image::UG_copy_8.png[width=70%]
 // end::copy[]
 
 // tag::share[]
@@ -879,7 +863,7 @@ Examples:
 * `share 1` +
 Shares the first coupon.
 
-Here are instructions for viewing your savings with the `share` command:
+Here are instructions for generating a coupon image with the `share` command:
 
 . First, find the coupon that you want to share. This
 can be done with the <<Finding coupons by name: `find`, `find` command>>.
@@ -888,14 +872,14 @@ can be done with the <<Finding coupons by name: `find`, `find` command>>.
 
 . Type the name of the file and select the folder you want to save to.
 +
-.Screen of downloading shared coupon image
+.Screen of downloading shared coupon image.
 image::ShareDownload.png[]
 
 . Click save, and the imaged will be saved into the specified folder.
 
 . Share this image with your friends and family!
-
-.Example of a shared coupon
++
+.Example of a shared coupon.
 image::GrabFoodCoupon.png[]
 
 [WARNING]
@@ -998,7 +982,7 @@ Examples:
 
 * `expand 1` +
 Opens the first coupon in the coupon list in a new window.
-
++
 .Example of an expanded coupon window.
 image::expand_example.png[]
 // end::expand[]
@@ -1101,14 +1085,14 @@ Examples:
 +
 Add a new Coupon without specifying a remind date. Note that the default
 remind date is 3 days before the state expiry date:
-
++
 .New coupon with a default remind date.
 image::ug_mcdonalds_mcgriddles.png[]
 
 * `add n/Grabfood s/40% e/30-4-2020 p/GRAB40 t/delivery r/10-4-2020`
 +
 Add a new Coupon while specifying a remind date of `10-04-2020`:
-
++
 .New coupon with remind date set to `10-04-2020`.
 image::ug_Grabfood_reminder.png[]
 
@@ -1199,7 +1183,7 @@ Demonstration:
 animation below plays automatically without the need for any further action.
 Click on the image to play the animation in this PDF file.)
 
-.Animation of closing window with kbd:[Ctrl]+kbd:[q]
+.Animation of closing window with kbd:[Ctrl]+kbd:[q].
 image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/ctrl%20q.gif]
 
 === Cycle through tabs: kbd:[Ctrl]+kbd:[Tab] (Nelson)
@@ -1219,6 +1203,8 @@ image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2
 // end::KeyboardShortcuts[]
 
 == FAQ
+This section provides you with the answers to some frequently asked questions!
+
 [qanda]
 How do I transfer my data to another computer?::
 Simply install Stash in the other computer and overwrite the empty data
@@ -1259,7 +1245,7 @@ inside their tough exoskeleton and elytra.
 
 
 == Command Summary
-This section has a summary of all the commands.
+This section provides you with a summary of all the commands.
 [cols="1,9", options="header"]
 |===
 | *Action* | *Format*
