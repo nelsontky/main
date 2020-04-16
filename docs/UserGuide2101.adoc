@@ -1160,9 +1160,12 @@ windows.
 
 Demonstration:
 
-image::https://camo.githubusercontent.com/2229a99e9c948cd605884c51defe362a1d3c3259/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f4c6f497a67795237354e72504f56456132432f67697068792e676966[]
+(Disclaimer: In the original non-PDF web version of this UG, the
+animation below plays automatically without the need for any further action.
+Click on the image to play the animation in this PDF file.)
 
-image::gifs/ctrl q.gif[]
+.Animation of closing window with kbd:[Ctrl]+kbd:[q]
+image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/copy%20command.gif]
 
 === Cycle through tabs: kbd:[Ctrl]+kbd:[Tab]
 You can press the keyboard buttons kbd:[Ctrl] and kbd:[Tab] simultaneously to
@@ -1171,8 +1174,12 @@ key presses would work.
 
 Demonstration:
 
+(Disclaimer: In the original non-PDF web version of this UG, the
+animation below plays automatically without the need for any further action.
+Click on the image to play the animation in this PDF file.)
+
 .Animation of switching tabs with kbd:[Ctrl]+kbd:[Tab].
-image::gifs/ctrl tab.gif[]
+image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/ctrl%20tab.gif]
 
 // end::KeyboardShortcuts[]
 
