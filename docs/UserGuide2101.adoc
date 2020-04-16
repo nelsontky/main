@@ -181,8 +181,7 @@ image::ShopeeCoupon.png[]
 is opened on this date. +
 - Usage: 1/2 - Number of times the coupon was used (1), and the number of times
 the coupon can be used (2). +
-- T&C: New users only - Terms and Condition applied for the valid usage
-of the coupon. +
+- T&C: New users only - Terms and Conditions applied to the coupon. +
 - Savings (blue box): $7.00, USB-C cable, iPhone case - Savings ($7) generated
 from the use of this coupon. USB-C Cable and iPhone Case are saveables; free
 items that come along with the use of this coupon.
@@ -195,18 +194,17 @@ accordingly with some commands of Coupon Stash.
 
 [NOTE]
 Duplicate coupons cannot exist in the active coupon list! Coupons are duplicates
-when they have the same name, promo code, expiry date and savings.
+when they have the same name, promo code, expiry date, and savings.
 
 ==== Summary tab
 
 The summary tab provides an overview of how much
 you have saved from using coupons in Coupon Stash.
 
-This tab provides an estimate of all the savings
-you have accumulated, provided the coupon that resulted
-in those savings is still present in Coupon Stash (this
-includes <<archive, archived>> coupons). This estimate
-is displayed in the form of a monetary amount at the
+This tab provides an estimate of all the savings you have accumulated from
+the usage of coupons that are still present in Coupon Stash
+(Including <<archive, archived>> coupons).
+This estimate is displayed in the form of a monetary amount at the
 top of the page, with saved items that may not be easily
 quantified displayed in a lime-green box at the side,
 preceded by the text "And these saveables too!".
@@ -214,7 +212,7 @@ preceded by the text "And these saveables too!".
 .Coupon Stash summary tab.
 image::ug_summary_tab.png[]
 
-Also, a graph that shows the monetary amount saved
+A graph that shows the monetary amount saved
 every week is also displayed in the summary tab.
 The next section will tell you more about how to
 interpret this graph.
@@ -230,9 +228,9 @@ top of each bar.
 In the graph, Monday is taken to be the first day
 of a week, and Sunday the last. The date displayed
 on the bottom axis corresponds to the first day of that
-week (Monday). Earlier weeks are displayed towards
-the left, while later weeks are displayed towards
-the right (direction of time axis is from left to right).
+week (Monday). Earlier weeks are displayed on
+the left, while later weeks are displayed on the right (direction of time axis
+is from left to right).
 
 The graph is drawn based on the latest week in which
 coupon usage was recorded by Coupon Stash, and shows
@@ -248,13 +246,6 @@ However, they can still be calculated using the
 .Coupon Stash savings graph.
 image::ug_savings_graph.png[]
 
-[NOTE]
-Although the total monetary amount and saveables list
-in the summary tab is obtained by adding up all the
-savings from every coupon regardless of the date,
-the savings graph may not display every weeks' savings
-as it only displays up to a maximum of 10 weeks.
-
 ==== Help tab
 
 The help tab shows you a short description of how
@@ -268,12 +259,13 @@ descriptions provided in the help tab are less detailed!
 === Calendar
 
 The calendar provides you with an overview of all your coupon's expiry dates within a month year. It reflects the expiry
-dates of the list of coupons in the <<couponstab,`coupons tab`>>.
+dates of the list of coupons in the Coupon Stash.
 
 
 ====
-The calendar changes accordingly to the changes in the list of coupons in the <<couponstab,`coupons tab`>>. Hence,
-the following commands that alters the list of coupons may also alter the calendar: +
+The calendar changes accordingly to the changes in the list of coupons in the
+Coupon Stash. Hence, the following commands that alters the list of coupons
+may also alter the calendar: +
 
 * <<Adding a coupon: `add`, `add`>>
 * <<Archiving a coupon: `archive` (Chester), `archive`>>
@@ -289,6 +281,8 @@ the following commands that alters the list of coupons may also alter the calend
 * <<Using a coupon: `used` (Chester), `used`>>
 ====
 
+.Elements in the Calendar.
+image::Calendar_Elements.png[width="50%"]
 
 [[calendar-title]]
 ==== Calendar Title
@@ -312,14 +306,11 @@ Some date cells are highlighted. The following are the meanings of the various h
 * Blue highlight: Indicates the system's date (usually today's date)
 * Red highlight: Indicates expiring coupon(s) on that date
 
-.Elements in the Calendar.
-image::Calendar_Elements.png[width="50%"]
-
 [[CommandInputBox]]
 === Command Input Box
 
 The command input box is the main way you will interact
-with Coupon Stash. Simply type in your commands and hit kbd:[enter]!
+with Coupon Stash. Simply type in your commands and hit kbd:[Enter]!
 
 [[CommandResultBox]]
 === Command Result Box
@@ -330,7 +321,7 @@ whether your command was successful or not.
 [[Features]]
 == Features
 This section introduces the features of Coupon Stash. There are some examples
-for you to try out in Coupon Stash too! +
+for you to try out too! +
 Also, take note of the general format of all the commands below!
 
 ====
@@ -339,17 +330,15 @@ Also, take note of the general format of all the commands below!
 
 * Words in UPPERCASE: parameters to be supplied by you (the user) +
 ** e.g. `add n/NAME`
-* [[index]]`INDEX`: positive integer that specifies the index number shown in
-the displayed coupon list. The index must be a positive
-integer
+* [[index]]`INDEX`: A *positive integer* that specifies the index number
+shown in the displayed coupon list.
 ** e.g. 1, 2, 3, …​
-* `NAME` is a parameter which can be used as `add n/The Deck Chicken Rice`
 * Letter(s) followed by a `/` : prefixes to come before some parameters
 ** e.g. `n/NAME`
 ** `n/` is the prefix for the `NAME` parameter
 * Items in square brackets: optional
 ** e.g `n/NAME [t/TAG]` +
-** Can be used as `n/The Deck Chicken Rice t/value` or `n/The Deck Chicken Rice`
+** e.g. `n/The Deck Chicken Rice t/value` or `n/The Deck Chicken Rice`
 * Items with ... after them: can be used multiple times (including zero
 times)
 ** e.g. `[t/TAG]...`​
@@ -369,9 +358,9 @@ times)
 // tag::add[]
 === Adding a coupon: `add`
 
-Adds a coupon. Some fields like `name`, `expiry date` and `savings` are
-required.
-Optional fields like `promo code` and `tags` may be provided as well.
+Adds a coupon. Some fields like name (`n/`), expiry date (`e/`) and savings
+(`s/`) are required.
+Optional fields like promo code (`p/`) and tags (`t/`) may be provided as well.
 
 Format: `add n/NAME e/EXPIRY_DATE s/SAVINGS_OR_FREE_ITEM [sd/START_DATE] [r/REMIND_DATE] [p/PROMO_CODE] [c/CONDITIONS] [u/USAGE] [l/USAGE_LIMIT] [s/EXTRA_FREE_ITEMS]... [t/TAG]...`
 
@@ -385,7 +374,7 @@ If unspecified, the default remind date of a coupon will be set to
 to learn more about remind dates.
 
 ****
-* Coupons must have at least one "savings" value, whether it is
+* Coupons must have at least one savings value, whether it is
 a flat monetary amount (e.g. $1.00), a percentage (e.g. 10%) or
 an item. (e.g. Free Water Bottle)
 * Savings can be represented by multiple free items, but not multiple
@@ -393,7 +382,7 @@ monetary amounts or percentage amounts.
 * Free item names cannot contain any numbers. (e.g. iPhone 11 is an invalid
 free item name as it contains the number 11)
 * Coupons cannot have both a monetary amount and a percentage amount.
-* To add more free items, use the same prefix as before!
+* To add more free items, use the same prefix (`s/`) as before!
 ****
 
 Examples:
@@ -432,7 +421,7 @@ Format: `edit INDEX [n/NAME] [e/EXPIRY_DATE] [sd/START_DATE] [r/REMIND_DATE] [p/
 * When editing tags, the existing tags of the coupon will be removed. (i.e
 adding of tags is not cumulative)
 * You can remove all of a  coupon’s tags by typing `t/` without specifying any
-tags after it.
+parameters after it.
 * When editing savings, just like tags, existing savings of the coupon will also
 be removed.
 * Usage cannot be edited.
@@ -452,7 +441,7 @@ Examples:
 * `edit 1 s/50%` +
 Edits the savings of the first coupon in the coupon list to be 50% off.
 * `edit 2 n/The Deck Nasi Ayam Hainan t/` +
-Edits the name of the second coupon in the coupon list to be The Deck Nasi Ayam Hainan and
+Edits the name of the second coupon in the coupon list to be "The Deck Nasi Ayam Hainan" and
 clears all existing tags.
 // end::edit[]
 
@@ -469,11 +458,10 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` +
-`delete 2` +
+* `delete 2` +
 Deletes the second coupon in the coupon list.
-* `find rice` +
-`delete 1` +
+
+* `delete 1` +
 Deletes the first coupon in the resulting coupon list of the find command.
 // end::delete[]
 
@@ -483,9 +471,9 @@ Shows you a list of a type of coupon in your Coupon Stash. +
 
 There are 3 types of lists: +
 
-* List of active coupons
-* List of archived coupons
-* List of used coupons
+* List of active coupons.
+* List of archived coupons.
+* List of used coupons.
 
 [NOTE]
 This command will change the month year on display in the <<calendar, calendar>> to the system's date (usually today's
@@ -495,15 +483,13 @@ Format: `list [PREFIX]` +
 
 ****
 * `PREFIX` can be `a/`, `u/` or left empty.
-* The `PREFIX` `a/` lists all of your archived coupons and `u/` lists all of your used coupons. If left empty, it lists
-all of your active coupons (coupons that are not fully used/ not archived (except for coupon(s) that are
-<<Unarchiving a coupon: `unarchive`, unarchived>> on purpose))
+* The `PREFIX` `a/` lists all of your <<archive, archived>> coupons and `u/`
+lists
+all of
+your <<_using_a_coupon_used_chester, used>> coupons. If left empty, it lists
+all of your active coupons. (Coupons that are not fully used/not archived)
 
 ****
-
-[NOTE]
-`PREFIX` `u/` lists all used coupons (including <<Archiving a coupon: `archive` (Chester), archived>> coupons that have been used
-at the end of the list).
 
 Examples:
 
@@ -511,10 +497,11 @@ Examples:
 Shows a list of all *active* coupons in Coupon Stash.
 
 * `list a/` +
-Shows a list of all *archived* coupons in Coupon Stash.
+Shows a list of all <<archive, *archived*>> coupons in Coupon Stash.
 
 * `list u/` +
-Shows a list of all *used* coupons in Coupon Stash.
+Shows a list of all <<_using_a_coupon_used_chester, *used*>> coupons in Coupon
+Stash.
 // end::list[]
 
 // tag::used[]
@@ -885,7 +872,6 @@ image::GrabFoodCoupon.png[]
 [WARNING]
 Image generated will have an index of 1 regardless of
 its true index!
-Below is a sample of how a shared coupon image looks like:
 // end::share[]
 
 // tag::undo[]
