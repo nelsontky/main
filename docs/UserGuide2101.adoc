@@ -1,7 +1,7 @@
 // command to generate:
 // asciidoctor-pdf -a pdf-theme=default-with-fallback-font UserGuide2101.adoc
 
-= Coupon Stash v1.4 - User Guide
+= Content Page
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -15,6 +15,7 @@
 
 :repoURL: https://github.com/AY1920S2-CS2103T-F09-1/main
 
+<<<
 [[section]]
 image:Stash.png[image,width=322,height=322]
 
@@ -31,11 +32,12 @@ along the way.
 *as of April 2020
 
 .Picture of Stasher (Coupon Stash's Mascot).
-image::ug_stasher.png[]
+image::ug_stasher.png[width=70%]
 Hi! I'm Stasher, the mascot of Coupon Stash. Together,
 we are going to save so much money! Let me guide you
 to use this wonderful application.
 
+<<<
 == Introduction
 
 Coupon Stash is meant for School of Computing (SoC) students and staff who enjoy
@@ -79,7 +81,7 @@ the link on the left!
 represent certain shortcuts in Coupon Stash. For example,
 the kbd:[Ctrl] key, which is used for most shortcuts.
 
-
+<<<
 == Quick Start
 
 Getting started? Look no further! The simple steps below will get you up to
@@ -117,6 +119,7 @@ with Coupon Stash's <<Features, features>>! +
 Once you are ready, use the <<Clearing all entries: `clear` (Alden), `clear`>> command to clear them and start your couponing
 journey with Coupon Stash!
 
+<<<
 [[UserInterface]]
 == User Interface
 
@@ -327,6 +330,7 @@ with Coupon Stash. Simply type in your commands and hit kbd:[enter]!
 The command result box shows you messages depending on
 whether your command was successful or not.
 
+<<<
 [[Features]]
 == Features
 This section introduces the features of Coupon Stash. There are some examples
@@ -1111,6 +1115,7 @@ command that changes the data.
 
 There is no need to save manually.
 
+<<<
 // tag::KeyboardShortcuts[]
 [[KeyboardShortcuts]]
 == Keyboard Shortcuts
@@ -1204,6 +1209,7 @@ image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2
 
 // end::KeyboardShortcuts[]
 
+<<<
 == FAQ
 This section provides you with the answers to some frequently asked questions!
 
@@ -1245,7 +1251,7 @@ the best coupons, as well as remember these coupons safely
 inside their tough exoskeleton and elytra.
 {empty} +
 
-
+<<<
 == Command Summary
 This section provides you with a summary of all the commands.
 [cols="1,9", options="header"]
@@ -1318,7 +1324,7 @@ e.g. setcurrency ms/€
 
 
 
-
+<<<
 == Appendix
 
 This section talks about features that have not been
