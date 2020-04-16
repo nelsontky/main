@@ -876,30 +876,28 @@ Format: `share INDEX`
 * A message with the file path to the `.png` file will be displayed in the <<CommandResultBox, Command Result Box>>.
 ****
 
+Examples:
+
+* `share 1` +
+Shares the specified coupon. +
+Step 1. <<Finding coupons by name: `find`, `find`>> the coupon that you would
+like to share. E.g. `find grab` +
+Step 2. Specify the index of the coupon to share - `share 1` +
+Step 3. Type the name of the file and select the folder you want to save to. +
+
+.Screen of downloading shared coupon image
+image::ShareDownload.png[]
+
+Step 4. Click save, and the imaged will be saved into the specified folder. +
+Step 5. Share this image with your friends and family!
+
+.Example of a shared coupon
+image::GrabFoodCoupon.png[]
+
 [WARNING]
 Image generated will have an index of 1 regardless of
 its true index!
 Below is a sample of how a shared coupon image looks like:
-
-.Example of a shared coupon
-image::example_shared_coupon.png[]
-
-[WARNING]
-Do not try entering this command with `MAX_INT` value as <<index, INDEX>>.
-This may lead to a bug.
-
-Examples:
-
-* `list` +
-`share 2` +
-Shares the second coupon in the resulting coupon list of the
-<<_listing_coupons_list, `list`>> command and save
-it as a `.png` file.
-* `find chicken` +
-`share 1` +
-Shares the first coupon in the resulting coupon list of the
-<<Finding coupons by name: `find`, `find`>> command and save it as a `.png`
-file.
 // end::share[]
 
 // tag::undo[]
