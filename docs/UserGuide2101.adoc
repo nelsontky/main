@@ -799,57 +799,41 @@ not be copied.
 
 Examples:
 
-[[prevExample]]
-* `copy 2` +
-Copies the second coupon in the current list to an <<Adding a coupon: `add`, `add`>> command and copies it to
-your clipboard.
-
-** Here are instructions for copying the second coupon in the current list of coupons to send it to someone:
-
-. Key in `copy 2` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard.
-+
-.Example of keying the `copy 2` command into the Command Input Box
-image::UG_copy_1.png[width=60%]
-
-. You will see a message in the <<UserInterface, Command Result Box>> indicating that the coupon is copied to your
-clipboard.
-+
-.Example of result message of the <<Copying a coupon: `copy` (Denise) , `copy`>> command in the Command Result Box
-image::UG_copy_2.png[width="40%"]
-
-. Simply kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) and send it to someone!
-+
-.Example of sharing the copied coupon through a messaging application
-image::UG_copy_3.png[width=50%]
-
-
-* `find food` +
-`copy 3` +
-Copies the third coupon in the resulting coupon list of the
-<<Finding coupons by name: `find`, `find`>> command to an <<Adding a coupon: `add`, `add`>> command
+* `copy 3` +
+Copies the third coupon in the current coupon list as an <<Adding a coupon: `add`, `add`>> command
 and copies it to your clipboard.
 
-** Here are the instructions for copying the third coupon in the resulting list of coupons after <<Finding coupons by name: `find`, `find`>> command to
-send it to someone:
+Here are the instructions for copying the third coupon in the resulting list of coupons after a
+<<Finding coupons by name: `find`, `find`>> command to send it to someone:
 
 . Key in `find food` in the <<UserInterface, Command Input Box>> to find all coupons with the keyword "food" in
 their names.
 +
-.Example of keying the `find food` command into the Command Input Box
-image::UG_copy_4.png[width="50%"]
+.Example of keying the `find food` command into the Command Input Box.
+image::UG_copy_4.png[width="60%"]
 
 . You will see a message in the <<UserInterface, Command Result Box>> indicating the number of coupons that has
 names with the keyword "food".
 +
-.Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box
+.Example of result message of the <<Finding coupons by name: `find`, `find`>> command in the Command Result Box.
 image::UG_copy_5.png[width=40%]
 
 . Key in `copy 3` in the <<UserInterface, Command Input Box>> to copy the second coupon to your clipboard. +
 +
-.Example of keying the `copy 3` command into the Command Input Box
-image::UG_copy_6.png[width=70%]
+.Example of keying the `copy 3` command into the Command Input Box.
+image::UG_copy_6.png[width=100%]
 
-. Repeat the last 2 steps from the <<prevExample, previous example>>!
+. You will see a message in the <<UserInterface, Command Result Box>> indicating that the third coupon has been copied
+to your clipboard.
++
+.Example of result message of the `copy` command.
+image::UG_copy_7.png[width=50%]
+
+. You can now kbd:[Ctrl] + kbd:[V] to paste it (kbd:[Cmd] + kbd:[V] for macOS) into any messaging platform/ application
+to share it.
++
+.Example of sharing the copied coupon on a messaging application.
+image::UG_copy_8.png[width=70%]
 // end::copy[]
 
 // tag::share[]
@@ -1209,6 +1193,8 @@ image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2
 // end::KeyboardShortcuts[]
 
 == FAQ
+This section provides you with the answers to some frequently asked questions!
+
 [qanda]
 How do I transfer my data to another computer?::
 Simply install Stash in the other computer and overwrite the empty data
@@ -1249,7 +1235,7 @@ inside their tough exoskeleton and elytra.
 
 
 == Command Summary
-This section has a summary of all the commands.
+This section provides you with a summary of all the commands.
 [cols="1,9", options="header"]
 |===
 | *Action* | *Format*
