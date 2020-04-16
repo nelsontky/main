@@ -477,7 +477,7 @@ Deletes the first coupon in the resulting coupon list of the find command.
 
 // tag::list[]
 === Listing coupons: `list` (Denise)
-The `list` command shows you a list of a type of coupon in your Coupon Stash. +
+Shows you a list of a type of coupon in your Coupon Stash. +
 
 There are 3 types of lists: +
 
@@ -705,7 +705,7 @@ non-archived matches.
 // tag::expiring[]
 === Listing all expiring coupons: `expiring` (Denise)
 
-The `expiring` command shows a list of all your coupons expiring on a specified date or during a
+Shows a list of all your coupons expiring on a specified date or during a
 <<coupon-stash-monthyear-format, month year>>.
 
 [NOTE]
@@ -776,7 +776,7 @@ Sorts the Coupon Stash by reminder date from earliest to latest.
 
 // tag::copy[]
 === Copying a coupon: `copy` (Denise)
-The `copy` command copies a coupon as an <<Adding a coupon: `add`, `add`>> command to your
+Copies a coupon as an <<Adding a coupon: `add`, `add`>> command to your
 clipboard so that you can easily share it with your friends/family who are also using Coupon Stash!
 
 Format: `copy INDEX`
@@ -962,7 +962,7 @@ was in the resulting coupon list is deleted.
 
 // tag::goto[]
 === Going to a month-year on the calendar: `goto` (Denise)
-The `goto` command changes the month year displayed on the <<calendar, calendar>> to the specified month and year. +
+Changes the month year displayed on the <<calendar, calendar>> to the specified month and year. +
 
 Format: `goto my/MONTH_YEAR`  +
 
@@ -1209,45 +1209,39 @@ image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2
 // end::KeyboardShortcuts[]
 
 == FAQ
-
-*Q*: How do I transfer my data to another computer?
-
-*A*: Simply install Stash in the other computer and overwrite the empty data
+[qanda]
+How do I transfer my data to another computer?::
+Simply install Stash in the other computer and overwrite the empty data
 file with your intended data file. +
 {empty} +
 
-*Q*: Can I add multiple coupons using a command line?
-
-*A:*  Sorry, not at the moment. We may consider adding this feature in version
+Can I add multiple coupons using a command line?::
+Sorry, not at the moment. We may consider adding this feature in version
 2.0.0. +
 {empty} +
 
-*Q* : Why do I need to tag my coupons?
-
-*A* : Tagging is not compulsory. However, it allows you to group similar
+Why do I need to tag my coupons?::
+Tagging is not compulsory. However, it allows you to group similar
 coupons together for easier identification. For example, you can easily
 identify all the coupons that are tagged "cheap", as these tags are
 displayed in bright orange at the top of each coupon.
 Do refer to <<couponcard, section 4.1.1>> for more details about the coupon card. +
 {empty} +
 
-*Q* : How do I store coupons with no expiry date?
-
-*A* : Sorry, at the moment, coupon entries with no expiry date cannot be
+How do I store coupons with no expiry date?::
+Sorry, at the moment, coupon entries with no expiry date cannot be
 stored. You would need to enter a much further date like 1-1-2030. To
 be added in version 2.0.0 +
 {empty} +
 
-*Q* : How do you calculate the savings value?
-
-*A* :  Whenever a coupon is marked as used, Coupon Stash will automatically
+How do you calculate the savings value?::
+Whenever a coupon is marked as used, Coupon Stash will automatically
 calculate the values saved based on the details of the coupon. You
-can use the <<saved, saved command>> to view the amount saved.
+can use the <<saved, saved command>> to view the amount saved. +
 {empty} +
 
-*Q* : What animal is Stasher?
-
-*A* :  Stasher is a beetle that loves discounts and hot deals!
+What animal is Stasher?::
+Stasher is a beetle that loves discounts and hot deals!
 Beetles are resourceful insects that know how to scavenge for
 the best coupons, as well as remember these coupons safely
 inside their tough exoskeleton and elytra.
