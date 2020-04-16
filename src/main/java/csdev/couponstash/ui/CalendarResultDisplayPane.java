@@ -33,7 +33,7 @@ public class CalendarResultDisplayPane extends UiPart<Region> {
     /**
      * Fills up all the placeholders of this window.
      */
-    public void fillInnerParts() {
+    void fillInnerParts() {
         calendarPane = new CalendarPane(logic);
         calendarPanePlaceholder.getChildren().add(calendarPane.getRoot());
         calendarPanePlaceholder.setAlignment(Pos.TOP_RIGHT);

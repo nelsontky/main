@@ -48,6 +48,8 @@ public class SummaryPane extends UiPart<Region> {
             "-fx-font: 11px arial;\n-fx-fill: white;";
     // controls font size of number amount
     private static final int BASE_FONT_SIZE = 625;
+    // limit for number of weeks in bar chart
+    private static final int BAR_CHART_WEEKS_LIMIT = 10;
 
     // Independent Ui parts residing in this Ui container
     private ObservableList<Coupon> allCoupons;
@@ -192,18 +194,22 @@ public class SummaryPane extends UiPart<Region> {
 
             LocalDate earliestWeek = SummaryPane.getPreviousMonday(earliestDate);
             LocalDate latestWeek = SummaryPane.getPreviousMonday(latestDate);
+            int count = 0;
 
-            for (LocalDate ld = earliestWeek;
-                 ld.isBefore(latestWeek) || ld.isEqual(latestWeek);
-                 ld = ld.plusWeeks(1)) {
+            for (LocalDate ld = latestWeek;
+                 !ld.isBefore(earliestWeek) && count < SummaryPane.BAR_CHART_WEEKS_LIMIT;
+                 ld = ld.minusWeeks(1)) {
                 // initialise all weeks with 0 savings
                 mapByWeek.add(ld, new PureMonetarySavings());
+                count++;
             }
 
             // populate the week map with savings
             for (Map.Entry<LocalDate, PureMonetarySavings> e : entryList) {
                 LocalDate mondayOfWeek = SummaryPane.getPreviousMonday(e.getKey());
-                mapByWeek.add(mondayOfWeek, e.getValue());
+                if (mapByWeek.containsKey(mondayOfWeek)) {
+                    mapByWeek.add(mondayOfWeek, e.getValue());
+                }
             }
 
             mapByWeek.entrySet().stream()

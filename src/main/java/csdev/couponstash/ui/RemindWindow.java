@@ -1,6 +1,5 @@
 package csdev.couponstash.ui;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -61,11 +60,10 @@ public class RemindWindow extends UiPart<Stage> {
     /**
      * Filters the coupons that have reminders today.
      */
-    private List<Coupon> filterRemindCoupons(List<Coupon> coupons) {
-        LocalDate today = LocalDate.now();
+    private static List<Coupon> filterRemindCoupons(List<Coupon> coupons) {
 
         return coupons.stream()
-                .filter(coupon -> coupon.getRemindDate().getDate().equals(today))
+                .filter(coupon -> coupon.getRemindDate().isToday())
                 .sorted(SortCommand.REMINDER_COMPARATOR)
                 .collect(Collectors.toList());
     }

@@ -54,6 +54,9 @@ public class ListCommand extends Command {
             model.updateFilteredCouponList(Model.PREDICATE_SHOW_ALL_ARCHIVED_COUPONS);
             view = Views.ARCHIVED;
         } else if (prefixToList.equals(PREFIX_USAGE)) {
+            // Put non-archived at the top first
+            model.sortCoupons(Model.COMPARATOR_NON_ARCHIVED_FIRST);
+
             model.updateFilteredCouponList(Model.PREDICATE_SHOW_ALL_USED_COUPONS);
             view = Views.USED;
         }

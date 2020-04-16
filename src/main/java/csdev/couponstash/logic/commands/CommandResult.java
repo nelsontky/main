@@ -17,8 +17,14 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should open help. */
+    private final boolean help;
+
     /** The application has a coupon to expand. */
     private final Optional<Coupon> couponToExpand;
+
+    /** The application has a coupon to share. */
+    private final Optional<Coupon> couponToShare;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -26,10 +32,14 @@ public class CommandResult {
     public CommandResult(
             String feedbackToUser,
             Optional<Coupon> couponToExpand,
+            Optional<Coupon> couponToShare,
+            boolean help,
             boolean exit
     ) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.couponToExpand = couponToExpand;
+        this.couponToShare = couponToShare;
+        this.help = help;
         this.exit = exit;
     }
 
@@ -38,7 +48,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, Optional.empty(), false);
+        this(feedbackToUser, Optional.empty(), Optional.empty(), false, false);
     }
 
     public String getFeedbackToUser() {
@@ -49,8 +59,16 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isHelp() {
+        return help;
+    }
+
     public Optional<Coupon> getCouponToExpand() {
         return couponToExpand;
+    }
+
+    public Optional<Coupon> getCouponToShare() {
+        return couponToShare;
     }
 
     @Override
@@ -67,12 +85,15 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
 
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && exit == otherCommandResult.exit;
+                && couponToShare.equals(otherCommandResult.couponToShare)
+                && couponToExpand.equals(otherCommandResult.couponToExpand)
+                && exit == otherCommandResult.exit
+                && help == otherCommandResult.help;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, exit);
+        return Objects.hash(feedbackToUser, couponToExpand, couponToShare, help, exit);
     }
 
 }

@@ -58,14 +58,17 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model, String commandText) {
         requireNonNull(model);
 
+        assert prefixToSortBy.equals(PREFIX_NAME)
+                || prefixToSortBy.equals(PREFIX_EXPIRY_DATE)
+                || prefixToSortBy.equals(PREFIX_REMIND)
+                : "Invalid prefixes should have been filtered out in SortCommandParser!";
+
         if (prefixToSortBy.equals(PREFIX_NAME)) {
             model.sortCoupons(NAME_COMPARATOR);
         } else if (prefixToSortBy.equals(PREFIX_EXPIRY_DATE)) {
             model.sortCoupons(EXPIRY_COMPARATOR);
         } else if (prefixToSortBy.equals(PREFIX_REMIND)) {
             model.sortCoupons(REMINDER_COMPARATOR);
-        } else {
-            assert false : "Invalid prefixes should have been filtered out in SortCommandParser!";
         }
 
         // Put non-archived at the top.

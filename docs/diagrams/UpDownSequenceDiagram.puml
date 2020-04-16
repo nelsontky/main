@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+
+box "Ui" UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+end box
+
+box "ModelManager" MODEL_COLOR_T1
+participant ":CommandTextHistory" as CommandTextHistory MODEL_COLOR
+end box
+
+activate CommandBox
+create CommandTextHistory
+CommandBox->CommandTextHistory
+
+activate CommandTextHistory
+CommandTextHistory-->CommandBox:commandTextHistory
+deactivate CommandTextHistory
+deactivate CommandBox
+
+[->CommandBox : Press a key
+activate CommandBox
+alt Key pressed is "up"
+CommandBox->CommandTextHistory : getUp()
+activate CommandTextHistory
+CommandTextHistory-->CommandBox:retrievedCommand
+deactivate CommandTextHistory
+else Key pressed is "down"
+CommandBox->CommandTextHistory : getDown()
+activate CommandTextHistory
+CommandTextHistory-->CommandBox:retrievedCommand
+deactivate CommandTextHistory
+else else
+end
+deactivate CommandBox
+
+@enduml

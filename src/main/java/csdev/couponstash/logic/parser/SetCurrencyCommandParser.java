@@ -13,7 +13,7 @@ import csdev.couponstash.logic.parser.exceptions.ParseException;
  */
 public class SetCurrencyCommandParser implements Parser<SetCurrencyCommand> {
     // ensure that currency symbol does not contain numbers
-    private static String validationRegex = ".*\\d.*";
+    private static String invalidationRegex = ".*\\d.*";
     // limit for the length of string possible
     private static final int STRING_LENGTH_LIMIT = 5;
 
@@ -57,7 +57,7 @@ public class SetCurrencyCommandParser implements Parser<SetCurrencyCommand> {
      * @param currencySymbol The String value to be tested.
      */
     private static boolean containsNumbers(String currencySymbol) {
-        return currencySymbol.matches(SetCurrencyCommandParser.validationRegex);
+        return currencySymbol.matches(SetCurrencyCommandParser.invalidationRegex);
     }
 
     /**

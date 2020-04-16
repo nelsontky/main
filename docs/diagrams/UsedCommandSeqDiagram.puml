@@ -4,9 +4,9 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CouponStashParser" as CouponStashParser LOGIC_COLOR
-participant "ucp:UsedCommandParser" as UsedCommandParser LOGIC_COLOR
-participant "u:UsedCommand" as UsedCommand LOGIC_COLOR
-participant "result:CommandResult" as CommandResult LOGIC_COLOR
+participant ":UsedCommandParser" as UsedCommandParser LOGIC_COLOR
+participant ":UsedCommand" as UsedCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box ModelManager MODEL_COLOR_T1
@@ -16,33 +16,33 @@ end box
 [-> LogicManager : execute("used 1 $100")
 activate LogicManager
 
-LogicManager -> CouponStashParser : parseCommand("used 1 $100")
+LogicManager -> CouponStashParser : parseCommand()
 activate CouponStashParser
 
 create UsedCommandParser
-CouponStashParser -> UsedCommandParser : new UsedCommandParser("$")
+CouponStashParser -> UsedCommandParser
 activate UsedCommandParser
 
-UsedCommandParser --> CouponStashParser : ucp
+UsedCommandParser --> CouponStashParser
 deactivate UsedCommandParser
 
-CouponStashParser -> UsedCommandParser : parse("1 $100")
+CouponStashParser -> UsedCommandParser : parse()
 activate UsedCommandParser
 
 create UsedCommand
-UsedCommandParser -> UsedCommand : new UsedCommand(1, 100)
+UsedCommandParser -> UsedCommand
 activate UsedCommand
 
-UsedCommand --> UsedCommandParser : u
+UsedCommand --> UsedCommandParser
 deactivate UsedCommand
 
-UsedCommandParser --> CouponStashParser : u
+UsedCommandParser --> CouponStashParser
 deactivate UsedCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 UsedCommandParser -[hidden]-> CouponStashParser
 destroy UsedCommandParser
 
-CouponStashParser --> LogicManager : u
+CouponStashParser --> LogicManager
 deactivate CouponStashParser
 
 LogicManager -> UsedCommand : execute(model, "used 1 $100")
@@ -58,7 +58,7 @@ create CommandResult
 UsedCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> UsedCommand
+CommandResult --> UsedCommand : result
 deactivate CommandResult
 
 UsedCommand --> LogicManager : result

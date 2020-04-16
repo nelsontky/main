@@ -152,6 +152,7 @@ public class ModelManager implements Model {
     public void addCoupon(Coupon coupon, String commandText) {
         couponStash.addCoupon(coupon);
         updateFilteredCouponList(PREDICATE_SHOW_ALL_ACTIVE_COUPONS);
+        sortCoupons(null);
         commitCouponStash(commandText);
     }
 
@@ -161,12 +162,12 @@ public class ModelManager implements Model {
 
         couponStash.setCoupon(target, editedCoupon);
         updateFilteredCouponList(PREDICATE_SHOW_ALL_ACTIVE_COUPONS);
+        sortCoupons(null);
         commitCouponStash(commandText);
     }
 
     @Override
     public void sortCoupons(Comparator<Coupon> cmp) {
-        requireNonNull(cmp);
         sortedCoupons.setComparator(cmp);
     }
 

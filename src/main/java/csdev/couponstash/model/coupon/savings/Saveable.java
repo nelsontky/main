@@ -16,6 +16,11 @@ public class Saveable implements Comparable<Saveable> {
             + "or null, and must have a non-negative count field.";
     // limit for the length of string possible
     public static final int STRING_LENGTH_LIMIT = 20;
+    // disallow numbers in Saveable to prevent confusion
+    // (Saveables must NOT match this regular expression!)
+    public static final String INVALIDATION_REGEX = ".*\\d.*";
+    public static final String MESSAGE_NUMBERS_MISTAKE = "It may be a mistake to "
+            + "include numbers in Saveable.";
 
     private final String savedItem;
     private final int count;
@@ -30,6 +35,7 @@ public class Saveable implements Comparable<Saveable> {
     public Saveable(String s) {
         requireNonNull(s);
         checkArgument(Saveable.isValidSaveableValue(s, 1), Saveable.MESSAGE_CONSTRAINTS);
+        checkArgument(!s.matches(Saveable.INVALIDATION_REGEX), Saveable.MESSAGE_NUMBERS_MISTAKE);
         this.savedItem = s;
         this.count = 1;
     }
@@ -45,6 +51,7 @@ public class Saveable implements Comparable<Saveable> {
     public Saveable(String s, int count) {
         requireNonNull(s);
         checkArgument(Saveable.isValidSaveableValue(s, count), Saveable.MESSAGE_CONSTRAINTS);
+        checkArgument(!s.matches(Saveable.INVALIDATION_REGEX), Saveable.MESSAGE_NUMBERS_MISTAKE);
         this.savedItem = s;
         this.count = count;
     }

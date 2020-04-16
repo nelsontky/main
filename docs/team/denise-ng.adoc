@@ -8,71 +8,101 @@
 ---
 
 == Overview
-
-Coupon Stash is a desktop coupons manager that allows users to keep track of
-their coupons. The user interacts with it using a CLI, and it has a beautiful
-GUI created with JavaFX. It is written in Java, and has about 25kLoC.
+Coupon Stash is a desktop coupon manager that allows users to keep track of their coupons. The user interacts with it
+using a Command Line Interface (CLI) in the application, with an aesthetically pleasing GUI created with JavaFX. It is
+written in Java with about 15kLoC. This application caters to fast-typists as all of the commands and features can be
+executed using the CLI.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to search for coupons by its expiry date/ month year*
-** What it does: allows the user to view all his/ her coupons by the expiry date or the month.
-** Justification: This feature is essential for users to keep track of the expiry dates of coupons. The enhancement,
+* *Major enhancements*:
+** Added *the ability to search for coupons by its expiry date/ month year*
+(Pull requests https://github.com/AY1920S2-CS2103T-F09-1/main/pull/82[#82]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/198[#198]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/202[#202])
+*** What it does: Allows the user to view all his/ her coupons by the expiry date or the month.
+*** Justification: This feature is essential for users to keep track of the expiry dates of coupons. The enhancement,
 with the calendar, will ensure that users know exactly when their coupons expire and will never forget to use them.
-** Highlights: This enhancement ties in closely with the calendar, which indicates if there is any coupon expiring on each date.
+*** Highlights: This enhancement ties in closely with the calendar, which indicates if there is any coupon expiring on
+each date.
 It also ties in with other coupon fields to ensure the validity of a coupon (i.e. not expired), such as savings from
 the coupon. This feature is critical to the functioning of Coupon Stash as it directly affects the primary functions of
 Coupon Stash such as the automatic archiving of expired coupons and setting of a reminder 3 days before the expiry date.
 
-* *Minor enhancements*: added a goto command that allows the user to navigate the calendar using the Command Line Interface
-& a copy command that allows the user to copy the details of a coupon to the user's clipboard.
+** Added *Calendar Pane* (Pull request https://github.com/AY1920S2-CS2103T-F09-1/main/pull/123[#123])
+*** What it does: allows user to have a bird eye's view of the expiry dates of his/ her coupons on the calendar.
+*** Justification: This feature is important for users to have a clearer view of the expiry dates of coupons with
+highlights on the calendar.
+*** Highlights: This enhancement ties in closely with expiry date, as the calendar will highlight a date on the calendar
+if there is any coupon expiring on the specific date.
+The Calendar Pane changes with the observable list in the coupon list panel, which follows the Observer Design Pattern.
 
-* *Code contributed*: Click on this https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=denise&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=zoom&zA=Denise-Ng&zR=AY1920S2-CS2103T-F09-1%2Fmain%5Bmaster%5D&zACS=356.75&zS=2020-02-14&zU=2020-04-08&zMG=false&zFTF=commit&zFGS=groupByRepos&zSO=undefined&zSWO=undefined&zSD=false&zSWD=false&since=2020-02-14[RepoSense link] to view the code that I have contributed to the project!
+
+* *Minor enhancements*:
+** Added start date field that allows coupons to have a starting date & to tie in with the expiry date (Pull requests
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/105[#105]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/226[#226])
+
+** Added the copy command that allows the user to copy the details of a coupon as an add command to the user's
+clipboard (Pull requests https://github.com/AY1920S2-CS2103T-F09-1/main/pull/134[#134]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/198[#198] (Renamed from export to copy))
+
+** Added the goto command that allows the user to navigate the calendar using the CLI (Pull request https://github.com/AY1920S2-CS2103T-F09-1/main/pull/202[#202])
+
+
+* *Code contributed*: Click on this
+https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=denise&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=zoom&zA=Denise-Ng&zR=AY1920S2-CS2103T-F09-1%2Fmain%5Bmaster%5D&zACS=356.75&zS=2020-02-14&zU=2020-04-08&zMG=false&zFTF=commit&zFGS=groupByRepos&zSO=undefined&zSWO=undefined&zSD=false&zSWD=false&since=2020-02-14[RepoSense link]
+to view the code that I have contributed to the project!
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+** Front-End Developer:
+*** Created and styled most of the UI classes (i.e. Calendar, Tabs, Result Display)
+(Pull requests https://github.com/AY1920S2-CS2103T-F09-1/main/pull/123[#123]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/172[#172]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/305[#305])
 
-_{you can add/remove categories in the list above}_
+** Project management:
+*** Created new issues when bugs are identified (Issues https://github.com/AY1920S2-CS2103T-F09-1/main/issues/217[#217]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/issues/229[#229]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/issues/321[#321])
+** Enhancements to existing features:
+*** Expanded on the list command to list active, archived or active (i.e. not expired/ not archived) coupons (Pull
+request https://github.com/AY1920S2-CS2103T-F09-1/main/pull/198[#198])
+** Documentation:
+*** Edited the logical flow of the User Guide (Pull request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/179[#179])
+*** Edited parts of User Guide (Pull requests https://github.com/AY1920S2-CS2103T-F09-1/main/pull/6[#6]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/7[#7]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/151[#151])
+*** Edited parts of Developer Guide (Pull requests https://github.com/AY1920S2-CS2103T-F09-1/main/pull/159[#159]
+, https://github.com/AY1920S2-CS2103T-F09-1/main/pull/167[#167])
+** Tool:
+*** Integrated a continuous integration workflow (Netlify) on GitHub  into team repo
+
 
 == Contributions to the User Guide
 
-
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|Given below are sections I contributed to the User Guide.
 |===
 
-include::../UserGuide.adoc[tag=delete]
+include::../UserGuide.adoc[tag=expiring]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=list]
+
+include::../UserGuide.adoc[tag=copy]
+
+include::../UserGuide.adoc[tag=goto]
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|Given below are sections I contributed to the Developer Guide.
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=calendar]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=reminder]
 
 
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

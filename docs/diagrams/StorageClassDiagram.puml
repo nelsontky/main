@@ -10,7 +10,7 @@ Interface AddressBookStorage <<Interface>>
 
 Class StorageManager
 Class JsonUserPrefsStorage
-Class JsonAddressBookStorage
+Class JsonCouponStashStorage
 
 StorageManager .left.|> Storage
 StorageManager o-right-> UserPrefsStorage

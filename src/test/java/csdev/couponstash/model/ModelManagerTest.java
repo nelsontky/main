@@ -93,12 +93,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredCouponList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCouponList().remove(0));
     }
 
     @Test
-    public void getFilteredPersonList_archiveExpiredCoupons_returnsTrue() {
+    public void getFilteredCouponList_archiveExpiredCoupons_returnsTrue() {
         CouponStash couponStash = new CouponStash(TypicalCoupons.getTypicalCouponStash());
         FilteredList<Coupon> filteredCouponList = couponStash.getCouponList()
                 .filtered(coupon -> coupon.getExpiryDate().date.isAfter(LocalDate.now()))

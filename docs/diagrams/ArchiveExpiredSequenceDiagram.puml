@@ -3,27 +3,28 @@
 
 skinparam ParticipantPadding 0
 
-box <color:black>Application</color> #999999
+actor User
+
+box <color:white>Application</color> #999999
 participant ":MainApp" as MainApp #333333
 end box
 
-
-box "<color:black>Model</color>" MODEL_COLOR_T1
+box "<color:white>Model</color>" MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 participant ":CouponStash" as CouponStash MODEL_COLOR
 participant ":FilteredList" as FilteredList MODEL_COLOR
 participant ":Coupon" as Coupon MODEL_COLOR
 end box
 
+User -> MainApp: Opens Coupon Stash
 activate MainApp
-
 create ModelManager
+
+MainApp -> ModelManager: ModelManager()
 activate ModelManager
 
-MainApp -> ModelManager: new ModelManager()
-
 create CouponStash
-ModelManager -> CouponStash: new CouponStash(couponStash)
+ModelManager -> CouponStash: CouponStash(couponStash)
 activate CouponStash
 CouponStash --> ModelManager: couponStash
 deactivate CouponStash
@@ -49,12 +50,14 @@ CouponStash --> ModelManager: updatedCouponStash
 deactivate CouponStash
 
 create FilteredList
-ModelManager -> FilteredList: new FilteredList<>(sortedCoupons, PREDICATE_SHOW_ALL_ACTIVE_COUPONS)
+ModelManager -> FilteredList: FilteredList<>(sortedCoupons, PREDICATE_SHOW_ALL_ACTIVE_COUPONS)
 activate FilteredList
 FilteredList --> ModelManager: filteredCoupons
 deactivate FilteredList
 
-MainApp <-- ModelManager : modelManager
+MainApp <-- ModelManager: modelManager
 deactivate ModelManager
+
+User <-- MainApp: Display active coupons
 
 @enduml

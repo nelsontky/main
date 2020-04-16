@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+'actor User
+
+box "Logic" LOGIC_COLOR_T1
+participant ":ExpiringCommand" as ExpiringCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":ObservableMonthView" as ObservableMonthView MODEL_COLOR
+end box
+
+box "Ui" UI_COLOR_T1
+participant ":CalendarPane" as CalendarPane UI_COLOR
+participant "d:DateCell" as DateCell UI_COLOR
+end box
+
+[-> ExpiringCommand: execute(model, "expiring my/9-2020")
+activate ExpiringCommand
+ExpiringCommand -> ModelManager :updateMonthView()
+
+activate ModelManager
+ModelManager -> ObservableMonthView : setValue()
+
+activate ObservableMonthView
+ObservableMonthView -> CalendarPane: fireValueChangedEvent()
+
+activate CalendarPane
+CalendarPane -> CalendarPane: fillUpCalendar()
+activate CalendarPane
+
+ref over CalendarPane, DateCell : Set details of DateCell
+CalendarPane --> CalendarPane
+deactivate CalendarPane
+
+CalendarPane --> ObservableMonthView
+deactivate CalendarPane
+
+ObservableMonthView --> ModelManager
+deactivate ObservableMonthView
+
+ModelManager --> ExpiringCommand
+deactivate ModelManager
+
+ExpiringCommand -->[ : CommandResult
+deactivate ExpiringCommand
+
+
+@enduml

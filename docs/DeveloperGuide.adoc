@@ -1,4 +1,4 @@
-= Coupon Stash - Developer Guide v1.0
+= Coupon Stash v1.4 - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -25,7 +25,7 @@ Refer to the guide <<SettingUp#, here>>.
 [[Design-Architecture]]
 === Architecture
 
-.Architecture Diagram
+.Architecture Diagram of Coupon Stash.
 image::ArchitectureDiagram.png[]
 
 The *_Architecture Diagram_* given above explains the high-level design of the
@@ -69,7 +69,7 @@ Each of the four components
 The _Sequence Diagram_ below shows how the components interact with each other
 for the scenario where the user issues the command `delete 1`.
 
-.Component interactions for `delete 1` command
+.Component interactions for `delete 1` command.
 image::ArchitectureSequenceDiagram.png[]
 
 The sections below give more details of each component.
@@ -77,14 +77,24 @@ The sections below give more details of each component.
 [[Design-Ui]]
 === UI component
 
-.Structure of the UI Component
+.Structure of the UI Component.
 image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/csdev/couponstash/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` that is made up of three main parts -
-`CommandBox`, `CalendarResultDisplayPanel` and  `CouponListPanel`.
+`CommandBox`, `CalendarResultDisplayPanel` and  a `TabsPanel`.
 All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+The TabsPanel can be further divided into three tabs - `HelpPane`, `SummaryPane`
+and the `CouponListPanel`. The `CouponListPanel` contains the `CouponCard` that
+represents the ``Coupon``s themselves.
+
+The `CalendarResultsDisplayPanel` is split into two UI components - the
+`CalendarPane` and the `ResultDisplay`. As the name suggests, the `CalendarPane`
+holds the calendar that allows easy visualization of expiry dates. The
+`ResultDisplay` provides feedback from Coupon Stash to the user after he runs a
+command.
 
 The `UI` component uses JavaFx UI framework.
 The layout of these UI parts are defined in matching `.fxml` files that are in
@@ -104,8 +114,8 @@ modified data.
 === Logic component
 
 [[fig-LogicClassDiagram]]
-.Structure of the Logic Component
-image::Structure-Of-Logic.png[]
+.Structure of the Logic Component.
+image::LogicClassDiagram.png[]
 
 *API* :
 link:{repoURL}/src/main/java/csdev/couponstash/logic/Logic.java[`Logic.java`]
@@ -121,17 +131,17 @@ certain actions, such as displaying help to the user.
 Given below is the Sequence Diagram for interactions within the `Logic`
 component for the `execute("delete 1")` API call.
 
-.Interactions Inside the Logic Component for the `delete 1` Command
+.Interactions Inside the Logic Component for the `delete 1` Command.
 image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker
 (X) but due to a limitation of PlantUML, the lifeline reaches the end of
-diagram.
+diagram. This limitation affects all of the sequence diagrams in this document.
 
 [[Design-Model]]
 === Model component
 
-.Structure of the Model Component
+.Structure of the Model Component.
 image::ModelClassDiagram.png[]
 
 *API* :
@@ -141,29 +151,30 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Coupon Stash data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g.
+** some examples of preferences that can be set are the money symbol, or
+window sizes.
+* exposes an unmodifiable `ObservableList<Coupon>` that can be 'observed' e.g.
 the UI can be bound to this list so that the UI automatically updates when the
 data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Coupon Stash`, which
-`Person` can reference.
-This would allow `Coupon Stash` to only require one `Tag` object per unique
-`Tag`, instead of each `Person` needing their own `Tag` object.
+As a more OOP model, we can store a `Tag` list in Coupon Stash, which a
+`Coupon` can refer to.
+This would allow Coupon Stash to only require one `Tag` object per unique
+tag, instead of each `Coupon` needing their own `Tag` object.
 An example of how such a model may look like is given below. +
- +
++
 image:BetterModelClassDiagram.png[]
 
 [[Design-Storage]]
 === Storage component
 
-.Structure of the Storage Component
+.Structure of the Storage Component.
 image::StorageClassDiagram.png[]
 
 *API* :
-link:{repoURL}/src/main/java/csdev/couponstash/storage/Storage.java[`Storage.jav
-a`]
+link:{repoURL}/src/main/java/csdev/couponstash/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -205,7 +216,8 @@ Step 1. The user launches the application for the first time.
 The `CouponStash` will be initialized with the initial coupon stash state, and
 the `currStateIndex` pointing to that single coupon stash state.
 
-image::UndoRedoState0.png[]
+.`CouponStash` will be initialized with the initial coupon stash state.
+image::UndoRedoState0.png[width=400]
 
 Step 2. The user executes `delete 5` command to delete the 5th coupon in the
 coupon stash.
@@ -215,14 +227,16 @@ executes to be saved in the `couponStashStateList`, and the `delete 5` command
 text to be stored in the `commandTextHistory`.  `currStateIndex` is shifted to
 the newly inserted coupon stash state.
 
-image::UndoRedoState1.png[]
+.`currStateIndex` is shifted to the newly inserted coupon stash state.
+image::UndoRedoState1.png[width=400]
 
 Step 3. The user executes `add n/OMO STORE ...` to add a new coupon.
 The `add` command also calls `Model#commitCouponStash(String commandText)`,
 causing another modified coupon stash state and command text to be saved into
 the `couponStashStateList` and `commandTextHistory` respectively.
 
-image::UndoRedoState2.png[]
+.Modified coupon stash state and command text are saved into the `couponStashStateList` and `commandTextHistory` respectively.
+image::UndoRedoState2.png[width=400]
 
 [NOTE]
 If a command fails its execution, it will not call
@@ -237,7 +251,8 @@ state, and restores the coupon stash to that state. Plus, the command text is
 returned, thus allowing for the display of the command that was undone. In this
 case, the command undone is `add n/OMO STORE...`.
 
-image::UndoRedoState3.png[]
+.`currStateIndex` shifted once to the left.
+image::UndoRedoState3.png[width=400]
 
 [NOTE]
 If the `currStateIndex` is at index 0, pointing to the initial coupon stash
@@ -249,10 +264,8 @@ the undo.
 
 The following sequence diagram shows how the undo operation works:
 
+.Undo operation sequence diagram.
 image::UndoSequenceDiagram.png[]
-
-NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but
-due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 The `redo` command does the opposite -- it calls `Model#redoCouponStash()`,
 which shifts the `currStateIndex` once to the right, pointing to the previously
@@ -273,21 +286,24 @@ Commands that do not modify the coupon stash, such as `list`, will  not call
 `Model#commitCouponStash()`.
 Thus, the `couponStashStateList` remains unchanged.
 
-image::UndoRedoState4.png[]
+.`couponStashStateList` remains unchanged.
+image::UndoRedoState4.png[width=400]
 
 Step 6. The user executes `clear`, which calls `Model#commitCouponStash()`.
 Since the `currStateIndex` is not pointing at the end of the
 `couponStashStateList`, all coupon stash states and command text history after
 the `currStateIndex` will be purged.
 We designed it this way because it no longer makes sense to redo the `add n/OMO
-STORE ...` command.
+                                                                      STORE ...` command.
 This is the behavior that most modern desktop applications follow.
 
-image::UndoRedoState5.png[]
+.Command text history after the `currStateIndex` is purged.
+image::UndoRedoState5.png[width=400]
 
 The following activity diagram summarizes what happens when a user executes a
-new command:
+new command text:
 
+.Activity diagram representation of how command texts are saved when they are executed.
 image::CommitActivityDiagram.png[]
 
 ==== Design Considerations
@@ -304,110 +320,799 @@ unwanted mutations.
 deleted).
 ** Cons: We must ensure that the implementation of each individual command is
 correct.
+
+Alternative 1 was chosen due to its relative simplicity and extensibility.
+Little to no modification needs to be made to each command that can be
+undone, thus reducing chances of new bugs surfacing. Additionally, the ability
+to undo operations such as `clear` will require alternative 2 to copy the
+entire coupon stash too, so both alternatives will have the same memory
+footprint in such a context. Finally, the real world performance impact of
+copying all coupons vs copying one is not very huge. Thus, the more
+extensible and simpler alternative 1 was chosen.
+
 // end::undoredo[]
 
 // tag::calendar[]
 === Calendar
 
 ==== Current Implementation
-The Calendar component provides a visual representation of the stored coupons
-that are expiring over a month. It is
-facilitated by the `CalendarPane` and `DateCell`.
+The Calendar component provides a visual representation of the stored coupons that are expiring over a month. It is
+facilitated by `CalendarPane`, `DateCell`, `ObservableList<Coupon>` and `ObservableMonthView`.
 
-The `CalendarPane` is controller of the `Calendar`. Users can change the month
-on display` to show the coupons that expire on a date by clicking on a highlighted
-`DateCell`.
+The `CalendarPane` is the controller of the Calendar on display. Users can change the month on display to show the coupons
+that expire during a specific month year by clicking on the arrows at the sides of the calendar's title or
+by using the `goto` command.
 
-Each `DateCell` represents each date of the month that is currently on display.
+Each `DateCell` represents each date of the month that is currently on display. Each `DateCell` uses the
+`ObservableList<Coupon>` to keep a list of the coupon(s) that expires on each date. A `DateCell` with coupon(s) expiring
+on the date are highlighted in red and a `Datecell` that represents the `system's date` is highlighted blue.
 
+The `ObservableList<Coupon>` is the list of filtered coupons that are currently on display in the `CouponListPanel`.
+They are obtained by calling the `Logic#getFilteredCouponList()` method. The list can be filtered to view all active,
+archived or used coupons using the `expiring` command .
 
-The `ObservableList<Coupon>` is the list of filtered coupons that are currently
-on display in the `CouponListPanel`.
-They are obtained by calling the `Logic#getFilteredCouponList()` method. Each
-`DateCell` uses the same
-`ObservableList<Coupon>` as reference, to get coupons that expires on each of
-the dates.
+The `ObservableMonthView` is the current month & year on display in the `Calendar Pane`. It is obtained by calling
+the `Logic#getMonthView()` method.
+
+The class diagram below shows the interaction between classes that affects the Calendar:
+
+.Overview of the class diagram representation of the Calendar.
+image::CalendarClassDiagram.png[]
 
 The sequence diagrams below show how the Calendar works:
 
+.Sequence diagram representation of the Calendar on the startup of Coupon Stash.
 image::CalendarSequenceDiagram.png[]
-image::CalendarSequenceDiagram_Ref_SetDetailsOfDateCell.png[]
+
+.Sequence diagram representation of the Set details of DateCell ref frame of Calendar (Applicable to the next two diagrams).
+image::CalendarSequenceDiagram_Ref_SetDetailsOfDateCell.png[width=400]
 
 The two scenarios below are examples of how the Calendar mechanism behaves at
 each step of each scenario.
 
-===== Updating the Calendar with a Filtered List
-The Calendar updates with the current observable coupon list. The following
-steps describes how this behavior is implemented.
+===== Updating the Calendar with an Updated List
+The Calendar updates with the current `ObservableList<Coupon>` with commands such as the `add`, `archive`, `clear`,
+`delete`, `edit`, `expiring`, `find`, `list`, `redo`, `unarchive`, `undo` and `used`. The following steps describes how
+this behavior is implemented.
 
 Step 1. The user launches the application for the first time.
-The Calendar displayed will render the saved data, triggered by the initiation
-of the UiManager.
 
-Step 2. The user executes a `find` command.
-The `find` command alters the observable coupon list and the Calendar will be
-updated according to the list with the
-`Logic#getFilteredCouponList()` method.
+The Calendar displayed will render the saved coupon data, triggered by the initiation of the UiManager.
 
+Step 2. The user executes a command that alters the `ObservableList<Coupon>` (any command listed above).
 
-===== Selecting a highlighted date on the Calendar
-Dates that have coupons expiring on that day are highlighted and clickable. The
-user can click on them and open a separate
-window to view all the coupons that are expiring on that day. The following
-steps describes how this behavior is implemented.
+When a command alters the observable coupon list, the listener of the observable list detects the change and the
+Calendar will be updated accordingly to the list by calling the `CalendarPane#fillUpCalendar()` method.
 
-Step 1. The user launches the application for the first time or changes the
-month displayed on the Calendar.
-The Calendar displayed will render the expiring coupons for the month and
-highlight the dates with expiring coupons
-facilitated by the `CalendarPane#setDateCellCircle` method.
-Example of highlighted date:
+For example, the `find` command alters the observable coupon list. It calls the `FindCommand#execute(Model, String)`
+method, which calls the `Model#updateFilteredCouponList(Predicate)` method. It then calls the
+`FilteredList<Coupon>#setPredicate(Predicate)` method that alters the observable coupon list.
 
-image::Calendar_HighlightedCell.png[]
+[NOTE]
+If a command fails its execution, it will not call the `FilteredList<Coupon>#setPredicate(Predicate)` method. Hence, the
+observable coupon list will not be altered and the calendar will not be altered.
 
-Step 2. The user clicks on a highlighted date.
-A new separate window will open, showing the user all the coupons that are
-expiring on that particular day facilitated
-by the `DateCell#displayCoupons()` method.
-Example of new window:
+The following sequence diagram shows how the Calendar updates with the observable coupon list:
 
-image::Calendar_CouponsOnDateWindow.png[]
+.Sequence diagram representation of the update of the Calendar with the Coupon List for the "find chicken" Command.
+image::CalendarFindCommandSeqDiagram.png[]
 
+===== Updating the Calendar with a Different Month View
+The Calendar updates with the current `ObservableMonthView` with commands such as `goto`, `expiring` and `list` or by
+clicking on the arrows at the sides of the calendar title. The following steps describes how this behavior is
+implemented.
+
+Step 1. The user launches the application for the first time.
+
+The Calendar displayed will render the saved coupon data, triggered by the initiation of the UiManager. The default
+calendar display will be set to the `system's month year`.
+
+Step 2. The user executes a command that alters the `ObservableMonthView` (any command listed above).
+
+When a command alters the observable month view, the listener of the observable month view detects the change and the
+month view display of the calendar will be updated according by calling the `CalendarPane#updateCalendarWithYearMonth`
+method.
+
+For example, the `goto` command calls the `GoToCommand#execute(Model, String)` method, which calls the
+`Model#updateMonthView(String)` method. It then calls the `ObservableMonthView#setValue(String)` method that alters the
+observable month view.
+
+* `expiring` command
+**  For the `expiring` command, the Calendar will be updated accordingly to the month year of the specified date or
+month year with the command.
+** For example, entering these `expiring` commands `expiring my/9-2020` or `expiring e/11-9-2020` will change the month
+year on display to September 2020.
+
+* `list` command
+** For the `list` command, the Calendar will be updated to the `system's month year`.
+[NOTE]
+If a command fails its execution, it will not call the `ObservableMonthView#setValue(String)` method. Hence, the
+observable month view will not be altered and the calendar will not be altered.
+
+The following sequence diagram shows how the Calendar updates with the observable month view:
+
+.Sequence diagram representation of the update of the Calendar's MonthView for the "expiring chicken" Command.
+image::CalendarExpiringCommandSeqDiagram.png[]
+
+Or alternatively, instead of step 2,
+
+Step 3. The user clicks on the arrows at the sides of the calendar title to
+change the month year displayed.
+
+When a click alters the observable month view, the listener of the observable month view detects the change and the
+month view display of the calendar will be updated according by calling the `CalendarPane#updateCalendarWithYearMonth`
+method.
+
+For example, clicking on the arrow on the right calls the `CalendarPane#changeCalendarToNextMonth` method, which calls
+`CalendarPane#updateCalendarToNextMonth`. It then calls the `ObservableMonthView#setValue` method that alters the
+observable month view.
 
 ==== Design Considerations
 ===== Aspect: Information displayed on the Calendar
-* **Alternative 1 (current choice):** Show expiring coupons by highlighting the
-dates with expiring coupons and users
-clicking on them for more information in a separate window
-** Pros: Cleaner view of the Calendar with minimal information
-** Cons: Lesser information provided with a glance and user have to click to
-see the details of the expiring coupons on
-a date in a separate window
+* **Alternative 1 (current choice):** Show expiring coupons by highlighting the dates with expiring coupon(s)
+** Pros: Cleaner view of the Calendar with minimal information & may take up less space on the `Main Window`
+** Cons: Lesser information provided with a glance
 
-* **Alternative 2:** Show a condensed version of the coupons in the cell of
-each date
-** Pros: No additional clicking required and more information provided with a
-glance
-** Cons: May be messy to look at when there are multiple coupons expiring on a
-date
+* **Alternative 2:** Show a condensed version of the coupons' details within the cell of each date
+** Pros: More information provided with a glance
+** Cons: Messy to look at when there are multiple coupons expiring on a date & may take up more space on the
+`MainWindow`
 
+We decided on alternative 1, to show coupons expiring on specific dates with highlights. This is because a coupon contains
+much information and the calendar may look cluttered and messy, which may be aesthetically unpleasant to the user.
+Furthermore, the user can use the `expiring` command to search for coupons expiring on a date or month year and have a
+more detailed view of the coupons in the `CouponListPanel`.
 
 ===== Aspect: Whether the Calendar should update with the list
-* **Alternative 1 (current choice):** Calender updates with the filtered list
-** Pros: User can relate the coupons shown in the Calendar to the
-`CouponListPanel` (Observer design pattern)
-** Cons: May overlook coupons if list is filtered
+* **Alternative 1 (current choice):** Calendar updates with the filtered list
+** Pros: User can easily relate and reference to the coupons shown in the Calendar to the `CouponListPanel`
+** Cons: May overlook some coupons if the list is filtered
 
 * **Alternative 2:** Calendar shows all the coupons in CouponStash
-** Pros: View of all coupons and will not overlook any coupons when the coupon
-list is filtered
-** Cons: User may be confused if he/she sees a coupon on the Calendar that is
-not in the `CouponListPanel`
+** Pros: View of all coupons and will not overlook any coupons even when the coupon list is filtered
+** Cons: User may be confused if he/she sees a highlighted date on the Calendar when there is no coupon expiring on that
+date in the `CouponListPanel`
 
+We decided on alternative 1, for the calendar to update with the list in the `CouponListPanel`. This is because this
+follows the Observer Pattern Design Principle. Furthermore, this will not confuse the user when the user sees a
+highlighted date on the Calendar when there is no coupon expiring on that date in the `CouponListPanel`.
+
+// end::calendar[]
+
+
+// tag::archiving[]
+[[Implementation-Coupon-Archiving]]
+=== Coupon Archiving
+
+When physical coupons are expired or exhausted, they would usually be thrown away,
+or kept in the archive. Coupon Stash simulates this archive, storing these coupons
+in the app so that the user can still keep track of it, and the savings they
+generated.
+
+==== Current Implementation
+
+The archiving of coupons is facilitated by the `Archived` attribute of a
+coupon. The following methods in the `CouponStash`,
+`Coupon`, `Usage`, `UsedCommand` class and the `Model` interface facilitates this feature:
+
+* `CouponStash#archiveExpiredCoupons()` -- Archives any coupon in the
+`CouponStash` that has expired, and returns a new updated `CouponStash`.
+* `Coupon#increaseUsageByOne()` - Increases the usage of a coupon by one.
+* `Usage#isAtLimit` - Returns true if the current usage is at its limit
+(abstracted by the `Limit` field).
+* `UsedCommand#execute()` - Executes the `used` command input by the user.
+* `Model#PREDICATE_SHOW_ALL_ACTIVE_COUPONS` - A `Predicate` function that filters
+out archived coupons from a given `CouponStash`.
+
+[#img-archiving]
+.Overview class diagram representation of the coupon archiving implementation.
+image::ArchivingClassDiagram.png[ArchivingClassDiagram]
+
+Given below is two example usage scenarios and how the archiving mechanism
+behaves at each step of each scenario. An activity diagram is provided first to
+describe the general events that will lead to an automatic archiving of coupons
+by Coupon Stash.
+
+[#img-automaticarchiving]
+.Activity diagram representation of the general flow of archiving of coupons in Coupon Stash
+image::ArchivingActivityDiagram.png[width="300"]
+
+**Archiving of Expired Coupons**
+
+Expired coupons are automatically archived by Coupon Stash upon start up of the
+application. The following steps describe how this behaviour is implemented.
+
+Step 1. The user launches the application for the first time. The initiation of
+`ModelManager` will also trigger the
+initiation of `CouponStash` with any available saved data.
+
+Step 2. The method `CouponStash#archiveExpiredCoupons` will be called from the
+newly initiated `CouponStash`, and have its
+`UniqueCouponList` mapped to a function that archive coupons that has expired
+before the date of opening the application, and returns a new updated `CouponStash`.
+This mapping function is facilitated by `Coupon#hasExpired()` and `Coupon#archive()`.
+
+Step 3. The `ModelManager` will proceed to filter out the archived coupons from
+the newly updated `CouponStash`, and return
+a filtered list of active coupons. This filtering is facilitated by the
+predicate `Model#PREDICATE_SHOW_ALL_ACTIVE_COUPONS`.
+
+[#img-archiveexpired]
+.Sequence diagram representation of archiving expired coupons
+image::ArchiveExpiredSequenceDiagram.png[]
+
+**Archiving of Exhausted Coupons**
+
+Coupons that have exhausted its usages will be automatically archived by the
+application. The following steps describe how
+this behaviour is implemented.
+
+Step 1. The user uses a `Coupon` in the current observable `CouponStash` with the
+command `used 1`.
+`UsedCommand` is created with the parsed arguments, and executed. The particular `Coupon`
+will then have its `Usage` increased by one by calling `Coupon#increaseUsageByOne()`.
+
+Step 2. The `Coupon` will then be checked if its `Usage` has reached its `Limit`, using
+the `Usage#isAtLimit()` method. For the purpose of this explanation, we assume that
+the coupon being used has a usage `Limit` of 1 and a previous `Usage` value of 0,
+with savings in `MonetaryAmount`.
+
+Step 3. The `Coupon` will have a new `Archived` value, which will be set to
+`true` if the `Usage` has indeed reached its `Limit`. This is facilitated by `Coupon#archive()`.
+
+Step 4. The `CouponStash` will be updated with this used `Coupon` with the
+`ModelManager#setCoupon()` method. Under the hood of
+this method, the current `FilteredList` will be updated to show active
+`Coupons` only, facilitated by the predicate
+`Model#PREDICATE_SHOW_ALL_ACTIVE_COUPONS`.
+
+[#img-archiveexhausted]
+.Sequence diagram representation of archiving exhausted coupons
+image::ArchiveExhaustedSequenceDiagram.png[]
+
+==== Design Considerations
+
+===== Aspect: The implementation to store archived coupons
+
+* **Alternative 1 (current choice):** `Coupon` contains an `Archived` field
+** Pros: Easy to implement, lower maintainability.
+** Cons: Saved data may get get considerably huge after heavy usage of
+application.
+
+* **Alternative 2:** Archived ``Coupon``s are stored in another separate data file.
+** Pros: Separates the logic between the two different `CouponStash`, e.g. ability
+to limit the functions on archived ``Coupon``s
+** Cons: Sharply increases the maintainability and coupling of the application
+with two data files.
+
+Alternative 1 was chosen, due to the cons of Alternative 2. While a separate
+file is akin to having two separate stashes of coupons, this would increase
+the overall complexity of the application. `Logic` and `Model` would have to
+deal with another set of data, and `Commands` may have to split up the logic
+for different data sets. Furthermore, while saved data will be larger for
+Alternative 1, it should only affect the performance of starting Coupon Stash
+up, since most of the interactions with the program is with active coupons.
+// end::archiving[]
+
+
+// tag::updownarrowcommandhistory[]
+=== Up/down arrow retrieve command history
+
+==== Current Implementation
+The retrieving of command history via the up and down arrow keys is facilitated
+by the `CommandTextHistory` class. The command history is stored internally as
+a `LinkedList` used as a stack with a `currIndex`
+tracking the next command in the history to return.
+The following methods and attributes in the `CommandTextHistory`
+class facilitates this feature:
+
+* `CommandTextHistory#add(String commandText)`
+* `CommandTextHistory#getDown()`
+* `CommandTextHistory#getUp()`
+* `CommandTextHistory#commandTextHistory`
+* `CommandTextHistory#currIndex`
+
+.Class diagram representation of the command history retrieving function.
+image::UpDownClassDiagram.png[]
+
+Given below is an example usage scenario and how the up/down button presses
+behaves at each step.
+
+Step 1. The user launches the application for the first time. The
+`CommandTextHistory` is initialized
+with a stack containing only an empty string (`""`), and the `currIndex`
+is set to `0`.
+
+.Stack containing only an empty string
+image::UpDownHistory0.png[]
+
+Step 2. The user executes `delete 1`. `CommandBox#handleCommandEntered()` will
+call `CommandTextHistory#add(String commandText)` to save the entered command
+into
+the stack contained in `CommandTextHistory`. The top of the stack (i.e. the
+empty string) is popped off first, before
+the entered command is pushed onto the stack. Then, the empty string is pushed
+onto the stack again, thus ensuring that
+the empty string stays at the top of the stack. Note that `currIndex` is not
+affected.
+
+.Stack after executing `delete 1`
+image::UpDownHistory1.png[]
+
+Step 3. The user executes `delete 2`. `CommandBox#handleCommandEntered()` will
+also save the entered command into
+the stack contained in `CommandTextHistory`. As in the previous step, the new
+command is pushed to the top of the stack,
+just below the empty string.
+
+.Stack after executing `delete 2`.
+image::UpDownHistory2.png[]
+
+Step 3. Now, the user decides to delete the second coupon again. We press the
+arrow key up once,
+and `CommandBox#commandTextField` has a listener that calls
+`CommandTextHistory#getUp()`.
+The `currIndex` is incremented, and then the command text pointed to by
+`currIndex` is returned and
+displayed in the program command box.
+
+.After pressing the "up" arrow key.
+image::UpDownHistory3.png[]
+
+Step 4. The user then executes the retrieved command (`delete 2`). As in the
+previous steps, this newly executed command
+is pushed to the top of the stack just below the empty string. However, in such
+a case when the `currIndex` is not `0` and
+does not point to the top of the stack, it is reset to `0`.
+
+.Stack after executing `delete 2` again.
+image::UpDownHistory4.png[]
+
+[NOTE]
+If the `currStateIndex` is pointing to the top of the stack,
+then there are no previous commands to retrieve. Thus, the up button will simply
+return the empty string. No changes to the stack and `currIndex` will be
+effected.
+
+The down arrow key does the opposite, it will lead to the calling of
+`CommandTextHistory#getDown()`,
+which shifts the `currIndex` one item higher (i.e. decrement the `currIndex` by
+`1`), before returning
+the command text pointed by the updated `currIndex`.
+
+[NOTE]
+If the `currIndex` is at index `commandTextHistory.size() - 1`, pointing to the
+bottom of the stack, there is no next command to retrieve when pressing the
+down key. Thus,
+the down button will simple return the command text currently being pointed to
+by the `currIndex`.
+No changes to the stack and `currIndex` will be affected.
+
+Below is a sequence diagram describing the events that happen when a user
+presses a key.
+
+.Sequence diagram representing retrieval of command text history with the up and down arrow keys.
+image::UpDownSequenceDiagram.png[]
+
+Below is a sequence diagram describing the events that happen when a executes
+a command text, thus triggering the saving of a command text into
+`CommandTextHistory`.
+
+.Sequence diagram representing the saving of a command text.
+image::UpDownSequenceDiagramAdd.png[]
+
+==== Design Considerations
+
+===== Aspect: Data structure to support the key actions
+
+* *Alternative 1 (current choice):* Use `LinkedList` as a stack to store
+the command text history.
+** Pros: `LinkedList` is a better data structure that allows for more efficient
+operations supported by stacks.
+
+* *Alternative 2:* Use `ArrayList` as a stack to store
+the command text history.
+** Pros: `ArrayList` is more recognizable to people who are relatively new to
+Java, thus reducing confusion.
+** Cons: Stack operations are less efficient on `ArrayList` s.
+// end::updownarrowcommandhistory[]
+
+// tag::couponsorting[]
+=== Coupon Sorting
+==== Current implementation
+The sorting of coupons in the coupon stash is facilitated by the following
+static variables in the `SortCommand` class and this methods in the `Model`
+interface and `SortedList` class.
+
+* `SortCommand#NAME_COMPARATOR` - Comparator that sorts coupons by name in
+ascending order.
+* `SortCommand#EXPIRY_COMPARATOR` - Comparator that sorts coupons by expiry
+date in ascending order.
+* `SortCommand#REMINDER_COMPARATOR` - Comparator that sorts coupons by
+remind date in ascending order.
+* `Model#sortCoupons(Comparator<Coupon> comparator)` - Sorts the
+`ObservableList` of coupons that are stored in `Model` according to the
+order decided by the passed in `comparator`.
+* `SortedList#setComparator(Comparator<Coupon> comparator)` - Sets the
+comparator that determines the order of the coupons inside the sorted list.
+
+.Overview of the class diagram representation of the coupon sorting implementation.
+image::SortingClassDiagram.png[]
+
+When a `sort` command is executed, the field to sort by is indicated by the
+inputted prefix. The sequence diagram below describes what happens when a
+`sort` command is run.
+
+.Sequence diagram describing the process of sorting coupons.
+image::SortCommandSeqDiagram.png[]
+
+Depending on the prefix to sort by, `ModelManager#sortCoupons()` will be
+called with the relevant comparator as its argument. The
+`ModelManager#sortCoupons()` method subsequently calls the
+`SortedList#setComparator()` method (not shown in the above diagram), which
+leads to a change of the comparator of the `SortedList` stored in
+`ModelManager` , thus triggering a sort of the `SortedList`.
+
+==== Design Considerations
+
+===== Aspect: Persistent or non - persistent sort?
+
+* *Alternative 1 (current choice):* Make sorting non - persistent.
+** Pros: Sorting is faster as no write to disk is needed to make the new
+order persistent. Additionally, with the coupons being sorted by the time they
+are added to the coupon stash by default, there is no way to restore this order
+without storing the time a coupon was added to the stash. Thus, the non -
+persistent approach shines here as restoring the original order of the coupon
+stash is as trivial as reopening the program.
+** Cons: If a user prefers a particular default sorting order for their
+coupons, they have to retype the `sort` command each time the program is
+launched or each time a coupon is added or edited.
+
+* *Alternative 2:* Make sorting persistent.
+** Pros: Gives users more freedom over the default order of their coupons.
+** Cons: Can be unnecessarily complicated to implement a hidden field stating
+a coupon's addition time just so users can revert to the default order.
+Additionally, it can be confusing to users when there are so many different
+ways to sort.
+
+In our usage during testing, we have never had the urge to have a default
+sorting order when the program is launched. Plus, we feel that the simplicity
+of excluding a sort by default order function will be well favored by users,
+and thus we chose alternative 1.
+
+// end::couponsorting[]
+
+// tag::reminder[]
+=== Coupon Reminder
+To ensure users are aware of expiring coupons and maximise their saving,
+Coupon Stash reminds the user through a pop-up window, upon launching the
+application.
+
+To achieve this feature, the following methods in the `RemindDate` and
+`RemindWindow` classes are used.
+
+* `RemindDate#isToday()` - Check if the `RemindDate` is today.
+* `RemindWindow#filterRemindCoupons()` - Filters out all `RemindDates` that
+are not today from `RemindWindow`.
+* `RemindWindow#constructRemindCoupons()` - Creates a `String` of coupons
+that have their `RemindDates` today. This `String` is used in the displayed
+reminder window.
+* `RemindWindow#showIfAny()` - Shows the reminder window if there are coupons
+to be reminded of today. If there are no coupons that have to be reminded
+today, no window will be shown.
+
+.Overview of the class diagram representation of the reminder checking implementation.
+image::RemindClassDiagram.png[]
+
+
+To make sense of how coupon reminder functions, let's dive into the specifics of
+RemindDate
+class, RemindCommand class and RemindWindow class.
+
+
+==== Implementation of editing a coupon's RemindDate
+
+The following activity diagram depicts what happens when the user runs a
+`edit` command to edit a coupons's `RemindDate`.
+
+.Activity Diagram representation of the flow of editing the `remind date` of a coupon.
+image::EditRemindActivityDiagram.png[width=500]
+
+==== Implementation of reminder pop up
+
+After establishing the remind dates for all the coupons,
+the next step is ensure that there will be a reminder pop
+up (if necessary) upon opening the application.
+
+The following steps describe how to reminder pop up works:
+
+. The user launches Coupon Stash. The `start` method
+in `MainApp` class will kick start the program
+by setting up the stage, along with the saved data.
+. This will trigger the `start` method in `UiManager`, which leads to the
+creation of a new `RemindWindow` instance, with a `List` of all coupons
+currently stored passed in as a parameter.
+. In the constructor of `RemindWindow`, coupons that do not have a remind
+date of today are filtered out.
+. After filtering the coupons, if there are coupons to be reminded today,
+their information will be concatenated into a `String` that is displayed in
+the reminder window.
+
+.Sequence diagram describing the process of opening the reminder window.
+image::RemindSequenceDiagram.png[]
+
+==== Design consideration
+
+*Aspect: How to keep track of coupon remind date*
+
+* *Alternative 1 (current choice):* Coupon contains a `Remind` field.
+
+** Pros: Code implementation is easier and this makes the remind date more
+visible to the user since it is a field.
+
+** Cons: Coupon display may get very cluttered with the addition of this
+extra field.
+
+* *Alternative 2 :* Store the remind dates of all coupons in a separate data
+file. Coupons can be stored in a hash table with their remind dates as keys.
+
+** Pros: No need to clutter coupon display with additional fields. Plus, it
+is efficient to list all coupons that have to be reminded for on a certain
+day as the coupons are stored in a hash table.
+
+** Cons: Hard to maintain two separate data files that have shared components
+(in this case coupons)
+
+All in all, we chose alternative 1 as we feel that it is good for users to be
+able to view the remind date of a coupon in the coupon view. Additionally, all
+speed-ups and efficiency of storing the remind dates in a separate data file
+is nullified by the fact that we still need to loop through all coupons to
+display their remind dates on the calendar component. Thus, to make it easier
+to extend the program in the future, we decided against adding another data
+file which can make extension more complicated, and chose to work with
+alternative 1.
+// end::reminder[]
+
+
+// tag::savings[]
+=== Savings per use and total amount saved
+
+To allow users to keep track of how much they have saved
+(after all, the whole point of coupons is to offer
+certain tangible benefits, encouraging purchases
+by customers), Coupon Stash automatically tracks the
+user's savings as they use their coupons that are
+handled in the application.
+
+To achieve this, ``Coupon``s have to store two different
+fields: +
+1. Amount of savings each use of a coupon provides +
+2. Total amount of savings accumulated
+from using a certain coupon
+
+==== Class structure of `Savings`
+
+Just for reference, the image below shows the class diagram
+for the `Savings` class. It is compulsory for each Coupon to
+contain an `Savings` object, that represents what the user
+would gain from 1 use of that Coupon.
+
+.Class diagram describing the structure of `Savings`.
+image::SavingsClassDiagram.png[]
+
+A Savings object can hold a `PercentageAmount`, `MonetaryAmount` or
+``Saveable``s, which represents discounts like "$5 off", "10% off"
+and "free door gift" respectively.
+
+The table below shows which are valid Savings objects, and
+which are not.
+
+.A list of different Savings objects, which could be valid or invalid.
+[cols="2"]
+|=========================================
+|Object Diagram | Comments
+a|
+.Savings with percentage amount.
+image:s1valid.png[] | Valid
+a|
+.Savings with monetary amount.
+image:s2valid.png[] | Valid
+a|
+.Savings with saveable items.
+image:s3valid.png[] | Valid
+a|
+.Savings without any fields present.
+image:s4invalid.png[] | Invalid: `Savings` must have at
+least one field
+a|
+.Savings with percentage amount and a saveable item.
+image:s5valid.png[] | Valid: `Savings` can have both a
+percentage amount and saveables
+a|
+.Savings with monetary amount and multiple saveable items.
+image:s6valid.png[] | Valid: `Savings` can hold more
+than one `Saveable`
+a|
+.Savings with monetary amount and percentage amount.
+image:s7invalid.png[] | Invalid: Savings cannot have both a
+`MonetaryAmount` and `PercentageAmount`
+|=========================================
+
+As can be seen from the table, `Savings` cannot be completely
+empty, and `Savings` cannot have both a `MonetaryAmount` and
+`PercentageAmount` (it does not make much sense to have
+a voucher that says "10% and $5 off").
+
+==== `PureMonetarySavings` and `DateSavingsSumMap`
+
+In order to calculate the total amount saved, ``Coupon``s also
+store information about how much the user saves, and storage
+is done at the moment the user uses the coupon. This
+information is stored in the form of `PureMonetarySavings`,
+which is a subclass of `Savings` that never holds
+``PercentageAmount``s. The class diagram below illustrates this.
+
+.Class diagram describing the structure of `PureMonetarySavings`.
+image::PureMonetarySavingsClassDiagram.png[]
+
+The reason why ``PercentageAmount``s are not allowed in
+accumulated savings is because a percentage
+discount is a relative value that depends on the
+original price of the product, and cannot be easily
+added up in a way that allows users to accurately
+measure how much they have saved from their coupons.
+
+[[dssm]]
+`PureMonetarySavings` are stored in
+a `DateSavingsSumMap`, which is a hash table that
+links the current date (`LocalDate`) to the savings
+earned (`PureMonetarySavings`) on that date.
+Each `Coupon` holds a `DateSavingsSumMap`. The
+next image shows the class diagram of the
+`DateSavingsSumMap`.
+
+.Class diagram describing the structure of `DateSavingsSumMap`.
+image::DateSavingsSumMapClassDiagram.png[]
+
+
+The following section describes
+the processes that follow whenever a user marks a Coupon
+as "used" with the `used` command.
+
+==== Implementation of used command
+
+When the user enters a `used` command, the actions taken by Coupon
+Stash change depending on whether the Coupon's Savings stores
+a MonetaryAmount of PercentageAmount. The following activity diagram
+shows what happens when the user runs a used command.
+
+.Activity diagram showing the execution of a used command.
+image::UsedCommandActivityDiagram.png[width=400]
+
+In terms of the implementation, the next two images
+shows the sequence diagram that models the successful
+execution of a used command within the actual
+program components.
+
+More specifically, the used command executed is
+`used 1 $100`, and the state of the system is such that
+a `Coupon` with `PercentageAmount` in its `Savings` (no
+`MonetaryAmount`) and with `Usage` not at its `Limit`
+is located at index 1. Also, the money symbol
+set in the user preferences would be `$`, which
+makes this command a valid one that will execute
+successfully.
+
+.Sequence diagram showing how a `UsedCommand` is executed.
+image::UsedCommandSeqDiagram.png[]
+
+The money symbol set in the user preferences is
+retrieved by `CouponStashParser`, which passes it
+to `UsedCommandParser` that will use this symbol
+to parse the `used` command.
+
+Also, within `UsedCommand`, the `UsedCommand#execute()` method
+will cause the creation of a new `Coupon` with the
+correct recorded number of uses and amount of
+savings earned. The next sequence diagram shows
+how a successful `UsedCommand#execute()` method produces the new total savings
+value for the new `Coupon`.
+
+.Sequence diagram showing how `UsedCommand` updates the total savings.
+image::UsedExecutionSeqDiagram.png[]
+
+In the end, the total savings value of the `Coupon`
+is updated. This total savings is represented by
+a <<DeveloperGuide.adoc#dssm, DateSavingsSumMap>>.
+
+One key implementation within the `UsedCommand` is the checks
+that it has to make to ensure the valid usage of a `Coupon`.
+Below is an activity diagram to show the flow of checks within
+the `UsedCommand#execute()` method.
+
+==== Implementation of saved command
+
+Now that we have seen how the `used` command works,
+we can look at how the `saved` command works. While
+`used` stores the amount of savings that the user
+has earned on a particular day, `saved` retrieves
+the amount of savings earned as recorded by Coupon
+Stash, given a particular time period.
+
+The saved command works similarly to the used command,
+where a `SavedCommandParser` will be created by `Logic`
+to split up the raw `String` into its arguments,
+creating a `SavedCommand`. Let's look at how a `SavedCommand`
+would be executed.
+
+.Sequence diagram showing the execution of a `SavedCommand`.
+image::SavedExecutionSeqDiagram.png[]
+
+Hence the `SavedCommand` loops through all ``Coupon``s to add
+up the savings earned from a particular time period,
+or from all dates if no time period is specified.
+
+==== Design considerations
+
+Based on the User Stories, there is a desire for tracking
+how much one has saved by using Coupon Stash, as well
+as for viewing total savings easily. Below are
+some alternative implementations of savings tracking
+and viewing that were considered by the developers,
+but were rejected in favour of the current
+implementation.
+
+Alternatives:
+
+* Restrict each `Savings` to a concrete monetary value
+
+This would make the implementation of `Savings` much
+simpler, as there would not be a need for separate
+classes like `PercentageAmount`, `MonetaryAmount` and
+``Saveable``s. However, this might burden the user with
+calculating how much they would save in terms of
+dollars and cents, when many coupons and discounts
+come in the form of certain percentage reductions
+of the original price, as well as free gifts or
+benefits that cannot be translatable to a concrete
+monetary amount.
+
+Hence, it was decided to rely on a few different
+representations of `Savings` that can be earned from
+using a `Coupon`, as well as a `Savings` class that
+could refer to any of these representations, or
+even a logical combination of these representations.
+
+* Each `Coupon` stores a `MonetaryAmount`, `PercentageAmount`
+and `Saveables` directly
+
+This would eliminate the need for the intermediary
+`Savings` class and reduce complication in the program
+code slightly. But, it would be difficult to ensure
+that at least one such field exists in the `Coupon`,
+or guarantee that the `Coupon` would have one such field.
+
+The `Coupon` class would have to hold the logic for
+determining whether it had a valid combination of
+`MonetaryAmount`, `PercentageAmount` and ``Saveable``s,
+which does violate Single Responsibility Principle
+as the `Coupon` class now has another reason to change
+(if we would want to allow both `MonetaryAmount` and
+`PercentageAmount` on a `Coupon` for instance).
+
+Hence the `Savings` class was decided to handle this
+responsibility, as well as abstract away the
+implementation details of the multiple possible
+values and combinations of these values. This allows
+the `Coupon` to think in terms of an entire `Savings`
+object, rather than handle multiple different scenarios
+depending on which fields it has.
+
+// end::savings[]
 
 === Logging
 
-We are using `java.util.logging` package for logging.
+We are using the `java.util.logging` package for logging.
 The `LogsCenter` class is used to manage the logging levels and logging
 destinations.
 
@@ -432,544 +1137,6 @@ debugging e.g. print the actual list instead of just its size
 Certain properties of the application can be controlled (e.g user prefs file
 location, logging level) through the configuration file (default:
 `config.json`).
-
-// tag::archiving[]
-[[Implementation-Coupon-Archiving]]
-=== Coupon Archiving
-
-When physical coupons are expired or exhausted, they would usually be thrown away,
-or kept in the archive. Coupon Stash simulates this archive, storing these coupons
-in the app so that the user can still keep track of it, and the savings it generated.
-
-==== Current Implementation
-
-The archiving of coupons is facilitated by the `Archived` attribute of a
-coupon. The following methods in the `CouponStash`,
-`Coupon`, `Usage` class and the `Model` interface facilitates this feature:
-
-* `CouponStash#archiveExpiredCoupons()` -- Archives any coupon in the
-`CouponStash` that has expired, and returns a new updated `CouponStash`.
-* `Coupon#increaseUsageByOne()` - Increases the usage of a coupon by one.
-* `Usage#isAtLimit` - Returns true if the current usage is at its limit
-(abstracted by the `Limit` field).
-* `Model#PREDICATE_SHOW_ALL_ACTIVE_COUPONS` - A `Predicate` function that filters
-out archived coupons from a given `CouponStash`.
-
-[#img-archiving]
-.Overview class diagram representation of the the coupon archiving implementation
-image::ArchivingClassDiagram.png[ArchivingClassDiagram]
-
-Given below is two example usage scenarios and how the archiving mechanism
-behaves at each step of each scenario.
-
-**Archiving of Expired Coupons**
-
-Expired coupons are automatically archived by Coupon Stash upon start up of the
-application. The following steps describe
-how this behaviour is implemented.
-
-Step 1. The user launches the application for the first time. The initiation of
-`ModelManager` will also trigger the
-initiation of `CouponStash` with any available saved data.
-
-Step 2. The method `CouponStash#archiveExpiredCoupons` will be called from the
-newly initiated `CouponStash`, and have its
-`UniqueCouponList` mapped to a function that archive coupons that has expired
-before the date of opening the application, and returns a new updated `CouponStash`.
-
-Step 3. The `ModelManager` will proceed to filter out the archived coupons from
-the newly updated `CouponStash`, and return
-a filtered list of active coupons. This filtering is facilitated by the
-predicate `Model#PREDICATE_SHOW_ALL_ACTIVE_COUPONS`.
-
-[#img-archiveexpired]
-.Sequence diagram representation of archiving expired coupons
-image::ArchiveExpiredSequenceDiagram.png[]
-
-
-**Archiving of Exhausted Coupons**
-
-Coupons that have exhausted its usages will be automatically archived by the
-application. The following steps describe how
-this behaviour is implemented.
-
-Step 1. The user uses a `Coupon` in the current observable `CouponStash` with the
-command `used 1`.
-The particular `Coupon` will then have its `Usage` increased by one.
-
-Step 2. The `Coupon` will then be checked if its `Usage` has reached its `Limit`, using
-the `Usage#isAtLimit()` method. For the purpose of this explanation, we assume that
-the coupon being used has a usage `Limit` of 1 and a previous `Usage` value of 0,
-with savings in `MonetaryAmount`.
-
-Step 3. The `Coupon` will have a new `Archived` value, which will be set to
-`true` if the `Usage` has indeed reached its `Limit`.
-
-Step 4. The `CouponStash` will be updated with this used `Coupon` with the
-`ModelManager#setCoupon()` method. Under the hood of
-this method, the current `FilteredList` will be updated to show active
-`Coupons` only, facilitated by the predicate
-`Model#PREDICATE_SHOW_ALL_ACTIVE_COUPONS`.
-
-[#img-archiveexhausted]
-.Sequence diagram representation of archiving exhausted coupons
-image::ArchiveExhaustedSequenceDiagram.png[]
-// end::archiving[]
-
-
-==== Design Considerations
-
-===== Aspect: The implementation to store archived coupons
-
-* **Alternative 1 (current choice):** `Coupon` contains an `Archived` field
-** Pros: Easy to implement, lower maintainability.
-** Cons: Saved data may get get considerably huge after heavy usage of
-application.
-
-* **Alternative 2:** Archived `Coupon` s are stored in another separate data file.
-** Pros: Separates the logic between the two different `CouponStash`, e.g. ability
-to limit the functions on archived `Coupon` s
-** Cons: Sharply increases the maintainability and coupling of the application
-with two data files.
-
-// tag::updownarrowcommandhistory[]
-=== Up/down arrow command history
-
-==== Current Implementation
-The retrieving of command history via the up and down arrow keys is facilitated
-by the `CommandTextHistory` class. The command history is stored internally as
-a `LinkedList` used as a stack with a `currIndex`
-tracking the next command in the history to return.
-The following methods in the `CommandTextHistory`
-class facilitates this feature:
-
-* `CommandTextHistory#add(String commandText)`
-* `CommandTextHistory#getDown()`
-* `CommandTextHistory#getUp()`
-
-Given below is an example usage scenario and how the up/down button presses
-behaves at each step.
-
-Step 1. The user launches the application for the first time. The
-`CommandTextHistory` is initialized
-with a `LinkedList` containing only an empty string (`""`), and the `currIndex`
-is set to `0`.
-
-image::UpDownHistory0.png[]
-
-Step 2. The user executes `delete 1`. `CommandBox#handleCommandEntered()` will
-call `CommandTextHistory#add(String commandText)` to save the entered command
-into
-the stack contained in `CommandTextHistory`. The top of the stack (i.e. the
-empty string) is popped off first, before
-the entered command is pushed onto the stack. Then, the empty string is pushed
-onto the stack again, thus ensuring that
-the empty string stays at the top of the stack. Note that `currIndex` is not
-affected.
-
-image::UpDownHistory1.png[]
-
-Step 3. The user executes `delete 2`. `CommandBox#handleCommandEntered()` will
-also save the entered command into
-the stack contained in `CommandTextHistory`. As in the previous step, the new
-command is pushed to the top of the stack,
-just below the empty string.
-
-image::UpDownHistory2.png[]
-
-Step 3. Now, the user decides to delete the second coupon again. We press the
-arrow key up once,
-and `CommandBox#commandTextField` has a listener that calls
-`CommandTextHistory#getUp()`.
-The `currIndex` is incremented, and then the command text pointed to by
-`currIndex` is returned and
-displayed in the program command box.
-
-image::UpDownHistory3.png[]
-
-Step 4. The user then executes the retrieved command (`delete 2`). As in the
-previous steps, this newly executed command
-is pushed to the top of the stack just below the empty string. However, in such
-a case when the `currIndex` is not `0` and
-does not point to the top of the stack, it is reset to `0`.
-
-image::UpDownHistory4.png[]
-
-[NOTE]
-If the `currStateIndex` is pointing to the top of the stack,
-then there are no previous commands to retrieve. Thus, the up button will simply
-return the empty string. No changes to the stack and `currIndex` will be
-effected.
-
-The down arrow key does the opposite, it will lead to the calling of
-`CommandTextHistory#getDown()`,
-which shifts the `currIndex` one item higher (i.e. decrement the `currIndex` by
-`1`), before returning
-the command text pointed by the updated `currIndex`.
-
-[NOTE]
-If the `currIndex` is at index `commandTextHistory.size() - 1`, pointing to the
-bottom of the stack, there is no next command to retrieve when pressing the
-down key. Thus,
-the down button will simple return the command text currently being pointed to
-by the `currIndex`.
-No changes to the stack and `currIndex` will be effected.
-
-==== Design Considerations
-
-===== Aspect: Data structure to support the key actions
-
-* *Alternative 1 (current choice):* Use `LinkedList` as a stack to store
-the command text history.
-** Pros: `LinkedList` is a better data structure that allows for more efficient
-operations supported by stacks.
-
-* *Alternative 2:* *Use `ArrayList` as a stack to store
-the command text history.
-** Pros: `ArrayList` is more recognizable to people who are relatively new to
-Java, thus reducing confusion.
-** Cons: Stack operations are less effifcient on `ArrayList` s.
-// end::updownarrowcommandhistory[]
-
-
-=== Coupon Reminder
-To ensure users are aware of expiring coupons and maximise their saving,
-Coupon Stash reminds the user through a pop-up window, upon launching the
-application.
-
-To achieve this feature, the following methods in `RemindDate` class of a
-coupon,
-`RemindCommand` and `RemindWindow` are used,
-
-* `RemindDate#setRemindDate()` - To set a specific remind date of a coupon. By
-default, every coupons's remind date are set to 3 days before the expiry date.
-* `RemindCommand#checkReminder()` - To evaluate all coupons' remind date against
-system's current date.
-* `RemindWindow#displayRemind()`- To display the pop up box with coupons that
-needs
-to be reminded
-
-image::RemindClassDiagram.png[]
-
-
-To make sense of how coupon reminder function, let's dive into the specifics of
-RemindDate
-class, RemindCommand class and RemindWindow class.
-
-==== Class structure of RemindDate field
-
-It is mandatory that each Coupon has a `RemindDate` object, that
-represent a date to be reminded. `RemindDate` class is heavily reliant of
-the expiry date of the coupon.
-
-Images are provided below to help understand the above said connectivity and
-to identify which are valid input remind date.
-
-Given below are two ways of a coupon's remind date are be derived from.
-
-**Default remind date**
-
-Whenever a new coupon without specifying a remind date is added,
-the default reminder will be set on 3 days before its expiry date.
-
-**Pre-determined remind date**
-
-Whenever the user has a specific remind date for a coupon, he/she can either
-
-* add a new coupon, specifying the remind date
-
-* use the remind command to set the remind field of an existing coupon
-
-
-==== Implementation of RemindCommand
-Depending of user's preference, there are two ways to use the remind command to
-set a coupon's remind date. The user can choose to input a specific remind date
-or
-input X amount of days before the expiry date.
-
-The following activity diagram depicts what happens when the user runs a
-`remind` command.
-
-image::RemindActivityDiagram.png[]
-
-==== Implementation of reminder pop up
-
-After establishing the remind dates for all the coupons,
-the next step is ensure that there will be a reminder pop
-up (if necessary) upon opening the application.
-
-The following steps describe how to reminder pop up works,
-
-Step 1. The user launches Coupon Stash. The `start` method
-in `MainApp` class will kick start the program
-by setting up the stage, along with the saved data.
-
-Step 2. The `checkReminder()` method is invoked to exhaust
-all the coupons in the coupon stash to check if there is
-any coupon's `remindDate` that matches the `system's date`.
-
-Step 3. In this example, we will assume that there are
-coupons that needs to be reminded and will call `RemindWindow#displayWindow`
-method with a concatenated string of coupons information.
-Coupon information, such as coupon's name and its
-expiry date, are retrieved by using  `toString` method
-of coupon's `Name` class and `ExpiryDate` class.
-
-Step 4. A new `stage`, along with new `label` with buttons
-and coupon information, will be
-built onto the scene that resembles a pop up window. This pop
-up would require the user to response before resuming the use of
-the application by clicking "OK"
-
-Step 5. The coupon's `remindDate` will set to `null` through the setter method
-of `Remind` class.
-
-
-image::RemindSequenceDiagram.png[]
-
-==== Design consideration
-
-*Aspect: The implementation of remind date for every
-coupon to facilitate coupon reminder*
-
-* *Alternative 1 (current state):* Coupon contains an
- `Remind` field
-
-** Pros: Code Implementation is easier and requires lower maintenance
-
-** Cons: Inefficient to access all coupon-objects to
-get the remind dates for crosschecking with sys date
-
-* *Alternative 2 :* To store a list of coupons based
-on their remind dates, in ascending order
-(Queue-data structure) in a separate data file
-
-** Pros: Avoid going through the entire coupon stash.
-Efficient.
-
-** Cons: Harder to maintain two data files.
-Very prone to error.
-
-// tag::savings[]
-=== Savings per use and total amount saved
-
-To allow users to keep track of how much they have saved
-(after all, the whole point of coupons is to offer
-certain tangible benefits, encouraging purchases
-by customers), Coupon Stash automatically tracks the
-user's savings as they use their coupons that are
-handled in the application.
-
-To achieve this, Coupons have to store two different
-fields: +
-1. Amount of savings each use of a coupon provides +
-2. Total amount of savings accumulated
-from using a certain coupon
-
-==== Class structure of Savings
-
-Just for reference, the image below shows the class diagram
-for the Savings class. It is compulsory for each Coupon to
-contain an Savings object, that represents what the user
-would gain from 1 use of that Coupon.
-
-image::SavingsClassDiagram.png[]
-
-A Savings object can hold a PercentageAmount, MonetaryAmount or
-Saveables, which represents discounts like "$5 off", "10% off"
-and "free door gift" respectively.
-
-The table below shows which are valid Savings objects, and
-which are not.
-
-[cols="2"]
-|=========================================
-|Object Diagram | Comments
-a|
-image:s1valid.png[] | Valid
-a|
-image:s2valid.png[] | Valid
-a|
-image:s3valid.png[] | Valid
-a|
-image:s4invalid.png[] | Invalid: Savings must have at
-least one field
-a|
-image:s5valid.png[] | Valid: Savings can have both a
-percentage amount and saveables
-a|
-image:s6valid.png[] | Valid: Savings can hold more
-than one Saveable
-a|
-image:s7invalid.png[] | Invalid: Savings cannot have both a
-MonetaryAmount and PercentageAmount
-|=========================================
-
-As can be seen from the table, Savings cannot be completely
-empty, and Savings cannot have both a MonetaryAmount and
-PercentageAmount (it does not make much sense to have
-a voucher that says "10% and $5 off").
-
-==== PureMonetarySavings and DateSavingsSumMap
-
-In order to calculate the total amount saved, Coupons also
-store information about how much the user saves, and storage
-is done at the moment the user uses the coupon. This
-information is stored in the form of PureMonetarySavings,
-which is a subclass of Savings that never holds
-PercentageAmounts. The class diagram below illustrates this.
-
-image:PureMonetarySavingsClassDiagram.png[]
-
-The reason why PercentageAmounts are not allowed in
-accumulated savings is because a percentage
-discount is a relative value that depends on the
-original price of the product, and cannot be easily
-added up in a way that allows users to accurately
-measure how much they have saved from their coupons.
-
-[[dssm]]
-PureMonetarySavings are stored in
-a DateSavingsSumMap, which is a hash table that
-links the current date (LocalDate) to the savings
-earned (PureMonetarySavings) on that date.
-Each Coupon holds a DateSavingsSumMap. The
-next image shows the class diagram of the
-DateSavingsSumMap.
-
-image::DateSavingsSumMapClassDiagram.png[]
-
-
-The following section describes
-the processes that follow whenever a user marks a Coupon
-as "used" with the `used` command.
-
-==== Implementation of used command
-
-When the user enters a `used` command, the actions taken by Coupon
-Stash change depending on whether the Coupon's Savings stores
-a MonetaryAmount of PercentageAmount. The following activity diagram
-shows what happens when the user runs a used command.
-
-image::UsedCommandActivityDiagram.png[]
-
-In terms of the implementation, the next two images
-shows the sequence diagram that models the successful
-execution of a used command within the actual
-program components.
-
-More specifically, the used command executed is
-`used 1 $100`, and the state of the system is such that
-a `Coupon` with `PercentageAmount` in its `Savings` (no
-`MonetaryAmount`) and with `Usage` not at its `Limit`
-is located at index 1. Also, the money symbol
-set in the user preferences would be `$`, which
-makes this command a valid one that will execute
-successfully.
-
-image::UsedCommandSeqDiagram.png[]
-
-The money symbol set in the user preferences is
-retrieved by `CouponStashParser`, which passes it
-to `UsedCommandParser` that will use this symbol
-to parse the `used` command.
-
-Also, within `UsedCommand`, the `UsedCommand#execute()` method
-will cause the creation of a new `Coupon` with the
-correct recorded number of uses and amount of
-savings earned. The next sequence diagram shows
-how a successful `UsedCommand#execute()` method produces the new total savings
-value for the new `Coupon`.
-
-image::UsedExecutionSeqDiagram.png[]
-
-In the end, the total savings value of the `Coupon`
-is updated. This total savings is represented by
-a <<DeveloperGuide.adoc#dssm, DateSavingsSumMap>>.
-
-One key implementation within the `UsedCommand` is the checks
-that is has to make to ensure the valid usage of a `Coupon`.
-Below is an activity diagram to show the flow of checks within
-the `UsedCommand#execute()` method.
-
-==== Implementation of saved command
-
-Now that we have seen how the used command works,
-we can look at how the saved command works. While
-`used` stores the amount of savings that the user
-has earned on a particular day, `saved` retrieves
-the amount of savings earned as recorded by Coupon
-Stash, given a particular time period.
-
-The saved command works similarly to the used command,
-where a SavedCommandParser will be created by Logic
-to split up the raw String into its arguments,
-creating a SavedCommand. Let's look at how a SavedCommand
-would be executed.
-
-image::SavedExecutionSeqDiagram.png[]
-
-Hence the SavedCommand loops through all Coupons to add
-up the savings earned from a particular time period,
-or from all dates if no time period is specified.
-
-==== Design considerations
-
-Based on the User Stories, there is a desire for tracking
-how much one has saved by using Coupon Stash, as well
-as for viewing total savings easily. Below are
-some alternative implementations of savings tracking
-and viewing that were considered by the developers,
-but were rejected in favour of the current
-implementation.
-
-Alternatives:
-
-* Restrict each Savings to a concrete monetary value
-
-This would make the implementation of Savings much
-simpler, as there would not be a need for separate
-classes like PercentageAmount, MonetaryAmount and
-Saveables. However, this might burden the user with
-calculating how much they would save in terms of
-dollars and cents, when many coupons and discounts
-come in the form of certain percentage reductions
-of the original price, as well as free gifts or
-benefits that cannot be translatable to a concrete
-monetary amount.
-
-Hence, it was decided to rely on a few different
-representations of Savings that can be earned from
-using a Coupon, as well as a Savings class that
-could refer to any of these representations, or
-even a logical combination of these representations.
-
-* Each Coupon stores a MonetaryAmount, PercentageAmount
-and Saveables directly
-
-This would eliminate the need for the intermediary
-Savings class and reduce complication in the program
-code slightly. But, it would be difficult to ensure
-that at least one such field exists in the Coupon,
-or guarantee that the Coupon would have one such field.
-
-The Coupon class would have to hold the logic for
-determining whether it had a valid combination of
-MonetaryAmount, PercentageAmount and Saveables,
-which does violate Single Responsibility Principle
-as the Coupon class now has another reason to change
-(if we would want to allow both MonetaryAmount and
-PercentageAmount on a Coupon for instance).
-
-Hence the Savings class was decided to handle this
-responsibility, as well as abstract away the
-implementation details of the multiple possible
-values and combinations of these values. This allows
-the Coupon to think in terms of an entire Savings
-object, rather than handle multiple different scenarios
-depending on which fields it has.
-
-// end::savings[]
 
 == Documentation
 
@@ -1090,7 +1257,7 @@ This use case describes how a user uses Coupon Stash to add a new coupon entry.
 
 . User keys in command to add coupon.
 . Coupon Stash adds coupon.
-. Coupon Stash informs to user that coupon is added.
+. Coupon Stash informs user that a coupon is added.
 +
 Use case ends.
 
@@ -1120,7 +1287,7 @@ entries.
 
 . User keys in command to list all the coupons.
 . Coupon Stash lists out all coupons.
-. Coupon Stash informs to user the number of coupons found in list.
+. Coupon Stash informs to user of the number of coupons found in the list.
 +
 Use case ends.
 
@@ -1152,7 +1319,7 @@ Use case ends.
 . User keys in command to pass:[<u>list all coupons (UC2)</u>].
 . User marks coupon as used.
 . Coupon Stash marks the coupon as used.
-. Coupon Stash informs the user the specific coupon that is succesdfully used.
+. Coupon Stash informs the user the specific coupon that is successfully used.
 +
 Use case ends.
 
@@ -1171,14 +1338,14 @@ Use case ends.
 [none]
 ** 1b1. Coupon Stash requests the user to enter an index that corresponds with an
 existing coupon.
-** 1b2. User enters new index.
+** 1b2. User enters a new index.
 ** Use case resumes from step 2.
 
 [none]
 * 1c. Coupon Stash detects that the specified coupon has been previously marked as
 done.
 [none]
-** 1c1. Coupon Stash informs user that coupon has been previously marked as done.
+** 1c1. Coupon Stash informs user that the coupon has been previously marked as done.
 ** Use case ends.
 
 === **Use Case: UC4 - Find coupon(s) by keyword(s)**
@@ -1211,7 +1378,7 @@ Use case ends.
 [none]
 ** 1b1. Coupon Stash requests the user to enter an index that corresponds with an
 existing coupon.
-** 1b2. User enters new index.
+** 1b2. User enters a new index.
 ** Use case resumes from step 2.
 
 
@@ -1227,7 +1394,7 @@ coupon.
 . User keys in command to pass:[<u>list all coupons (UC2)</u>].
 . User edits an existing coupon.
 . Coupon Stash updates the coupon details.
-. Coupon Stash informs the user the which coupon has been edited.
+. Coupon Stash informs the user which coupon has been edited.
 +
 Use case ends.
 
@@ -1246,7 +1413,7 @@ Use case ends.
 [none]
 ** 2b1. Coupon Stash requests the user to enter an index that corresponds with an
 existing coupon.
-** 2b2. User enters new index.
+** 2b2. User enters a new index.
 ** Use case resumes from step 3.
 
 === **Use Case: UC6 - Set reminder**
@@ -1259,7 +1426,7 @@ coupon.
 **MSS**
 
 . User keys in command to pass:[<u>list all coupons (UC2)</u>].
-. User sets reminder for an existing coupon.
+. User sets a reminder for an existing coupon.
 . On the day of the input date, a pop up will appear to remind the user about
 the coupon.
 +
@@ -1280,7 +1447,7 @@ Use case ends.
 [none]
 ** 2b1. Coupon Stash requests the user to enter an index that corresponds with an
 existing coupon.
-** 2b2. User enters new index.
+** 2b2. User enters a new index.
 ** Use case resumes from step 3.
 
 === **Use Case: UC7 - List coupon(s) expiring before date**
@@ -1294,7 +1461,7 @@ before the input expiry date.
 
 . User keys in command to find a coupon based on expiry date.
 . Matched coupons are displayed.
-+ Coupon Stash informs the user the number of coupons expiring before the specified date.
+Coupon Stash informs the user the number of coupons expiring before the specified date.
 Use case ends.
 
 **Extensions**
@@ -1312,7 +1479,7 @@ Use case ends.
 [none]
 ** 1b1. Coupon Stash requests the user to enter an index that corresponds with an
 existing coupon.
-** 1b2. User enters new index.
+** 1b2. User enters a new index.
 ** Use case resumes from step 2.
 
 === **Use Case: UC8 - Delete coupon**
@@ -1344,7 +1511,7 @@ Use case ends.
 [none]
 ** 2b1. Coupon Stash requests the user to enter an index that corresponds with an
 existing coupon.
-** 2b2. User enters new index.
+** 2b2. User enters a new index.
 ** Use case resumes from step 2.
 
 === **Use Case: UC9 - Undo previous command**
@@ -1396,59 +1563,29 @@ code, or barcode) (coming in in v2.0)
 [appendix]
 == Glossary
 
-[red]# Terms that are italicised inline code (e.g `_operating system_`) can be
-found with definitions here. #
-
-. **Apple** - American technology company well known for lifestyle devices like
-iPhone and iPad, which are manufactured exclusively by exploited minimum wage
-workers in China and Taiwan.
-. **coding** - the process of writing code that represents a computer program,
-or using a programming language to get a computer to behave how you want it to.
-. **Coupon Stash** - the program that makes handling your coupons easier, and
+* **Coupon Stash** - the program that makes handling your coupons easier, and
 also the subject matter of this Developer Guide.
-. **common operating system** - refers to the most widely seen `_operating
-systems_` within the top 3 most common `_desktop_` `_operating system
-families_`, namely `_Microsoft Windows_`, `_Apple_` Mac OS X and `_GNU
-Project_` Linux as of February 2020 (and within these families, Windows 10,
-macOS Catalina, no data for Linux).
-. **desktop** - a computer meant for use at an ordinary desk, usually one with
-a screen, as well as devices that allow people to interact with the computing
-system with physical controls such as a moveable hand-held device typically
-with large buttons and a wheel called a mouse, as well as a panel of buttons
-with printed alphanumeric characters known as a keyboard.
-. **GNU Project** - a label used for certain open-source software applications
-that are developed completely without expectation of remuneration, the acronym
-GNU in this case does not refer to any significant terms and can instead be
-taken just as a distinctive name.
-. **Java 11** - the 11th version of the highly popular Java platform and
+* **common operating system** - refers to the most widely seen operating
+systems for desktop computers.
+* **Java 11** - the 11th version of the highly popular Java platform and
 programming language, on which many software applications are built upon.
-. **lag** - the phenomenon where some arbitrary user input takes a noticeable
+* **lag** - the phenomenon where some arbitrary user input takes a noticeable
 and vexatious amount of time to effect a change in the application state.
-. **Microsoft** - American technology company well known for the Windows
-operating system, as well as the highly popular productivity software
-collection `_Microsoft_` Office, amongst various other products which comprise
-mostly of competing offerings to more well-established products, that fail to
-gain as much market share as the precedent.
-. **monetary amounts** - any currency amount (for example, 10.55 may represent
+* **monetary amount** - any currency amount (for example, 10.55 may represent
 10 dollars and 55 cents, or 10 pounds and 55 pence, or 10 pesos and 55
 centavos).
-. **operating system** - a fundamental software application that runs on a
+* **operating system** - a fundamental software application that runs on a
 computer, supporting basic functions such as ability to manage computer memory,
 to allow users to use the device without concern for such technical details.
-. **operating system family** - a group of `_operating systems_` that are
-developed by the same company or organisation, usually with the same branding
-as each other, having visually similar UIs and behaviour.
-. **OS (Operating System)** - see operating system.
-. **promo code** - short for promotional code, usually refer to an unique
+* **OS (Operating System)** - see operating system.
+* **promo code** - short for promotional code, usually refer to an unique
 string of letters and numbers that can be entered in some mobile application to
 redeem certain benefits.
-. **SoC (School of Computing)** - the School of Computing at the National
+* **SoC (School of Computing)** - the School of Computing at the National
 University of Singapore.
-. **source code** - a set of instructions, written in a programming language
+* **source code** - a set of instructions, written in a programming language
 that determine the final application’s internal and external behaviour.
-. **Stash** - a group of something valuable that the user would like to keep
-securely, ideally using our `_Coupon Stash_` application.
-. **UI (User Interface)** - a catch-all term referring to how a computer system
+* **UI (User Interface)** - a catch-all term referring to how a computer system
 and a coupon interacts, usually referring to specific elements displayed on the
 computer screen that the user may interact with such as buttons or text boxes,
 as well as areas where the computer application displays certain outputs to the
@@ -1465,41 +1602,292 @@ testers are expected to do more _exploratory_ testing.
 
 === Launch and Shutdown
 
-. Initial launch
+* Initial launch
 
 .. Download the jar file and copy into an empty folder
-.. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample coupons.
-. Saving window preferences
-
-.. Resize the window to an optimum size. Move the window to a different
-location. Close the window.
-.. Re-launch the app by double-clicking the jar file. +
-   Expected: The most recent window size and location is retained.
+.. Head over to your local Command Line Interface (CLI), and change to the
+directory where the jar file was saved.
+.. Type `java - jar CouponStash.jar` in the CLI. +
+Expected: Shows the GUI with a set of sample coupons.
 
 === Adding a coupon
 
-. Adding a coupon
+* Adding a coupon
 
 .. Test case: `add n/Popular Bookstore e/31-12-2020 s/10%` +
 Expected: Coupon Popular Bookstore is added to the list. `Start Date` is set to
-today's date, while the Remind Date is set to 3 days before the specified
+the `system's date`, while the Remind Date is set to 3 days before the specified
 `Expiry Date`. In this case, it would be 28-12-2020.
+
+=== Listing coupons
+* List different type of coupons
+.. Test case: `list` +
+Expected: All active coupons are displayed on the list.
+.. Test case: `list a/` +
+Expected: All archived coupons are displayed on the list.
+.. Test case: `list u/` +
+Expected: All previously used coupons are displayed on the list.
 
 === Deleting a coupon
 
-. Deleting a coupon while all coupons are listed
+* Deleting a coupon while all coupons are listed
 
-.. Prerequisites: List all coupons using the `list` command. Multiple coupons
-in the list.
+.. Prerequisites: List all coupons using the `list` command. Have at least one
+coupon in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list.
+Expected: First contact is deleted from the list.
 Details of the deleted contact shown in the status message.
 Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No coupon is deleted.
+Expected: No coupon is deleted.
 Error details shown in the status message.
-Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is
-larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+larger than the list size) +
+Expected: Similar to previous.
+
+=== Editing a Coupon
+
+* Editing a coupon while all coupons are listed
+
+.. Prerequisites: List all coupons using the `list` command. Have at least one
+coupon in the list.
+.. Test case: `edit 1 p/ILOVESTASH` +
+Expected: The first coupon will have its Promo Code changed to `ILOVESTASH`.
+.. Test case: `edit 1 e/31-12-2021` +
+Expected: The first coupon will have its Expiry Date changed to `31-12-2021`.
+.. Test case: `edit 1 l/0` +
+Expected: The first coupon will now have unlimited usage.
+.. Test case: `edit 1 u/10` +
+Expected: An error message will be thrown, explaining that usage cannot be edited.
+.. Test case: `edit 1 s/$10 s/Water Bottle` +
+Expected: The first coupon will have its savings changed to $10, and include
+a Water Bottle item.
+
+=== Finding a coupon
+
+* Finds certain coupons by name in Coupon Stash.
+
+.. Prerequisites: Have some coupons in Coupon Stash,
+preferably the sample data.
+
+.. Test case: `find adidas` +
+Expected: Only the coupon named "Adidas" shows up.
+
+.. Test case: `find grabfood` +
+Expected: Only the coupon named "GrabFood" shows up.
+
+=== Sorting the Coupon Stash
+
+* Sorts coupons by name, expiry date or remind date
+in Coupon Stash.
+
+.. Prerequisites: Have some coupons in Coupon Stash,
+preferably the sample data. The following test cases
+assumes the commands are run on a set of unmodified sample data.
+
+.. Test case: `sort n/` +
+Expected: The Coupon Stash appears in this order:
+Adidas, Gong Cha, GrabFood, Lazada, LiHO, Shopee
+
+.. Test case: `sort e/` +
+Expected: The Coupon Stash appears in this order:
+GrabFood (30-04-2020), LiHO (31-05-2020),
+Gong Cha (30-06-2020), Lazada (30-09-2020),
+Shopee (31-10-2020), Adidas (31-12-2020)
+
+.. Test case: `sort r/` +
+Expected: The Coupon Stash appears in this order:
+GrabFood (27-04-2020), LiHO (28-05-2020),
+Gong Cha (27-06-2020), Lazada (27-09-2020),
+Shopee (28-10-2020), Adidas (28-12-2020)
+
+=== Listing all expiring coupons
+
+* Shows coupons that are expiring on a certain date
+or a certain month.
+
+.. Prerequisites: Have some coupons in Coupon Stash,
+preferably the sample data. The following test cases
+assumes the commands are run on a set of unmodified sample data.
+
+.. Test case: `expiring e/31-10-2020` +
+Expected: Shopee (expires on 31-10-2020) appears as
+the only coupon.
+
+.. Test case: `expiring my/4-2020` +
+Expected: GrabFood (expires 30-04-2020) appears as
+the only coupon
+
+=== Viewing savings
+
+* Views savings accumulated in the application
+
+.. Prerequisites: Have some coupons in Coupon Stash,
+preferably the sample data. The following test cases
+assumes the commands are run on a set of unmodified sample data.
+
+.. Test case: `saved` +
+Expected: The command result box displays "In total,
+you have saved $60.00 as well
+as earned 1x USB-C cable, 1x iPhone case."
+
+.. Test case: `saved d/11-3-2020` +
+Expected: The command result box displays "You
+saved $7.30 on 11 March 2020." (this savings
+record is attached to the "Gong Cha" coupon).
+
+.. Test case: `saved sd/16-3-2020 e/23-3-2020` +
+Expected: The command result box displays "You
+saved $17.00 between 16 March 2020 and 23 March 2020."
+
+=== Using a coupon
+
+* Marks a coupon as used and registers the savings.
+Depending on whether the coupon is a percentage or
+monetary amount, you may be required to enter in
+the original price of the item.
+
+.. Prerequisites: Have some coupons in Coupon Stash
+that have usage not at the limit,
+preferably the sample data. The following test cases
+assumes the commands are run on a set of unmodified sample data.
+
+.. Test case: `list`, `used 6 $100` +
+Expected: The command result box displays "Used Coupon:
+GrabFood" and sayings for today increases by $40
+(40% of $100 saved).
+
+=== Archiving a coupon
+
+* Marks a coupon as archived and hides it from the
+normal view.
+
+.. Prerequisites: Have some coupons in Coupon Stash
+that are not already archived. The following test cases
+assumes the commands are run on a set of unmodified sample data.
+
+.. Test case: `list`, `archive 5` +
+Expected:  The command result box displays "Archived Coupon:
+LiHO" and LiHO disappears from the displayed coupons.
+
+.. Test case: `list a/`, `unarchive 1` +
+Expected: The command result box displays "Unarchived Coupon:
+LiHO" and LiHO reappears in the displayed coupons.
+
+=== Copying a coupon
+
+* Recreates a coupon as an add command that can be
+copied and shared to other users of Coupon Stash.
+
+.. Prerequisites: Have some coupons in Coupon Stash
+that are not already archived. The following test cases
+assumes the commands are run on a set of unmodified sample data.
+
+.. Test case: `list`, `copy 1` +
+Expected: Command result box displays "Copied coupon: Adidas"
+and `add n/Adidas p/30ADIDAS e/31-12-2020 s/30.0% s/Adidas Cap l/1`
+is added to the operating system's clipboard.
+
+=== Sharing a coupon
+
+* Takes an image of the coupon as it appears in Coupon Stash
+and opens the file save dialogue box of your operating system
+so you can save the image to your computer.
+
+.. Prerequisites: Have some coupons in Coupon Stash
+that are not already archived. The following test cases
+assumes the commands are run on a set of unmodified sample data.
+
+.. Test case: `list`, `share 2` +
+Expected: The operating system prompts you to save
+"Gong Cha.png" to a location on your computer.
+
+=== Undoing a command
+
+* Undoes the previous command entered, only if the
+command resulted in a change to the coupons.
+
+.. Prerequisites: At least one command that
+modified a coupon was previously entered.
+
+.. Test case: `add n/Test e/1-1-5050 s/$40`, `undo`
+Expected: A new coupon named "Test" is added, and then
+removed again once `undo` is run.
+
+=== Going to a month on the calendar
+
+* Navigates the calendar to jump to a certain month and year,
+without the need for clicking buttons in the User Interface.
+
+.. Prerequisites: None
+
+.. Test case: `goto my/4-5678` +
+Expected: The calendar shows the month of April, in
+the year 5678.
+
+=== Expanding a coupon
+
+* Opens a new window with full details of the
+Coupon, such as a list of all the saveable items.
+
+.. Prerequisites: Have at least one coupon displayed
+in Coupon Stash. The following test cases
+assumes the commands are run on a set of unmodified sample data.
+
+.. Test case: `list`, `expand 2` +
+Expected: A window appears that shows the full
+history of coupon usage for the Gong Cha coupon.
+
+=== Setting currency symbol
+
+* Changes the currency symbol used by Coupon Stash
+when displaying amounts saved and when interpreting
+monetary amounts in commands.
+
+.. Prerequisites: None. The following test cases
+assumes the commands are run with the unmodified
+sample user preferences.
+
+.. Test case: `setcurrency ms/RM` +
+Expected: Command result box displays "Money
+symbol changed from $ to RM!" and coupons shown are
+updated to display savings in RM instead of $.
+
+
+=== Viewing help page
+
+* Opens the user guide of Coupon Stash in
+another window.
+
+.. Prerequisites: None.
+
+.. Test case: `help` +
+Expected: A web browser window opens, showing
+the Coupon Stash User Guide.
+
+[appendix]
+== Efforts
+Coupon Stash is the first team-based software engineering project for all of us.
+Without much experience, we faced many difficulties in coordinating our features
+and codes. Since Coupon Stash is User Interface intensive, we had to learn
+JavaFX comprehensively to fulfil the high standards that we set for ourselves.
+Learning a new Framework was as good as learning a new language in itself,
+taking us some time to understand how to fully utilize it.
+
+Each of us would push commits every other day every week to try and complete
+our tasking too. While our product is similar to AB3 in terms of data fields, we
+push it further by adding functionality to these fields. The intertwining of these
+functionality was the most difficult part about this project. We would usually
+try to sort out the implementation on chat, but there are times where one of
+us would mess up the implementation somewhere afterwards, causing a bit of
+debugging. We also try to apply as much of our learning from the textbook,
+but again without much practice, it would usually take us a few iterations
+and discussions to correct our code. Nonetheless, we learnt a lot from this
+project throughout these 7 weeks.
+
+What we believe we did well in was getting our project workflow right from the
+start. Using Github’s project board, issue tracker and branch protections, we
+were able to help each other spot mistakes, ensuring that our master branch
+was always working. Even though we started as strangers, the long weekly
+discussions that we have brought us close! We are definitely proud of the
+product that we created, and believe that it serves its purpose well.

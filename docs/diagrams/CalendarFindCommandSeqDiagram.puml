@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+'actor User
+
+box "Logic" LOGIC_COLOR_T1
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":FilteredList" as FilteredList MODEL_COLOR
+end box
+
+box "UI" UI_COLOR_T1
+participant ":CalendarPane" as CalendarPane UI_COLOR
+participant "d:DateCell" as DateCell UI_COLOR
+end box
+
+[-> FindCommand: execute(model, "find chicken")
+activate FindCommand
+FindCommand -> ModelManager :updateFilteredCouponList()
+
+activate ModelManager
+ModelManager -> FilteredList : setPredicate()
+
+activate FilteredList
+FilteredList -> CalendarPane
+
+activate CalendarPane
+CalendarPane -> CalendarPane: fillUpCalendar()
+activate CalendarPane
+
+ref over CalendarPane, DateCell : Set details of DateCell
+CalendarPane --> CalendarPane
+deactivate CalendarPane
+
+CalendarPane --> FilteredList
+deactivate CalendarPane
+
+FilteredList --> ModelManager
+deactivate FilteredList
+
+ModelManager --> FindCommand
+deactivate ModelManager
+
+FindCommand -->[ : CommandResult
+deactivate FindCommand
+
+@enduml

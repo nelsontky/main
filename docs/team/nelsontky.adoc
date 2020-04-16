@@ -5,17 +5,21 @@
 
 == PROJECT: Coupon Stash
 
----
+image::Ui.png[width="600"]
 
 == Overview
 
 Coupon Stash is a desktop coupons manager that allows users to keep track of
 their coupons. The user interacts with it using a CLI, and it has a beautiful
-GUI created with JavaFX. It is written in Java, and has about 25kLoC.
+GUI created with JavaFX. It is written in Java, and has about 15kLoC.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo and redo operations*
+* *Major enhancement*: added *the ability to undo and redo operations* (Pull
+request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/91[#91],
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/135[#135],
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/284[#284])
 ** What it does: allows the user to undo the most recent operation on the
 coupon stash. Undoing can itself be undone via the redo operation.
 ** Justification: This feature is essential in allowing users who've made
@@ -30,8 +34,68 @@ Some new commands added by other group members also require updates to
 be pushed to the undo and redo feature, thus this was a very dynamic
 feature that needed frequent updates.
 
+* *Major enhancement*: added *the ability to share coupons as images* (Pull
+request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/176[#176],
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/384[#384])
+** What it does: allows the user to share their coupons as an image file.
+** Justification: In the 21st century where everyone seems to post every
+thing on social media, the ability for users to share their coupons as a
+format ripe for social media consumption is of upmost importance. This
+feature allows users to share their coupons in a portable format for sharing
+over various platforms.
+** Highlights: This enhancement required the rendering of a `CouponCard` in a
+`Scene`, before we proceed to take a `snapshot` of the `CouponCard`. The main
+challenge came when trying to save the `WritableImage` returned by `snapshot`
+as a `.png` file. To perform that task, an external module
+(`javax.imageio.ImageIO`) had to be requested to be used. Then, the image
+needed a save dialog to be saved. Due to file operations having potential for
+many errors, exceptions has to be caught and thrown and multiple error
+messages were also created to best reflect an error.
+
+* *Major enhancement*: added *the ability to open an offline copy of the user
+guide* (Pull
+request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/201[#201],
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/284[#284],
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/385[#385])
+** What it does: allows the user to open an offline copy of the user guide in
+their web browser with the `help` command.
+** Justification: While the help tab exists, the help tab only shows
+information about the commands. Much more of the program's functionality is
+available in the user guide, and with the program being an offline
+application, it is thus very useful for the user to be able to read the user
+guide offline. This will empower users to fully exploit the potential of our
+program.
+** Highlights: The user guide is stored as a single `.html` file with
+all styles and images embed into that single ~6 MB file.
+The file has to be packaged into the release jar file,
+before it gets extracted from the jar file on the first time the `help`
+command is executed. It was a challenge to reliably get the path of the jar
+file. (We need the path to extract the `.html` from the jar) After figuring
+out how to get the jar file path during runtime, we had to extract the
+`.html` file from within the jar file and then write it to the directory the
+jar file resides. Initially, writing to a file was very slow and it would
+even make the program crash sometimes! Then, I remembered what I learnt from
+CS2106 and realised that a buffered writing operation will reduce system
+calls and thus be faster. And lo and behold, after the implementation of a
+write buffer, writing speeds got a lot faster. (now it only takes one second)
 * *Minor enhancement*: added a history command that allows the user to navigate
-to previous commands using up/down keys.
+to previous commands using up/down keys. (Pull
+request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/135[#135],
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/140[#140])
+* *Minor enhancement*: added a sort command that allows the user to sort
+coupons by the names, expiry dates, and remind dates in ascending order. (Pull
+request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/140[#140],
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/284[#284])
+* *Minor enhancement*: worked on the expand command. (Pull request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/375[#375])
+* *Minor enhancement*: wrote the logic for the Help Pane. (Pull request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/215[#215])
+* *Minor enhancement*: improved and cleaned up the remind command. (Pull request
+https://github.com/AY1920S2-CS2103T-F09-1/main/pull/329[#329])
 
 * *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#=undefined&search=nelsontky[All contributed code]]
 
@@ -43,42 +107,34 @@ to previous commands using up/down keys.
 *** Updated the help menu https://github.com/AY1920S2-CS2103T-F09-1/main/pull/215[#215]
 *** Updated the help command to open an offline copy of the user guide
 https://github.com/AY1920S2-CS2103T-F09-1/main/pull/284[#284]
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide:
-https://github.com[#14]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12],
-https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1],
-https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:
-https://github.com[1], https://github.com[2], https://github.com[3])
-** Tools:
-*** Integrated a third party library (Natty) to the project
-(https://github.com[#42])
+*** Contributed to forum discussions
+(example:  https://github.com/nus-cs2103-AY1920S2/forum/issues/7[1])
 
 == Contributions to the User Guide
 
-
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my
-ability to write documentation targeting end-users._
+|Here are some sections of the User Guide authored by me.
 |===
 
-include::../UserGuide.adoc[tag=delete]
+include::../UserGuide.adoc[tag=sort]
+
+include::../UserGuide.adoc[tag=undo]
+
+include::../UserGuide.adoc[tag=redo]
+
+include::../UserGuide.adoc[tag=expand]
+
+include::../UserGuide.adoc[tag=reminding]
+
+include::../UserGuide.adoc[tag=KeyboardShortcuts]
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase
-my ability to write technical documentation and the technical depth of my
-contributions to the project._
+|_These are some sections I contributed to the Developer Guide.
+Highlights include frequent use of Unified Modelling Language
+(UML) diagrams to illustrate associations between program components._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=updownarrowcommandhistory]

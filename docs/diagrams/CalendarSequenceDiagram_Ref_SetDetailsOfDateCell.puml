@@ -2,8 +2,8 @@
 !include style.puml
 
 mainframe <b>sd</b> Set details of DateCell
-participant ":CalendarPane" as CalendarPane MODEL_COLOR
-participant "d:DateCell" as DateCell MODEL_COLOR
+participant ":CalendarPane" as CalendarPane UI_COLOR
+participant "d:DateCell" as DateCell UI_COLOR
 
 activate CalendarPane
 

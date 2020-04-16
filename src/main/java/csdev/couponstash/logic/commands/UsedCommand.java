@@ -132,9 +132,7 @@ public class UsedCommand extends IndexedCommand {
      * To be used for a Coupon with PercentageAmount savings (requires
      * the original price of the item bought as a MonetaryAmount).
      */
-    private static Coupon createUsedCouponPercentageValue(Coupon couponToBeUsed,
-                                                          MonetaryAmount originalAmount) {
-
+    private static Coupon createUsedCouponPercentageValue(Coupon couponToBeUsed, MonetaryAmount originalAmount) {
         PureMonetarySavings newTotalSavings = SavingsConversionUtil
                 .convertToPure(couponToBeUsed.getSavingsForEachUse(), originalAmount);
         return couponToBeUsed.addToTotalSavings(LocalDate.now(), newTotalSavings)

@@ -5,6 +5,8 @@ import static csdev.couponstash.logic.commands.CommandTestUtil.assertCommandSucc
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import csdev.couponstash.commons.core.Messages;
@@ -19,17 +21,22 @@ import csdev.couponstash.testutil.TypicalIndexes;
 class ExpandCommandTest {
 
     private Model model = new ModelManager(TypicalCoupons.getTypicalCouponStash(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalCoupons.getTypicalCouponStash(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Coupon couponToExpand = model.getFilteredCouponList().get(TypicalIndexes.INDEX_FIRST_COUPON.getZeroBased());
         ExpandCommand expandCommand = new ExpandCommand(TypicalIndexes.INDEX_FIRST_COUPON);
 
-        String expectedMessage = String.format(ExpandCommand.MESSAGE_EXPAND_COUPON_SUCCESS, couponToExpand.getName());
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(ExpandCommand.MESSAGE_EXPAND_COUPON_SUCCESS, couponToExpand.getName()),
+                Optional.of(couponToExpand),
+                Optional.empty(),
+                false,
+                false
+        );
 
-        ModelManager expectedModel = new ModelManager(model.getCouponStash(), new UserPrefs());
-
-        assertCommandSuccess(expandCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(expandCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

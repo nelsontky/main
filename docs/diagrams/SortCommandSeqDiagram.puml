@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CouponStashParser" as CouponStashParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant ":SortCommand" as SortCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box ModelManager MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute()
+activate LogicManager
+
+LogicManager -> CouponStashParser : parseCommand()
+activate CouponStashParser
+
+create SortCommandParser
+CouponStashParser -> SortCommandParser : SortCommandParser()
+activate SortCommandParser
+
+SortCommandParser --> CouponStashParser : scp
+deactivate SortCommandParser
+
+CouponStashParser -> SortCommandParser : parse()
+activate SortCommandParser
+
+create SortCommand
+SortCommandParser -> SortCommand : SortCommand()
+activate SortCommand
+
+SortCommand --> SortCommandParser : s
+deactivate SortCommand
+
+SortCommandParser --> CouponStashParser : s
+deactivate SortCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SortCommandParser -[hidden]-> CouponStashParser
+destroy SortCommandParser
+
+CouponStashParser --> LogicManager : s
+deactivate CouponStashParser
+
+LogicManager -> SortCommand : execute()
+activate SortCommand
+
+alt prefixToSortBy == "n/"
+    SortCommand -> ModelManager : sortCoupons(NAME_COMPARATOR)
+    activate ModelManager
+    ModelManager --> SortCommand :
+    deactivate ModelManager
+else prefixToSortBy == "e/"
+    SortCommand -> ModelManager : sortCoupons(EXPIRY_COMPARATOR)
+    activate ModelManager
+    ModelManager --> SortCommand :
+    deactivate ModelManager
+else prefixToSortBy == "r/"
+    SortCommand -> ModelManager : sortCoupons(REMINDER_COMPARATOR)
+    activate ModelManager
+    ModelManager --> SortCommand :
+    deactivate ModelManager
+end
+
+create CommandResult
+SortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortCommand
+deactivate CommandResult
+
+SortCommand --> LogicManager : result
+deactivate SortCommand
+SortCommand -[hidden]-> SortCommandParser
+destroy SortCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

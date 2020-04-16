@@ -1,0 +1,96 @@
+@startuml
+!include style.puml
+
+skinparam ParticipantPadding 0
+
+actor User
+
+box Application #999999
+participant ":MainApp" as MainApp #333333
+end box
+
+box Ui UI_COLOR_T1
+participant ":UiManager" as UiManager UI_COLOR
+participant ":RemindWindow" as RemindWindow UI_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Coupon" as Coupon MODEL_COLOR
+participant ":RemindDate" as RemindDate MODEL_COLOR
+end box
+
+User -> MainApp: Opens Coupon Stash
+activate MainApp
+create UiManager
+MainApp->UiManager: UiManager()
+activate UiManager
+
+UiManager-->MainApp: ui
+
+deactivate UiManager
+
+MainApp->UiManager: start()
+activate UiManager
+
+create RemindWindow
+UiManager->RemindWindow: RemindWindow()
+activate RemindWindow
+
+RemindWindow->RemindWindow: filterRemindCoupons()
+
+loop for each coupon in stash
+    activate RemindWindow
+
+
+    RemindWindow->Coupon:getRemindDate()
+    activate Coupon
+    Coupon-->RemindWindow:remindDate
+    deactivate Coupon
+
+    RemindWindow->RemindDate:remindDate.isToday()
+    activate RemindDate
+    RemindDate-->RemindWindow:isToday
+    deactivate RemindDate
+
+    alt coupon remind date is today
+    RemindWindow->RemindWindow:add coupon to couponsToRemind
+    activate RemindWindow
+    RemindWindow-->RemindWindow
+    deactivate RemindWindow
+    end
+
+end
+RemindWindow-->RemindWindow: couponsToRemind
+deactivate RemindWindow
+
+
+RemindWindow-->UiManager: remindWindow
+
+deactivate RemindWindow
+
+UiManager->RemindWindow: showIfAny()
+alt at least one coupon to remind
+    activate RemindWindow
+
+    RemindWindow->RemindWindow: constructRemindCoupons()
+    activate RemindWindow
+
+    loop for each coupon to remind
+        RemindWindow->RemindWindow: concatenate coupon information
+        activate RemindWindow
+        RemindWindow-->RemindWindow
+        deactivate RemindWindow
+
+    end
+
+    RemindWindow->RemindWindow: remindMessage
+    deactivate RemindWindow
+end
+
+RemindWindow-->UiManager
+
+UiManager-->MainApp
+
+MainApp-->User:Show reminder window
+
+@enduml

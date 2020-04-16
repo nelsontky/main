@@ -1,22 +1,21 @@
 @startuml
 !include style.puml
 
-'skinparam SequenceBoxPadding 100
-
-box "<color:black>Logic</color>" LOGIC_COLOR_T1
+box "<color:white>Logic</color>" LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":UsedCommand" as UsedCommand LOGIC_COLOR
 end box
 
-box "<color:black>Model</color>" MODEL_COLOR_T1
+box "<color:white>Model</color>" MODEL_COLOR_T1
 participant ":Coupon" as Coupon MODEL_COLOR
-participant "<<class>>\n::Usage" as Usage MODEL_COLOR
+participant ":Usage" as Usage MODEL_COLOR
 participant ":ModelManager" as ModelManager MODEL_COLOR
 end box
 
+-> LogicManager : execute()
 activate LogicManager
 
-LogicManager -> UsedCommand
+LogicManager -> UsedCommand : execute()
 activate UsedCommand
 
 UsedCommand -> UsedCommand : createUsedCouponMonetaryValue()
@@ -30,7 +29,7 @@ deactivate Coupon
 UsedCommand --> UsedCommand : usedCoupon
 deactivate UsedCommand
 
-UsedCommand -> Usage : isUsageAtLimit(usedCoupon, limit)
+UsedCommand -> Usage : isAtLimit()
 activate Usage
 Usage --> UsedCommand
 deactivate Usage
@@ -63,5 +62,7 @@ deactivate ModelManager
 
 UsedCommand --> LogicManager : commandResult
 deactivate UsedCommand
+
+[<-- LogicManager : commandResult
 
 @enduml

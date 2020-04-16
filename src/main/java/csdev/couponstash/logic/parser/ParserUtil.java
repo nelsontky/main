@@ -150,7 +150,7 @@ public class ParserUtil {
             } else {
                 String trimmedSaveable = checkStringLength(str.trim(), Saveable.STRING_LENGTH_LIMIT);
                 // numbers might be a mistake by the user
-                if (trimmedSaveable.matches(".*\\d.*")) {
+                if (trimmedSaveable.matches(Saveable.INVALIDATION_REGEX)) {
                     throw new ParseException(
                             String.format(Savings.NUMBER_DETECTED_BUT_NOT_IN_FORMAT, moneySymbol));
                 }

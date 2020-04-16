@@ -1,0 +1,16 @@
+@startuml
+
+start
+:User enters edit command to edit remind date;
+:Checks validity of index and remind date;
+if () then ([is valid index and remind date])
+  :Checks if the specified remind date is after the coupon's expiry date;
+  if () then ([is not after the expiry date])
+            :Set coupon's remind date to the specified remind date;
+    else ([else])
+    endif
+else ([else])
+endif
+stop
+
+@enduml

@@ -17,7 +17,7 @@ end box
 activate LogicManager
 
 LogicManager -> CouponStashParser : parseCommand("delete 1")
-activate CouponStashParserParser
+activate CouponStashParser
 
 create DeleteCommandParser
 CouponStashParser -> DeleteCommandParser

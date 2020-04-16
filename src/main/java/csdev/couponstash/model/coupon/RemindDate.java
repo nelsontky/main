@@ -42,6 +42,14 @@ public class RemindDate {
     }
 
     /**
+     * Returns true if the {@RemindDate} is today.
+     * @return True if remind date is today
+     */
+    public boolean isToday() {
+        return date.equals(LocalDate.now());
+    }
+
+    /**
      * Returns the remind date as a LocalDate.
      * @return Remind Date as a LocalDate
      */

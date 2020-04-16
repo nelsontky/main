@@ -66,7 +66,7 @@ public class SampleDataUtil {
 
         ArrayList<Saveable> shopeeSaveables = new ArrayList<Saveable>();
         shopeeSaveables.add(new Saveable("USB-C cable"));
-        shopeeSaveables.add(new Saveable("iPhone 11 case"));
+        shopeeSaveables.add(new Saveable("iPhone case"));
         DateSavingsSumMap shopeeSavingsSum = new DateSavingsSumMap();
         shopeeSavingsSum.add(LocalDate.of(2020, 4, 1),
                 new PureMonetarySavings(new MonetaryAmount(25, 20), shopeeSaveables));
@@ -134,7 +134,7 @@ public class SampleDataUtil {
         Set<Tag> gongChaTags = getTagSet("bubbletea");
         Set<Tag> shopeeTags = getTagSet("newuser");
         Set<Tag> lazadaTags = getTagSet("ecommerce");
-        Set<Tag> liHoTags = getTagSet("bobatea");
+        Set<Tag> liHoTags = getTagSet("bubbletea");
         Set<Tag> grabFoodTags = getTagSet("delivery", "grab", "food");
 
         // Coupon Condition

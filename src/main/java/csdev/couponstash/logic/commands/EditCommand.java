@@ -109,7 +109,7 @@ public class EditCommand extends IndexedCommand {
         }
 
         Usage currentUsage = couponToEdit.getUsage();
-        if (Usage.isUsageGreaterThanLimit(currentUsage, editedCoupon.getLimit())) {
+        if (currentUsage.isGreaterThanLimit(editedCoupon.getLimit())) {
             throw new CommandException(String.format(MESSAGE_LIMIT_LESS_THAN_USAGE, currentUsage));
         }
 

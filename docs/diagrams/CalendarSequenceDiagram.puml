@@ -3,14 +3,14 @@
 
 'actor User
 
-box "<color:black>UI</color>"
-participant ":MainWindow" as MainWindow MODEL_COLOR
-participant ":CalendarResultDisplayPane" as CalendarResultDisplayPane MODEL_COLOR
-participant ":CalendarPane" as CalendarPane MODEL_COLOR
-participant "d:DateCell" as DateCell MODEL_COLOR
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":CalendarResultDisplayPane" as CalendarResultDisplayPane UI_COLOR
+participant ":CalendarPane" as CalendarPane UI_COLOR
+participant "d:DateCell" as DateCell UI_COLOR
 end box
 
-box "<color:black>Logic</color>"
+box Logic LOGIC_COLOR_T1
 participant "logic: LogicManager" as Logic LOGIC_COLOR
 end box
 
@@ -33,6 +33,11 @@ activate CalendarPane
 
 
 CalendarPane -> Logic: getFilteredCouponList()
+activate Logic
+Logic --> CalendarPane
+deactivate Logic
+
+CalendarPane -> Logic: getMonthView()
 activate Logic
 Logic --> CalendarPane
 deactivate Logic

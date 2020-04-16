@@ -8,11 +8,11 @@ end box
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
 participant "<<class>>\n:SavingsConversionUtil" as SavingsConversionUtil MODEL_COLOR
-participant "savingsForEachUse:Savings" as Savings MODEL_COLOR
-participant "ma:MonetaryAmount" as MonetaryAmount MODEL_COLOR
+participant ":Savings" as Savings MODEL_COLOR
+participant ":MonetaryAmount" as MonetaryAmount MODEL_COLOR
 end box
 
-[-> UsedCommand : execute(model, "used 1 $100")
+[-> UsedCommand : execute()
 activate UsedCommand
 
 UsedCommand -> ModelManager : getFilteredCouponList()
@@ -41,8 +41,9 @@ destroy MonetaryAmount
 SavingsConversionUtil --> UsedCommand : newTotalSavings
 deactivate SavingsConversionUtil
 
-UsedCommand -> ModelManager : setCoupon(oldCoupon, newCoupon)
+UsedCommand -> ModelManager
 activate ModelManager
+ModelManager --> UsedCommand
 deactivate ModelManager
 
 [<-- UsedCommand : result

@@ -64,12 +64,11 @@ public class Usage {
 
     /**
      * Returns true if {@code usage} current value is greater than its {@code limit}.
-     * @param usage The usage of the coupon.
+     * @param limit Limit of the coupon to compare to.
      */
-    public static boolean isUsageGreaterThanLimit(Usage usage, Limit limit) {
-        int currentUsage = usage.value;
+    public boolean isGreaterThanLimit(Limit limit) {
         int usageLimit = limit.value;
-        return currentUsage > usageLimit;
+        return value > usageLimit;
     }
 
     /**

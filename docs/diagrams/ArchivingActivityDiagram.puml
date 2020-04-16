@@ -1,0 +1,25 @@
+@startuml
+
+skinparam ActivityFontSize 11
+skinparam ArrowFontSize 11
+
+start
+:User starts Coupon Stash up;
+:Coupon Stash checks for expired Coupons in data file;
+
+if () then ([is expired])
+    :Archive Coupon;
+else ([else])
+endif
+
+:User uses a Coupon;
+:Coupon Stash checks if Coupon is exhausted;
+
+if () then ([is exhausted])
+    :Archive Coupon;
+else ([else])
+endif
+
+stop
+
+@enduml

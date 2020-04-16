@@ -54,9 +54,9 @@ public class TabsPanel extends UiPart<Region> {
         this.logic = logic;
         tabPane.getSelectionModel().selectedItemProperty()
                 .addListener((ov, oldTab, newTab) -> {
+                    logger.info("Switching to " + newTab.getText() + " tab!");
                     if (newTab == summaryTab) {
                         summaryPane.updateView();
-                        logger.info("Switching to summary tab!");
                     }
                 });
     }

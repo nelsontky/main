@@ -162,7 +162,7 @@ public interface Model {
     void commitCouponStash(String command);
 
     /**
-     * Restores the previous coupon statsh state from its history.
+     * Restores the previous coupon stash state from its history.
      *
      * @return Command undone to
      */

@@ -1,5 +1,6 @@
 package csdev.couponstash.ui;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import csdev.couponstash.commons.core.LogsCenter;
@@ -41,21 +42,21 @@ public class CommandBox extends UiPart<Region> {
         // commandText
         commandTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
-                String retrivedCommand = commandTextHistory.getUp();
-                commandTextField.setText(retrivedCommand);
+                String retrievedCommand = commandTextHistory.getUp();
+                commandTextField.setText(retrievedCommand);
                 logger.info(
                         String.format(
                                 "UP arrow key pressed. Previous command text \"%s\" retrived.",
-                                retrivedCommand
+                                retrievedCommand
                         )
                 );
             } else if (event.getCode() == KeyCode.DOWN) {
-                String retrivedCommand = commandTextHistory.getDown();
-                commandTextField.setText(retrivedCommand);
+                String retrievedCommand = commandTextHistory.getDown();
+                commandTextField.setText(retrievedCommand);
                 logger.info(
                         String.format(
                                 "DOWN arrow key pressed. Next command text \"%s\" retrived.",
-                                retrivedCommand
+                                retrievedCommand
                         )
                 );
             }
@@ -79,7 +80,7 @@ public class CommandBox extends UiPart<Region> {
 
             commandExecutor.execute(commandTextField.getText());
             commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | IOException e) {
             setStyleToIndicateCommandFailure();
         }
     }
@@ -114,7 +115,7 @@ public class CommandBox extends UiPart<Region> {
          *
          * @see Logic#execute(String)
          */
-        CommandResult execute(String commandText) throws CommandException, ParseException;
+        CommandResult execute(String commandText) throws CommandException, ParseException, IOException;
     }
 
 }
