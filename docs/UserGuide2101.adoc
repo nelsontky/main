@@ -1122,8 +1122,8 @@ allows you to restore the text of the previous executed command. Pressing
 the kbd:[↓] keyboard button allows you to revert to a more recently entered
 command.
 
-Here are instructions for restoring previously entered command texts with the
-kbd:[↑] and kbd:[↓] keys:
+Here is a scenario where restoring previously entered command texts with the
+kbd:[↑] and kbd:[↓] keys will be useful:
 
 . Suppose you ran these 3 commands in order in Coupon Stash:
 * `edit 1 n/ Adidas 31 Percent`
@@ -1135,7 +1135,7 @@ image::keyboard_shortcuts/updownedit.png[]
 +
 .Before running the `archive` command.
 image::keyboard_shortcuts/updownarchive.png[]
-* `add n/McDonald's McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/50% sd/1-4-2020 l/2 t/Value t/Savoury`
+* `add n/McDonalds McGriddles p/ILOVEMCGRIDDLES e/31-12-2020 s/50% sd/1-4-2020 l/2 t/Value t/Savoury`
 +
 .Before running the `add` command.
 image::keyboard_shortcuts/updownadd.png[]
@@ -1151,6 +1151,24 @@ we can access the previously entered command via the kbd:[↑] keyboard button.
 . Press kbd:[↑] thrice to retrieve the `edit` command.
 * We press kbd:[↑] thrice as the `edit` command was run three commands ago.
 
++
+.`edit` command restored after pressing kbd:[↑] thrice.
+image::keyboard_shortcuts/updownretrivee.png[]
+
+. Next, we can change ``edit``'s name parameter from "Adidas 31 Percent" to
+"Adidas 30 Percent", before executing the command again.
+
++
+.Amended name parameter.
+image::keyboard_shortcuts/updownchangedname.png[]
++
+.Adidas coupon amended successfully.
+image::keyboard_shortcuts/updownfinal.png[]
+
+[NOTE]
+Just as kbd:[↑] can be used to navigate the command history, kbd:[↓] can be
+used to navigate towards the more recent entries in the command history.
+
 === Close expanded coupon or reminder windows: kbd:[Ctrl]+kbd:[q]
 After <<expand, expanding>> a coupon, you can close
 the expanded coupon window by keeping the focus on the coupon window and
@@ -1165,7 +1183,7 @@ animation below plays automatically without the need for any further action.
 Click on the image to play the animation in this PDF file.)
 
 .Animation of closing window with kbd:[Ctrl]+kbd:[q]
-image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/copy%20command.gif]
+image::gifs/copy command.png[link=https://raw.githubusercontent.com/AY1920S2-CS2103T-F09-1/main/master/docs/images/gifs/ctrl%20q.gif]
 
 === Cycle through tabs: kbd:[Ctrl]+kbd:[Tab]
 You can press the keyboard buttons kbd:[Ctrl] and kbd:[Tab] simultaneously to
